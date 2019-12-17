@@ -27,9 +27,10 @@ namespace SpaceSaver
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
            };
+
         public Vector2 Spawn_point;
 
-        private const int cell_size=cell_size;
+        private const int cell_size=64;
 
         public Map(Game1 game1)
         {
@@ -43,7 +44,7 @@ namespace SpaceSaver
             if (timer > 5)
             {
                 Game1._enemies.Add(new Enemy(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.txtr_monster_run, 8, 0.1f) },
-                                                                                    { "Hit", new Animation(Game1.txtr_monster_hit, 5, 0.5f)  },
+                                                                                   { "Hit", new Animation(Game1.txtr_monster_hit, 5, 0.5f)  },
                                                                                    { "Shoot", new Animation(Game1.txtr_monster_shoot, 2, 0.2f) },}, Spawn_point, Game1, "enemy", 1, 1, 1, 1));
                 timer = 0;
             }
@@ -57,30 +58,29 @@ namespace SpaceSaver
             {
                 for (int j = 0; j < Layer.GetLongLength(1); j++)
                 {
+                    Vector2 position = new Vector2(i * cell_size, j * cell_size);
                     if (Layer[i, j] != 1)
                     {
-                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_floor, new Vector2(i * cell_size, j * cell_size), "floor"));
+                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_floor, position, "floor"));
                     }
 
                     if (Layer[i, j] == 1)
                     {
-                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_wall, new Vector2(i * cell_size, j * cell_size), "wall"));
+                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_wall, position, "wall"));
                     }
-
-                    if (Layer[i, j] == 2)
+                    else if (Layer[i, j] == 2)
                     {
-                        Game1._player = new Player(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.txtr_player, 8, 0.15f) }, }, new Vector2(i * cell_size, j * cell_size), Game1, "player");
+                        Game1._player = new Player(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.txtr_player, 8, 0.15f) }, }, position, Game1, "player");
                     }
-
-                    if (Layer[i, j] == 3)
+                    else if (Layer[i, j] == 3)
                     {
-                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_shield_enemy, new Vector2(i * cell_size, j * cell_size), "enemy_point"));
+                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_shield_enemy, position, "enemy_point"));
 
                         Spawn_point = new Vector2(i * cell_size, j * cell_size);
                     }
-                    if (Layer[i, j] == 4)
+                    else if (Layer[i, j] == 4)
                     {
-                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_base_point, new Vector2(i * cell_size, j * cell_size), "base_point"));
+                        Game1._static_objects.Add(new Static_Component(ref Game1.txtr_base_point, position, "base_point"));
                     }
                 }
             }

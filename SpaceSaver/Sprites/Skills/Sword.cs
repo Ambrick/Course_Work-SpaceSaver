@@ -32,78 +32,48 @@ namespace SpaceSaver
         {
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (Timer >= Param.Duration)
+            {
                 IsDead = true;
+            }
 
             SwordInteraction();
         }
 
         private void SwordInteraction()
         {
-            /*//проверка на столкновение удара игрока с врагом/щитом врага/пуля врага
+            //проверка на столкновение удара игрока с врагом/щитом врага/пуля врага
             if (Object_type == "player_sword")
             {
-                foreach (Shield shield in Game1._shields)
-                {
-                    if (shield.Object_type == "enemy_shield" && !debuff && Collision_manager.CheckCollision(this, shield))
-                    {
-                        _parent._Sword_param.Damage = _parent._Sword_param.Damage * shield._parent._Shield_param.Reduction;
-                        debuff = true;
-                    }
-                }
                 foreach (Enemy enemy in Game1._enemies)
                 {
                     if (Collision_manager.CheckCollision(this, enemy))
                     {
-                        enemy._Minion_Stats.CurrentHealthPoints -= _parent._Sword_param.Damage;
+                        enemy.GetHit(Param.Damage);
                         IsDead = true;
+                        return;
                     }
                 }
                 foreach (Bullet spr2 in Game1._bullets)
                 {
                     if (spr2.Object_type == "enemy_bullet")
                     {
-                        if (Collision_manager.CheckCollision(spr2, this))
-                        {/*
-                            if (_parent._Sword_param.IsShield && !spr2._parent._Bullet_param.IsPiercing)
-                            {
-                                spr2.IsDead = true;
-                                break;
-                            }
-                            if (_parent._Sword_param.IsShield && spr2._parent._Bullet_param.IsPiercing)
-                            {
-                                spr2.IsDead = true;
-                                IsDead = true;
-                                break;
-                            }*//*
-                            if (_parent._Sword_param.IsJedi)
-                            {
-                                spr2.IsDead = true;
-                                Game1._bullets.Add(new Bullet(Game1.txtr_bullet_enemy, Game1, _parent, "player_bullet"));
-                                break;
-                            }
-                            
+                        if (Collision_manager.CheckCollision(spr2, this) && Param.IsJedi)
+                        {
+                            spr2.IsDead = true;
+                            Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_enemy, Game1._player._Bullet_param, Game1._player.Position, "player_bullet", Game1._player.Angle));
+                            IsDead = true;
+                            return;
                         }
                     }
                 }
             }
-            //проверка на столкновение вражеской пули с игроком или щитом игрока
-            if (Object_type == "enemy_bullet")
+            else
             {
-                foreach (Shield shield in Game1._shields)
+                if (Collision_manager.CheckCollision(this, Game1._player))
                 {
-                    if (shield.Object_type == "player_shield" && !debuff && Collision_manager.CheckCollision(this, shield))
-                    {
-                        _parent._Bullet_param.Damage = _parent._Bullet_param.Damage * shield._parent._Shield_param.Reduction;
-                        debuff = true;
-                    }
-                }
-                if (Collision_manager.CheckCollision(this, _parent))
-                {
-                    _parent._Minion_Stats.CurrentHealthPoints -= _parent._Bullet_param.Damage;
-                    IsDead = true;
+                    Game1._player.GetHit(Param.Damage);
                 }
             }
-        */
         }
     }
 }

@@ -29,7 +29,6 @@ namespace SpaceSaver
         public List<Static_Component> _static_objects=new List<Static_Component> { };
         public List<Bullet> _bullets = new List<Bullet> { };
         public List<Sword> _swords = new List<Sword> { };
-        public List<Shield> _shields = new List<Shield> { };
         public List<Enemy> _enemies = new List<Enemy> { };
         public List<Explosion> _explosions = new List<Explosion> { };
         public Game1()

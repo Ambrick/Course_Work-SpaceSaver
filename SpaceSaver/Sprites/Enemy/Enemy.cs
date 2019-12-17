@@ -27,7 +27,6 @@ namespace SpaceSaver
             Minion_Skills_Initialization();
             _bullet_timer = _Bullet_param.CoolDown;
             _sword_timer = _Sword_param.CoolDown;
-            _shield_timer = _Shield_param.CoolDown;
             _timer = 5f;
 
         }
@@ -47,11 +46,12 @@ namespace SpaceSaver
             //Если нет, то движение в зависимости от направления
 
 
-            if (_bullet_timer >= 5)
+            if (_bullet_timer >= 1)
             {
                 Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_enemy, _Bullet_param, Position, "enemy_bullet", Angle));
 
                 _bullet_timer = 0;
+                AnimationManager.Play(Animations["Shoot"]);
             }
             
             Velocity.Y = -2;
@@ -84,9 +84,12 @@ namespace SpaceSaver
                     if (Collision_manager.Collision_Y(this, spr2))
                         Velocity.Y = 0;
                 }
-                if (spr2.Object_type == "wall" && spr2.Object_type == "base_point")
+                if (spr2.Object_type == "base_point")
                 {
-                    IsDead = true;
+                    if (spr2.Position==Position)
+                    {
+                        IsDead = true;
+                    }
                 }
             }
         }

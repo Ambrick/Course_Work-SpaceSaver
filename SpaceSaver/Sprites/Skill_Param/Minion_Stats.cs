@@ -26,26 +26,8 @@ namespace SpaceSaver
 
         public void SetCurrentMinionStats(int current_stats_lvl)
         {
-            if (current_stats_lvl == 1)
-            {
-                MaxHealthPoints = InitialHealthPoints * 2;
-                MoveSpeed = 2.4f;
-            }
-            else if (current_stats_lvl == 2)
-            {
-                MaxHealthPoints = InitialHealthPoints * 3;
-                MoveSpeed = 3f;
-            }
-            else if (current_stats_lvl == 3)
-            {
-                MaxHealthPoints = InitialHealthPoints * 4;
-                MoveSpeed = 4f;
-            }
-            else if (current_stats_lvl == 4)
-            {
-                MaxHealthPoints = InitialHealthPoints * 5;
-                MoveSpeed = 5f;
-            }
+            MaxHealthPoints = current_stats_lvl * InitialHealthPoints;
+            MoveSpeed = 2f+0.4f * current_stats_lvl;
         }
     }
 }

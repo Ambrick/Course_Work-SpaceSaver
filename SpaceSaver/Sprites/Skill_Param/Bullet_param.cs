@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceSaver
+﻿namespace SpaceSaver
 {
     public class Bullet_param
     {
@@ -15,10 +9,6 @@ namespace SpaceSaver
         public float MoveSpeed { get; set; }
 
         public float Duration { get; set; }
-
-        public bool IsMaterial { get; set; }
-
-        public bool IsPiercing { get; set; }
 
         private float BaseDamage { get; set; }
 
@@ -32,37 +22,10 @@ namespace SpaceSaver
 
         public void SetCurrentBulletParam(int current_bullet_lvl)
         {
-            if (current_bullet_lvl == 1)
-            {
-                MoveSpeed = 3f;
-                Damage = BaseDamage* 1.3f;
-                Duration = 1f;
-                CoolDown = 1.7f;
-            }
-            else if (current_bullet_lvl == 2)
-            {
-                MoveSpeed= 5f;
-                Damage = BaseDamage * 1.7f;
-                Duration = 1.7f;
-                CoolDown = 1f;
-            } 
-            else if (current_bullet_lvl == 3)
-            {
-                IsMaterial = true;
-                MoveSpeed = 7f;
-                Damage = BaseDamage * 2f;
-                Duration = 2.4f;
-                CoolDown = 0.7f;
-            }
-            else if (current_bullet_lvl == 4)
-            {
-                IsMaterial = true;
-                IsPiercing = true;
-                MoveSpeed = 9f;
-                Damage = BaseDamage * 2f;
-                Duration = 3f;
-                CoolDown = 0.3f;
-            }
+            MoveSpeed = 3 * current_bullet_lvl;
+            Damage = BaseDamage * current_bullet_lvl * 0.5f;
+            Duration = 1.3f + current_bullet_lvl*0.3f;
+            CoolDown = 1f / current_bullet_lvl;
         }
     }
 }

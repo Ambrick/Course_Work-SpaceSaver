@@ -44,19 +44,11 @@ namespace SpaceSaver
                 Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_player, _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = 0;
             }
-
             if (mouseSt.RightButton == ButtonState.Pressed && _sword_timer >= _Sword_param.CoolDown && Sword_lvl > 0)
             {
-               // Game1._swords.Add(new Sword(_game1.txtr_sword_player, _game1, this, "player_sword"));
+                Game1._swords.Add(new Sword(Game1, ref Game1.txtr_sword_player, _Sword_param,Position, "player_sword", Angle));
                 _sword_timer = 0;
             }
-
-            if (keyboardState.IsKeyDown(Keys.Space) && _shield_timer >= _Shield_param.CoolDown && Shield_lvl > 0)
-            {
-               // Game1._shields.Add(new Shield(_game1.txtr_shield, _game1, this, "player_shield"));
-                _shield_timer = 0;
-            }
-
 
             if (level_system._skill_points != 0 && _timer > 0.2f)
             {
@@ -77,14 +69,6 @@ namespace SpaceSaver
                     _timer = 0;
                 }
                 if (keyboardState.IsKeyDown(Keys.D3))
-                {
-                    Shield_lvl++;
-                    _Shield_param.SetCurrentShieldParam(Shield_lvl);
-                    level_system._skill_points--;
-
-                    _timer = 0;
-                }
-                if (keyboardState.IsKeyDown(Keys.D4))
                 {
                     Stats_lvl++;
                     _Minion_Stats.SetCurrentMinionStats(Stats_lvl);
@@ -118,7 +102,7 @@ namespace SpaceSaver
         public void PlayerInteraction()
         {
             foreach(Static_Component spr2 in Game1._static_objects)
-            {/*
+            {
                 if (spr2.Object_type == "wall")
                 {
                     if (Collision_manager.Collision_X(this, spr2))
@@ -134,13 +118,6 @@ namespace SpaceSaver
                         spr2.IsDead = true;
                     }
                 }
-                if (spr2.Object_type == "start_point")
-                {
-                    if (Collision_manager.CheckCollision(this, spr2))
-                    {
-
-                    }
-                }
                 if (spr2.Object_type == "key")
                 {
                     if (Collision_manager.CheckCollision(this, spr2))
@@ -148,7 +125,7 @@ namespace SpaceSaver
                         level_system.ifGetKey();
                         spr2.IsDead = true;
                     }
-                }*/
+                }
             }
         }
     }

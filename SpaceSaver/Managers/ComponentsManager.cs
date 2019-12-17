@@ -27,16 +27,6 @@ namespace SpaceSaver
                     break;
                 }
             }
-            foreach (var component in Game1._shields)
-            {
-                component.Update(gameTime);
-                if (component.IsDead)
-                {
-                    Game1._shields.Remove(component);
-                    break;
-                }
-            }
-
             foreach (var component in Game1._bullets)
             {
                 component.Update(gameTime);
@@ -84,16 +74,12 @@ namespace SpaceSaver
         {
             foreach (var component in Game1._static_objects)
                 component.Draw(sprBatch);
-            /*foreach (var component in Game1._shields)
-                component.Draw(sprBatch);
             foreach (var component in Game1._swords)
-                component.Draw(sprBatch);*/
+                component.Draw(sprBatch);
             foreach (var component in Game1._bullets)
                 component.Draw(sprBatch);
-
             foreach (var component in Game1._explosions)
                 component.Draw(sprBatch);
-
             foreach (var component in Game1._enemies)
                 component.Draw(sprBatch);
             Game1._player.Draw(sprBatch);

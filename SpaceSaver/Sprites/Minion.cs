@@ -21,15 +21,11 @@ namespace SpaceSaver
 
         protected float _sword_timer;
 
-        protected float _shield_timer;
+        public Bullet_param _Bullet_param;
 
-        protected Bullet_param _Bullet_param;
+        public Sword_param _Sword_param;
 
-        protected Sword_param _Sword_param;
-
-        protected Shield_param _Shield_param;
-
-        protected Minion_Stats _Minion_Stats;
+        public Minion_Stats _Minion_Stats;
 
         public Minion(Dictionary<string, Animation> animations, Vector2 position, Game1 game1) : base (animations, position,  game1) { }
 
@@ -37,19 +33,16 @@ namespace SpaceSaver
         {
             _Bullet_param = new Bullet_param(Bullet_lvl, InitialDamage);
             _Sword_param = new Sword_param(Sword_lvl, InitialDamage);
-            _Shield_param = new Shield_param(Shield_lvl);
             _Minion_Stats = new Minion_Stats(Stats_lvl, InitialHealthPoints);
 
             _bullet_timer = _Bullet_param.CoolDown;
             _sword_timer = _Sword_param.CoolDown;
-            _shield_timer = _Shield_param.CoolDown;
         }
 
         protected void SkillsTimerUpdate(GameTime gameTime)
         {
             _bullet_timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             _sword_timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _shield_timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         protected virtual void Action(GameTime gameTime) { }
@@ -61,6 +54,11 @@ namespace SpaceSaver
             Velocity = Vector2.Zero;
 
             AnimationManager.Update(gameTime);
+        }
+
+        public void GetHit(float IncomeDDamage)
+        {
+            _Minion_Stats.CurrentHealthPoints -= IncomeDDamage;
         }
     }
 }
