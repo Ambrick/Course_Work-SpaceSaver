@@ -9,8 +9,6 @@ namespace SpaceSaver
 
         public int Sword_lvl { get; set; }
 
-        public int Shield_lvl { get; set; }
-
         public int Stats_lvl { get; set; }
 
         public float InitialDamage { get; set; }
@@ -56,9 +54,9 @@ namespace SpaceSaver
             AnimationManager.Update(gameTime);
         }
 
-        public void GetHit(float IncomeDDamage)
+        public void GetHit(float IncomeDamage)
         {
-            _Minion_Stats.CurrentHealthPoints -= IncomeDDamage;
+            _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
         }
     }
 }

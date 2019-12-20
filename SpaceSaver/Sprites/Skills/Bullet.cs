@@ -14,7 +14,7 @@ namespace SpaceSaver
 
         public Bullet_param Param;
 
-        public Bullet(Game1 game1, ref Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base(ref texture, position, object_type)
+        public Bullet(Game1 game1, Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base( texture, position, object_type)
         {
             Game1 = game1;
             Texture = texture;

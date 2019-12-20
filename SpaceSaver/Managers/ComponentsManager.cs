@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceSaver
 {
@@ -19,6 +14,8 @@ namespace SpaceSaver
 
         public void UpdateComponents(GameTime gameTime)
         {
+            Game1.Map.Update(gameTime);
+
             foreach (var component in Game1._static_objects)
             {
                 if (component.IsDead)
@@ -50,9 +47,6 @@ namespace SpaceSaver
                 component.Update(gameTime);
                 if (component.IsDead)
                 {
-                    Game1._explosions.Add( new Explosion(new Dictionary<string, Animation>()
-                                                    { { "Action", new Animation(Game1.txtr_explosion, 6, 0.27f) }, },
-                                                    new Vector2(component.Position.X, component.Position.Y), Game1, "explosion"));
                     Game1._enemies.Remove(component);
                     break;
                 }
@@ -62,7 +56,6 @@ namespace SpaceSaver
                 component.Update(gameTime);
                 if (component.IsDead)
                 {
-                    Game1._static_objects.Add(new Static_Component(ref Game1.txtr_key, new Vector2(component.Position.X, component.Position.Y), "key"));
                     Game1._explosions.Remove(component);
                     break;
                 }
@@ -83,6 +76,17 @@ namespace SpaceSaver
             foreach (var component in Game1._enemies)
                 component.Draw(sprBatch);
             Game1._player.Draw(sprBatch);
+        }
+
+        public void UnloadLvl()
+        {
+            Game1._static_objects.Clear();
+            Game1._swords.Clear();
+            Game1._bullets.Clear();
+            Game1._explosions.Clear();
+            Game1._enemies.Clear();
+            Game1._player = null;
+            Game1.Map= null;
         }
     }
 }

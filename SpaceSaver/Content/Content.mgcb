@@ -31,35 +31,59 @@
 /processorParam:Quality=Best
 /build:Music/Menu.mp3
 
-#begin Sounds/Menu_select.wav
+#begin Sounds/Enemy_shoot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Menu_select.wav
+/build:Sounds/Enemy_shoot.wav
 
-#begin Sounds/Monster_appear.wav
+#begin Sounds/Explosion.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_appear.wav
+/build:Sounds/Explosion.wav
 
-#begin Sounds/Monster_death.wav
+#begin Sounds/Gong.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_death.wav
+/build:Sounds/Gong.wav
 
-#begin Sounds/Monster_slice.wav
+#begin Sounds/Heal.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_slice.wav
+/build:Sounds/Heal.wav
 
-#begin Sounds/Player_death.wav
+#begin Sounds/Lose.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Player_death.wav
+/build:Sounds/Lose.wav
+
+#begin Sounds/Lvlup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Lvlup.wav
+
+#begin Sounds/Monster_roar1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_roar1.wav
+
+#begin Sounds/Monster_roar2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_roar2.wav
+
+#begin Sounds/Player_get_hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Player_get_hit.wav
 
 #begin Sounds/Player_powerup.wav
 /importer:WavImporter
@@ -79,13 +103,13 @@
 /processorParam:Quality=Best
 /build:Sounds/Player_slice.wav
 
-#begin Sounds/Start_gong.wav
+#begin Sounds/Win.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Start_gong.wav
+/build:Sounds/Win.wav
 
-#begin Sprites/Background_image.jpg
+#begin Sprites/background.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -95,7 +119,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Background_image.jpg
+/build:Sprites/background.jpg
 
 #begin Sprites/Bullet_icon.bmp
 /importer:TextureImporter
@@ -120,6 +144,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Enemy_bullet.png
+
+#begin Sprites/Enemy_point.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemy_point.png
 
 #begin Sprites/Explosion.png
 /importer:TextureImporter
@@ -241,6 +277,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player_bullet.png
 
+#begin Sprites/Player_point.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player_point.png
+
 #begin Sprites/Player_slice.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -265,18 +313,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Robot_Run.png
 
-#begin Sprites/Shield_Enemy.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Shield_Enemy.png
-
 #begin Sprites/Shield_icon.bmp
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -288,30 +324,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Shield_icon.bmp
-
-#begin Sprites/Shield_Player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Shield_Player.png
-
-#begin Sprites/Start_point.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Start_point.png
 
 #begin Sprites/Stats_icon.bmp
 /importer:TextureImporter

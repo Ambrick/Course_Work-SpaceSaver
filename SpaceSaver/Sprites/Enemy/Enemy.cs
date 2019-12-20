@@ -10,67 +10,45 @@ namespace SpaceSaver
 {
     public class Enemy : Minion
     {
-        public float _timer;
-
-        public Enemy(Dictionary<string, Animation> animations, Vector2 position, Game1 game1, string object_type, int _Bullet_lvl, int _Sword_lvl, int _Shield_lvl, int _Stats_lvl) : base(animations, position, game1)
+        public Enemy(Dictionary<string, Animation> animations, Vector2 position, Game1 game1, string object_type, int lvl) : base(animations, position, game1)
         {
             Game1 = game1;
-
-            InitialDamage = 20;
-            InitialHealthPoints = 50;
-
-            Bullet_lvl = _Bullet_lvl; Sword_lvl = _Sword_lvl; Shield_lvl = _Shield_lvl; Stats_lvl = _Stats_lvl;
-
+            Dynamic_Component_Initialization(animations, position, game1);
             Object_type = object_type;
 
-            Dynamic_Component_Initialization(animations, position, game1);
+            InitialDamage = 30;
+            InitialHealthPoints = 70;
+
+            Bullet_lvl = lvl; Sword_lvl = lvl; Stats_lvl = lvl;
             Minion_Skills_Initialization();
-            _bullet_timer = _Bullet_param.CoolDown;
-            _sword_timer = _Sword_param.CoolDown;
-            _timer = 5f;
-
         }
-
 
         protected override void Action(GameTime gameTime)
         {
             SkillsTimerUpdate(gameTime);
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             
 
             Angle = (float)Math.Atan2(Game1._player.Position.Y - Position.Y, Game1._player.Position.X - Position.X);
 
-            //Проверка наличия в радиусе игрока
-
-
-            //Если нет, то движение в зависимости от направления
-
-
-            if (_bullet_timer >= 1)
+            if (_bullet_timer >= _Bullet_param.CoolDown)
             {
-                Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_enemy, _Bullet_param, Position, "enemy_bullet", Angle));
+                Game1._bullets.Add(new Bullet(Game1, Game1.textures["enemy_bullet"], _Bullet_param, Position, "enemy_bullet", Angle));
 
                 _bullet_timer = 0;
-                AnimationManager.Play(Animations["Shoot"]);
             }
             
-            Velocity.Y = -2;
+            Velocity.Y -= _Minion_Stats.MoveSpeed;
 
             //-------------------------------------------------
             PlayerInteraction();
             //-------------------------------------------------
             AnimationManager.Play(Animations["Move"]);
-            /*
-            if (Velocity != Vector2.Zero)
-                AnimationManager.Play(Animations["Move"]);
-            else
-                AnimationManager.Play(Animations["Shoot"]);
-                */
             if (_Minion_Stats.CurrentHealthPoints < 0)
             {
+                Game1._player.level_system.ifGetKey();
+                Game1.Map.IfEnemyDead(gameTime, Position);
                 IsDead = true;
             }
-
         }
 
         public void PlayerInteraction()
@@ -84,11 +62,12 @@ namespace SpaceSaver
                     if (Collision_manager.Collision_Y(this, spr2))
                         Velocity.Y = 0;
                 }
-                if (spr2.Object_type == "base_point")
+                if (spr2.Object_type == "player_point")
                 {
-                    if (spr2.Position==Position)
+                    if (spr2.Properties.Intersects(Properties))
                     {
                         IsDead = true;
+                        Game1.Map.IfBaseHitted();
                     }
                 }
             }

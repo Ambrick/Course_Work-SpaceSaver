@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace SpaceSaver
 {
     public class Player : Minion
     {
-        Leveling_up level_system;
+        public Leveling_up level_system;
 
         private float _timer = 5f;
 
@@ -22,10 +23,10 @@ namespace SpaceSaver
             Object_type = object_type;
 
 
-            InitialDamage = 10;
+            InitialDamage = 30;
             InitialHealthPoints = 100;
-            level_system = new Leveling_up(100, 1000);
-            Bullet_lvl = 4; Sword_lvl = 4; Shield_lvl = 4; Stats_lvl = 4;
+            level_system = new Leveling_up (25, 100);
+            Bullet_lvl = 1; Sword_lvl = 0; Stats_lvl = 4;
             Minion_Skills_Initialization();
         }
 
@@ -37,16 +38,16 @@ namespace SpaceSaver
 
             var keyboardState = Keyboard.GetState();
             var mouseSt = Mouse.GetState();
-            Angle = (float)Math.Atan2(mouseSt.Y - Game1.ScreenHeight / 2, mouseSt.X - Game1.ScreenWidth / 2);
+            Angle = (float) Math.Atan2(mouseSt.Y - Game1.ScreenHeight / 2, mouseSt.X - Game1.ScreenWidth / 2);
 
             if (mouseSt.LeftButton == ButtonState.Pressed && _bullet_timer >= _Bullet_param.CoolDown)
             {
-                Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_player, _Bullet_param, Position, "player_bullet", Angle));
+                Game1._bullets.Add(new Bullet(Game1, Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = 0;
             }
             if (mouseSt.RightButton == ButtonState.Pressed && _sword_timer >= _Sword_param.CoolDown && Sword_lvl > 0)
             {
-                Game1._swords.Add(new Sword(Game1, ref Game1.txtr_sword_player, _Sword_param,Position, "player_sword", Angle));
+                Game1._swords.Add(new Sword(Game1, Game1.textures["player_sword"], _Sword_param,Position, "player_sword", Angle));
                 _sword_timer = 0;
             }
 
@@ -112,21 +113,25 @@ namespace SpaceSaver
                 }
                 if (spr2.Object_type == "heal")
                 {
-                    if (Collision_manager.CheckCollision(this, spr2))
+                    if (Properties.Intersects(spr2.Properties))
                     {
-                        _Minion_Stats.CurrentHealthPoints = _Minion_Stats.MaxHealthPoints;
+                        GetHeal();
                         spr2.IsDead = true;
                     }
                 }
                 if (spr2.Object_type == "key")
                 {
-                    if (Collision_manager.CheckCollision(this, spr2))
+                    if (Properties.Intersects(spr2.Properties))
                     {
-                        level_system.ifGetKey();
                         spr2.IsDead = true;
                     }
                 }
             }
+        }
+
+        public void GetHeal()
+        {
+            _Minion_Stats.CurrentHealthPoints = _Minion_Stats.MaxHealthPoints;
         }
     }
 }

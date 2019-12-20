@@ -22,9 +22,9 @@
 
         public void SetCurrentBulletParam(int current_bullet_lvl)
         {
-            MoveSpeed = 3 * current_bullet_lvl;
+            MoveSpeed = 4 + current_bullet_lvl*1.3f;
             Damage = BaseDamage * current_bullet_lvl * 0.5f;
-            Duration = 1.3f + current_bullet_lvl*0.3f;
+            Duration = 1.2f;
             CoolDown = 1f / current_bullet_lvl;
         }
     }

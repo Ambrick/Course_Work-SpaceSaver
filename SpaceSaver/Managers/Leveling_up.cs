@@ -1,12 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceSaver
+﻿namespace SpaceSaver
 {
     public class Leveling_up
     {
@@ -45,7 +37,7 @@ namespace SpaceSaver
 
                 _current_lvl++;
                 _skill_points++;
-                _eperience_points_to_lvlup = 100 + 25 * _current_lvl-1;
+                _eperience_points_to_lvlup +=  25 * _current_lvl;
                 Reset_lvl_sys();
             }
         }

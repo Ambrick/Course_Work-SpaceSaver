@@ -14,7 +14,7 @@ namespace SpaceSaver
 
         public Sword_param Param;
 
-        public Sword(Game1 game1, ref Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(ref texture, position, object_type)
+        public Sword(Game1 game1, Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
         {
             Game1 = game1;
             Texture = texture;
@@ -46,21 +46,21 @@ namespace SpaceSaver
             {
                 foreach (Enemy enemy in Game1._enemies)
                 {
-                    if (Collision_manager.CheckCollision(this, enemy))
+                    if (Properties.Intersects(enemy.Properties))
                     {
                         enemy.GetHit(Param.Damage);
                         IsDead = true;
                         return;
                     }
                 }
-                foreach (Bullet spr2 in Game1._bullets)
+                foreach (Bullet bullet in Game1._bullets)
                 {
-                    if (spr2.Object_type == "enemy_bullet")
+                    if (bullet.Object_type == "enemy_bullet")
                     {
-                        if (Collision_manager.CheckCollision(spr2, this) && Param.IsJedi)
+                        if (Properties.Intersects(bullet.Properties) && Param.IsJedi)
                         {
-                            spr2.IsDead = true;
-                            Game1._bullets.Add(new Bullet(Game1, ref Game1.txtr_bullet_enemy, Game1._player._Bullet_param, Game1._player.Position, "player_bullet", Game1._player.Angle));
+                            bullet.IsDead = true;
+                            Game1._bullets.Add(new Bullet(Game1, Game1.textures["enemy_bullet"], bullet.Param, Game1._player.Position, "player_bullet", Game1._player.Angle));
                             IsDead = true;
                             return;
                         }
@@ -69,7 +69,7 @@ namespace SpaceSaver
             }
             else
             {
-                if (Collision_manager.CheckCollision(this, Game1._player))
+                if (Properties.Intersects(Game1._player.Properties))
                 {
                     Game1._player.GetHit(Param.Damage);
                 }

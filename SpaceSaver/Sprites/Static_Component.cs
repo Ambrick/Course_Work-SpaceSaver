@@ -7,7 +7,7 @@ namespace SpaceSaver
     {
         public Texture2D Texture;
 
-        public Static_Component(ref Texture2D texture, Vector2 position, string object_type)
+        public Static_Component(Texture2D texture, Vector2 position, string object_type)
         {
             Texture = texture;
             Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
@@ -15,7 +15,7 @@ namespace SpaceSaver
             Object_type = object_type;
         }
 
-        public Static_Component(ref Texture2D texture, string object_type) { }
+        public Static_Component(Texture2D texture, string object_type) { }
 
         public void Draw(SpriteBatch sprBatch)
         {
