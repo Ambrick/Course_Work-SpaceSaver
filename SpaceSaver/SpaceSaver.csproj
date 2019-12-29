@@ -46,8 +46,10 @@
     <Compile Include="Managers\Leveling_up.cs" />
     <Compile Include="Managers\ComponentsManager.cs" />
     <Compile Include="Map\Level.cs" />
+    <Compile Include="Sprites\Enemies\Enemy_hard.cs" />
+    <Compile Include="Sprites\Enemies\Enemy_simple.cs" />
     <Compile Include="Sprites\Explosion.cs" />
-    <Compile Include="Sprites\Enemy\Enemy.cs" />
+    <Compile Include="Sprites\Enemies\Enemy.cs" />
     <Compile Include="Sprites\Skill_Param\Sword_param .cs" />
     <Compile Include="Sprites\Skill_Param\Bullet_param.cs" />
     <Compile Include="Models\Animation.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprites\Static_Component.cs" />
     <Compile Include="Sprites\Skills\Sword.cs" />
+    <Compile Include="UI\Hood.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

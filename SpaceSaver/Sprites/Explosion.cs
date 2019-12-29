@@ -13,10 +13,10 @@ namespace SpaceSaver
 
         private float _timer;
 
-        public Explosion(Dictionary<string, Animation> animations, Vector2 position, Game1 game1, string object_type): base (animations, position, game1)
+        public Explosion(Dictionary<string, Animation> animations, Vector2 position,  string object_type) : base (animations, position)
         {
             Object_type = object_type;
-            Dynamic_Component_Initialization(animations, position, game1);
+            Dynamic_Component_Initialization(animations, position);
             _lifeTime = Animations.First().Value.FrameSpeed * Animations.First().Value.FrameCount;
             Angle = 0;
         }

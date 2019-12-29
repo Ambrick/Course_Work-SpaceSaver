@@ -24,9 +24,9 @@ namespace SpaceSaver
             }
         }
 
-        public Dynamic_Component(Dictionary<string, Animation> animations, Vector2 position, Game1 game1) { }
+        public Dynamic_Component(Dictionary<string, Animation> animations, Vector2 position) { }
 
-        protected void Dynamic_Component_Initialization(Dictionary<string, Animation> animations, Vector2 position, Game1 game1)
+        protected void Dynamic_Component_Initialization(Dictionary<string, Animation> animations, Vector2 position)
         {
             //Передаем список полученный анимаций в анимации
             Animations = animations;
@@ -38,7 +38,7 @@ namespace SpaceSaver
         }
         public virtual void Update(GameTime gameTime) { }
 
-        public void Draw(SpriteBatch sprBatch)
+        public virtual void Draw(SpriteBatch sprBatch)
         {
             AnimationManager.Draw(sprBatch, Angle);
         }

@@ -22,8 +22,6 @@ namespace SpaceSaver
         public Rectangle Rectangle { get; set; }
 
         public Rectangle Properties => new Rectangle((int)Position.X - Rectangle.Width / 2, (int)Position.Y - Rectangle.Height / 2, Rectangle.Width, Rectangle.Height);
-
-        protected Game1 Game1;
     }
 }
 

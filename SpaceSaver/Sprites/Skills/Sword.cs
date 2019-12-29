@@ -10,13 +10,10 @@ namespace SpaceSaver
 
         private Vector2 Direction;
 
-        public bool Debuff = false;
-
         public Sword_param Param;
 
-        public Sword(Game1 game1, Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
+        public Sword(Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
         {
-            Game1 = game1;
             Texture = texture;
             Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             Position = position;
@@ -44,23 +41,23 @@ namespace SpaceSaver
             //проверка на столкновение удара игрока с врагом/щитом врага/пуля врага
             if (Object_type == "player_sword")
             {
-                foreach (Enemy enemy in Game1._enemies)
+                foreach (Enemy enemy in Game1.enemies)
                 {
                     if (Properties.Intersects(enemy.Properties))
                     {
-                        enemy.GetHit(Param.Damage);
+                        enemy.GetHitIsDead(Param.Damage);
                         IsDead = true;
                         return;
                     }
                 }
-                foreach (Bullet bullet in Game1._bullets)
+                foreach (Bullet bullet in Game1.bullets)
                 {
                     if (bullet.Object_type == "enemy_bullet")
                     {
                         if (Properties.Intersects(bullet.Properties) && Param.IsJedi)
                         {
                             bullet.IsDead = true;
-                            Game1._bullets.Add(new Bullet(Game1, Game1.textures["enemy_bullet"], bullet.Param, Game1._player.Position, "player_bullet", Game1._player.Angle));
+                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], bullet.Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
                             IsDead = true;
                             return;
                         }
@@ -69,9 +66,9 @@ namespace SpaceSaver
             }
             else
             {
-                if (Properties.Intersects(Game1._player.Properties))
+                if (Properties.Intersects(Game1.player.Properties))
                 {
-                    Game1._player.GetHit(Param.Damage);
+                    Game1.player.GetHitIsDead(Param.Damage);
                 }
             }
         }

@@ -4,7 +4,7 @@
     {
         public int _current_lvl;
 
-        public int _skill_points;
+        public int _skill_points = 0;
 
         public float _eperience_points;
 
@@ -12,17 +12,16 @@
 
         public float _eperience_for_key;
 
-        public Leveling_up(float exp_to_lvlup, float exp_for_key)
+        public Leveling_up(float exp_to_lvlup, float exp_for_key, int current_lvl)
         {
-            _current_lvl = 1;
-            _skill_points = 0;
+            _current_lvl = current_lvl;
 
             _eperience_points = 0;
             _eperience_points_to_lvlup = exp_to_lvlup;
             _eperience_for_key = exp_for_key;
         }
 
-        public void ifGetKey()
+        public void IfGetKey()
         {
             _eperience_points += _eperience_for_key;
 

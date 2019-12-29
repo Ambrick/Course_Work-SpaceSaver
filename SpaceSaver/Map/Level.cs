@@ -7,128 +7,102 @@ namespace SpaceSaver
 {
     public class Level
     {
-        Random rand= new Random();
-
-        private Game1 Game1;
-
-        private int Map_lvl;
-
-        private int Enemy_total;
-
-        private int Enemy_count;
-
-        private float Spawn_timer;
-
-        private float Spawn_default;
-
-        private int Enemy_lvl;
-
-        private int Key_count;
+        public int Map_lvl;
 
         private int[,] LVL;
 
-        private Vector2 Spawn_point;
-
-        private float timer;
-
         private const int cell_size = 64;
 
-        public int enemies_killed=0;
+        public int keys_on_lvl;
 
-        public int Finished = 0;
+        public int Finished;
 
-        public int BaseHp;
-
-        private List<string> Loot = new List<string> { };
-
-        public Level(Game1 game1, int lvl, int enemy_count, float enemy_cooldown, int enemy_lvl, int key_count, int Hp, int[,] level_matrix)
+        public Level(int lvl, int[,] level_matrix)
         {
-            Game1 = game1;
-            BaseHp = Hp;
-            Map_lvl = lvl;
-            Enemy_total = enemy_count;
-            Enemy_count = enemy_count;
-            Spawn_timer = enemy_cooldown;
-            Spawn_default = Spawn_timer;
-            Enemy_lvl = enemy_lvl;
-            Key_count = key_count;
-
-            if (Key_count > Enemy_count)
-            {
-                SwapNum(ref Key_count, ref Enemy_count);
-            }
-
             LVL = level_matrix;
-
-            LoadLevel(Map_lvl);
+            LoadLevel(lvl);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime) // прописать условия прохождения или провала уровня
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timer > Spawn_timer && Enemy_count != 0)
-            {
-                Game1._enemies.Add(new Enemy(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.1f) } }, Spawn_point, Game1, "enemy", Enemy_lvl));
-                timer = 0;
-                Spawn_timer = Spawn_default * Enemy_count;
-                Enemy_count--;
-            }
+            //Если игрок набрал нужное количество ключей для уровня и наступил в красный круг, то Finish=1 + Game1.player= UnloadLvl (Finished);
+
+            //Если игрок "умер", Finish=0 + Game1.player= UnloadLvl (Finished);
         }
 
         public void IfEnemyDead(GameTime gameTime, Vector2 position)
         {
-            Game1._explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.27f) }, }, position, Game1, "explosion"));
-
-            enemies_killed++;
-            if (enemies_killed == Enemy_total || Game1._enemies.Count == 0 )
-            {
-                Game1.game_state++;
-            }
-        }
-
-        public void IfBaseHitted()
-        {
-            BaseHp--;
-            if (BaseHp == 0)
-            {
-                Game1.game_state = 0;
-            }
+            Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, position, "explosion"));
+            Game1.static_objects.Add(new Static_Component(Game1.textures["key"], position, "key"));
         }
 
         public void LoadLevel(int lvl)
         {
+            Map_lvl = lvl;
             for (int i = 0; i < LVL.GetLongLength(0); i++)
             {
                 for (int j = 0; j < LVL.GetLongLength(1); j++)
                 {
-                    if (LVL[i, j] != 1)
+                    if (LVL[i, j] != 1 && LVL[i, j] != 5)
                     {
-                        Game1._static_objects.Add(new Static_Component(Game1.textures["floor"], new Vector2(i * cell_size, j * cell_size), "floor"));
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["floor"], new Vector2(i * cell_size, j * cell_size), "floor"));
                     }
                     if (LVL[i, j] == 1)
                     {
-                        Game1._static_objects.Add(new Static_Component(Game1.textures["wall"], new Vector2(i * cell_size, j * cell_size), "wall"));
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["wall"], new Vector2(i * cell_size, j * cell_size), "wall"));
                     }
                     else if (LVL[i, j] == 2)
                     {
-                        Game1._static_objects.Add(new Static_Component(Game1.textures["player_point"], new Vector2(i * cell_size, j * cell_size), "player_point"));
-                        Game1._player = new Player(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.textures["player_run"], 8, 0.15f) }, },
-                            new Vector2(i * cell_size, j * cell_size), Game1, "player");
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["player_point"], new Vector2(i * cell_size, j * cell_size), "player_point"));
+                        Game1.player = new Player(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.textures["player_run"], 8, 0.15f) }, },
+                            new Vector2(i * cell_size, j * cell_size), "player");
                     }
                     else if (LVL[i, j] == 3)
                     {
-                        Game1._static_objects.Add(new Static_Component(Game1.textures["enemy_point"], new Vector2(i * cell_size, j * cell_size), "enemy_point"));
-                        Spawn_point = new Vector2(i * cell_size, j * cell_size);
+                        keys_on_lvl++;
+                        Game1.enemies.Add(new Enemy_simple(new Dictionary<string, Animation>() {
+                            { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
+                            { "Hit", new Animation(Game1.textures["enemy_slice"], 5, 0.1f) } }, new Vector2(i * cell_size, j * cell_size), "enemy_simple", Map_lvl));
+
+                    }
+                    else if (LVL[i, j] == 4)
+                    {
+                        keys_on_lvl++;
+                        Game1.enemies.Add(new Enemy_hard(new Dictionary<string, Animation>() {
+                            { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
+                            { "Shoot", new Animation(Game1.textures["enemy_shoot"], 2, 0.3f) } }, new Vector2(i * cell_size, j * cell_size), "enemy_hard", Map_lvl));
+
+                    }
+                    else if (LVL[i, j] == 6)
+                    {
+                        //Game1.static_objects.Add(new Static_Component(Game1.textures["heal"], new Vector2(i * cell_size, j * cell_size), "heal"));
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["key"], new Vector2(i * cell_size, j * cell_size), "key"));
+                    }
+                    else if (LVL[i, j] == 7)
+                    {
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["buff"], new Vector2(i * cell_size, j * cell_size), "buff"));
                     }
                 }
             }
         }
 
-        public T SwapNum <T> (ref T x, ref T y)
+        public Player UnloadLvl(int finish_state)
         {
-            T t = y;
-            y = x;
-            return t;
+            //Обнулить счетчик ключей у игрока
+            Player player_instance = Game1.player;
+
+            Game1.static_objects.Clear();
+            Game1.swords.Clear();
+            Game1.bullets.Clear();
+            Game1.explosions.Clear();
+            Game1.enemies.Clear();
+            Game1.Map = null;
+
+            if (finish_state == 1)
+            {
+                return player_instance;
+            }
+            return null;
         }
     }
 }

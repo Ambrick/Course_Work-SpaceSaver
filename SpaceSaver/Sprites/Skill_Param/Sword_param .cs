@@ -12,20 +12,24 @@
 
         private float BaseDamage{ get; set; }
 
+        public int Skill_lvl { get; private set; }
+
         public Sword_param(int skill_lvl, float InitialDamage)
         {
-            BaseDamage = InitialDamage;
-            Damage = BaseDamage;
+            Damage = BaseDamage = InitialDamage;
+            Skill_lvl = skill_lvl - 1;
 
-            SetCurrentSwordParam(skill_lvl);
+            SetCurrentSwordParam();
         }
 
-        public void SetCurrentSwordParam(int current_sword_lvl)
+        public void SetCurrentSwordParam()
         {
-            Damage = BaseDamage * current_sword_lvl * 0.3f;
-            CoolDown = 3f / current_sword_lvl;
+            Skill_lvl++;
 
-            if (current_sword_lvl == 4)
+            Damage = BaseDamage * Skill_lvl * 0.3f;
+            CoolDown = 3f / Skill_lvl;
+
+            if (Skill_lvl == 4)
             {
                 IsJedi = true;
                 CoolDown = 0.4f;

@@ -3,90 +3,72 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
-    public class ComponentsManager
+    public static class ComponentsManager
     {
-        private Game1 Game1;
-
-        public ComponentsManager(Game1 game1)
-        {
-            Game1 = game1;
-        }
-
-        public void UpdateComponents(GameTime gameTime)
+        public static void UpdateComponents(GameTime gameTime)
         {
             Game1.Map.Update(gameTime);
 
-            foreach (var component in Game1._static_objects)
+            foreach (var component in Game1.static_objects)
             {
                 if (component.IsDead)
                 {
-                    Game1._static_objects.Remove(component);
+                    Game1.static_objects.Remove(component);
                     break;
                 }
             }
-            foreach (var component in Game1._bullets)
-            {
-                component.Update(gameTime);
-                if (component.IsDead)
-                {
-                    Game1._bullets.Remove(component);
-                    break;
-                }
-            }
-            foreach (var component in Game1._swords)
+            foreach (var component in Game1.bullets)
             {
                 component.Update(gameTime);
                 if (component.IsDead)
                 {
-                    Game1._swords.Remove(component);
+                    Game1.bullets.Remove(component);
                     break;
                 }
             }
-            foreach (var component in Game1._enemies)
+            foreach (var component in Game1.enemies)
             {
                 component.Update(gameTime);
                 if (component.IsDead)
                 {
-                    Game1._enemies.Remove(component);
+                    Game1.enemies.Remove(component);
                     break;
                 }
             }
-            foreach (var component in Game1._explosions)
+            foreach (var component in Game1.explosions)
             {
                 component.Update(gameTime);
                 if (component.IsDead)
                 {
-                    Game1._explosions.Remove(component);
+                    Game1.explosions.Remove(component);
                     break;
                 }
             }
-            Game1._player.Update(gameTime);
+            Game1.player.Update(gameTime);
+            foreach (var component in Game1.swords)
+            {
+                component.Update(gameTime);
+                if (component.IsDead)
+                {
+                    Game1.swords.Remove(component);
+                    break;
+                }
+            }
         }
 
-        public void DrawComponents(SpriteBatch sprBatch)
+        public static void DrawComponents(SpriteBatch sprBatch)
         {
-            foreach (var component in Game1._static_objects)
+            foreach (var component in Game1.static_objects)
                 component.Draw(sprBatch);
-            foreach (var component in Game1._swords)
+            foreach (var component in Game1.bullets)
                 component.Draw(sprBatch);
-            foreach (var component in Game1._bullets)
+            foreach (var component in Game1.explosions)
                 component.Draw(sprBatch);
-            foreach (var component in Game1._explosions)
+            foreach (var component in Game1.enemies)
                 component.Draw(sprBatch);
-            foreach (var component in Game1._enemies)
+            Game1.player.Draw(sprBatch);
+            foreach (var component in Game1.swords)
                 component.Draw(sprBatch);
-            Game1._player.Draw(sprBatch);
-        }
-
-        public void UnloadLvl()
-        {
-            Game1._static_objects.Clear();
-            Game1._swords.Clear();
-            Game1._bullets.Clear();
-            Game1._explosions.Clear();
-            Game1._enemies.Clear();
-            Game1._player = null;
-            Game1.Map= null;
         }
     }
 }

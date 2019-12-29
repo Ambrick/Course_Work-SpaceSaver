@@ -8,24 +8,28 @@
 
         public float MoveSpeed { get; set; }
 
-        public float Duration { get; set; }
+        public float Range { get; set; }
+
+        public int Skill_lvl { get; private set; }
 
         private float BaseDamage { get; set; }
 
         public Bullet_param(int skill_lvl, float InitialDamage)
         {
-            BaseDamage = InitialDamage;
-            Damage = BaseDamage;
+            Damage = BaseDamage = InitialDamage;
+            Skill_lvl = skill_lvl-1;
 
-            SetCurrentBulletParam(skill_lvl);
+            SetCurrentBulletParam();
         }
 
-        public void SetCurrentBulletParam(int current_bullet_lvl)
+        public void SetCurrentBulletParam()
         {
-            MoveSpeed = 4 + current_bullet_lvl*1.3f;
-            Damage = BaseDamage * current_bullet_lvl * 0.5f;
-            Duration = 1.2f;
-            CoolDown = 1f / current_bullet_lvl;
+            Skill_lvl++;
+
+            MoveSpeed = 4 + Skill_lvl * 1.3f;
+            Damage = BaseDamage * Skill_lvl * 0.5f;
+            Range = 70 + Skill_lvl*40;
+            CoolDown = 1f / Skill_lvl;
         }
     }
 }

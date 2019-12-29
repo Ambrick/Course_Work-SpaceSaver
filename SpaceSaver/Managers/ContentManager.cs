@@ -11,18 +11,24 @@ namespace SpaceSaver
     {
         public static Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
         {
-            Content.RootDirectory = "Content";
             return new Dictionary<string, Texture2D> {
                 {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
                 {"enemy_run", Content.Load<Texture2D>("Sprites/Monster_run") },
+                {"enemy_shoot", Content.Load<Texture2D>("Sprites/Monster_shoot") },
+                {"enemy_slice", Content.Load<Texture2D>("Sprites/Monster_hit") },
                 {"wall", Content.Load<Texture2D>("Sprites/Wall") },
                 {"floor", Content.Load<Texture2D>("Sprites/Floor") },
                 {"player_bullet", Content.Load<Texture2D>("Sprites/Player_bullet") },
                 {"enemy_bullet", Content.Load<Texture2D>("Sprites/Enemy_bullet") },
                 {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
+                {"enemy_sword", Content.Load<Texture2D>("Sprites/Monster_slice") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
+                {"buff", Content.Load<Texture2D>("Sprites/Buff") },
                 {"key", Content.Load<Texture2D>("Sprites/Key_Big") },
-                {"enemy_point", Content.Load<Texture2D>("Sprites/Enemy_point") },
+                {"hood", Content.Load<Texture2D>("Sprites/Hood") },
+                {"sword_icon", Content.Load<Texture2D>("Sprites/Sword_icon") },
+                {"bullet_icon", Content.Load<Texture2D>("Sprites/Bullet_icon") },
+                {"stats_icon", Content.Load<Texture2D>("Sprites/Stats_icon") },
                 {"player_point", Content.Load<Texture2D>("Sprites/Player_point") },
                 {"explosion", Content.Load<Texture2D>("Sprites/Explosion") },
                 {"background", Content.Load<Texture2D>("Sprites/background") },
@@ -31,8 +37,6 @@ namespace SpaceSaver
         public static Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
         {
             SoundEffect.MasterVolume = 0.05f;
-            Content.RootDirectory = "Content";
-
             return new Dictionary<string, SoundEffect> {
                 {"player_get_hit", Content.Load<SoundEffect>("Sounds/Player_get_hit") },
                 {"enemy_roar1", Content.Load<SoundEffect>("Sounds/Monster_roar1") },
@@ -53,8 +57,7 @@ namespace SpaceSaver
         public static Dictionary<string, Song> LoadSongs(ContentManager Content)
         {
             MediaPlayer.Volume = 0.05f;
-            Content.RootDirectory = "Content";
-
+            MediaPlayer.IsRepeating = true;
             return new Dictionary<string, Song> {
                 {"menu", Content.Load<Song>("Music/Menu") },
                 {"lvl1", Content.Load<Song>("Music/Lvl_1") },

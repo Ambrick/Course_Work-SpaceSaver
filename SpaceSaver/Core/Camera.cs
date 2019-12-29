@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpaceSaver
 {
-    public class Camera
+    public static class Camera
     {
         private static Matrix Offset => Matrix.CreateTranslation(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2, 0);
 

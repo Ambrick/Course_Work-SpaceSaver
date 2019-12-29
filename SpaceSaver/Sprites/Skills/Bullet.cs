@@ -6,17 +6,16 @@ namespace SpaceSaver
 {
     public class Bullet: Static_Component
     {
-        private float Timer;
-
         private Vector2 Direction;
 
         public bool Debuff = false;
 
         public Bullet_param Param;
 
-        public Bullet(Game1 game1, Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base( texture, position, object_type)
+        private Vector2 initial_pos;
+
+        public Bullet(Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base( texture, position, object_type)
         {
-            Game1 = game1;
             Texture = texture;
             Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             Position = position;
@@ -27,17 +26,16 @@ namespace SpaceSaver
             Direction = new Vector2((float) Math.Cos(Angle), (float) Math.Sin(Angle));
             Position = position + Direction * 25f;
             Velocity = Direction * Param.MoveSpeed;
+
+            initial_pos = Position;
         }
 
         public void Update(GameTime gameTime)
         {
-            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (Timer >= Param.Duration)
+            if (Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range)
             {
                 IsDead = true;
             }
-
 
             //--------------------------------
             BulletInteraction();
@@ -49,7 +47,7 @@ namespace SpaceSaver
         public void BulletInteraction()
         {
             //проверка на столкновение со стенjq
-            foreach (Static_Component spr2 in Game1._static_objects)
+            foreach (Static_Component spr2 in Game1.static_objects)
             {
                 if (spr2.Object_type == "wall")
                 {
@@ -63,22 +61,20 @@ namespace SpaceSaver
             //проверка на столкновение пули игрока с врагом
             if (Object_type == "player_bullet")
             {
-                foreach (Enemy enemy in Game1._enemies)
+                foreach (Enemy enemy in Game1.enemies)
                 {
                     if (Collision_manager.CheckCollision(this, enemy))
                     {
-                        enemy.GetHit(Param.Damage);
-                        IsDead = true;
+                        enemy.GetHitIsDead(Param.Damage);
                     }
                 }
             }
             //проверка на столкновение вражеской пули с игроком
             if (Object_type == "enemy_bullet")
             {
-                if (Collision_manager.CheckCollision(this, Game1._player))
+                if (Collision_manager.CheckCollision(this, Game1.player))
                 {
-                    Game1._player.GetHit(Param.Damage);
-                    IsDead = true;
+                    Game1.player.GetHitIsDead(Param.Damage);
                 }
             }
         }
