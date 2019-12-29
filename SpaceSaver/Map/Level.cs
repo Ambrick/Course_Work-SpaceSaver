@@ -25,15 +25,34 @@ namespace SpaceSaver
 
         public void Update(GameTime gameTime) // прописать условия прохождения или провала уровня
         {
-            //Если игрок набрал нужное количество ключей для уровня и наступил в красный круг, то Finish=1 + Game1.player= UnloadLvl (Finished);
-
-            //Если игрок "умер", Finish=0 + Game1.player= UnloadLvl (Finished);
+            if (Game1.player.key_count == keys_on_lvl)
+            {
+                foreach (var sprite in Game1.static_objects)
+                {
+                    if (sprite.Properties.Intersects(Game1.player.Properties) && sprite.Object_type == "player_point")
+                    {
+                        Game1.game_state++;
+                        if (Game1.game_state ==4)
+                        {
+                            Game1.sounds["win"].Play();
+                        }
+                        Game1.alow_next = true;
+                    }
+                }
+            }
+            else if (Game1.player.IsDead)
+            {
+                Game1.sounds["lose"].Play();
+                Game1.game_state = -4;
+                Game1.alow_next = true;
+            }
         }
 
-        public void IfEnemyDead(GameTime gameTime, Vector2 position)
+        public void IfEnemyDead(Vector2 position)
         {
-            Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, position, "explosion"));
             Game1.static_objects.Add(new Static_Component(Game1.textures["key"], position, "key"));
+            Game1.score++;
+            Game1.sounds["enemy_roar1"].Play();
         }
 
         public void LoadLevel(int lvl)
@@ -54,8 +73,7 @@ namespace SpaceSaver
                     else if (LVL[i, j] == 2)
                     {
                         Game1.static_objects.Add(new Static_Component(Game1.textures["player_point"], new Vector2(i * cell_size, j * cell_size), "player_point"));
-                        Game1.player = new Player(new Dictionary<string, Animation>() { { "Move", new Animation(Game1.textures["player_run"], 8, 0.15f) }, },
-                            new Vector2(i * cell_size, j * cell_size), "player");
+                        Game1.player.Position = new Vector2(i * cell_size, j * cell_size);
                     }
                     else if (LVL[i, j] == 3)
                     {
@@ -75,20 +93,24 @@ namespace SpaceSaver
                     }
                     else if (LVL[i, j] == 6)
                     {
-                        //Game1.static_objects.Add(new Static_Component(Game1.textures["heal"], new Vector2(i * cell_size, j * cell_size), "heal"));
                         Game1.static_objects.Add(new Static_Component(Game1.textures["key"], new Vector2(i * cell_size, j * cell_size), "key"));
+                        keys_on_lvl++;
                     }
                     else if (LVL[i, j] == 7)
                     {
                         Game1.static_objects.Add(new Static_Component(Game1.textures["buff"], new Vector2(i * cell_size, j * cell_size), "buff"));
                     }
+                    else if (LVL[i, j] == 8)
+                    {
+                        Game1.static_objects.Add(new Static_Component(Game1.textures["heal"], new Vector2(i * cell_size, j * cell_size), "heal"));
+                    }
                 }
             }
         }
 
-        public Player UnloadLvl(int finish_state)
+        public void UnloadLvl(bool Win)
         {
-            //Обнулить счетчик ключей у игрока
+            Game1.player.key_count = 0;
             Player player_instance = Game1.player;
 
             Game1.static_objects.Clear();
@@ -98,11 +120,10 @@ namespace SpaceSaver
             Game1.enemies.Clear();
             Game1.Map = null;
 
-            if (finish_state == 1)
+            if (!Win)
             {
-                return player_instance;
+                Game1.player = null;
             }
-            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -46,7 +47,7 @@ namespace SpaceSaver
        
         public void BulletInteraction()
         {
-            //проверка на столкновение со стенjq
+            //проверка на столкновение со стеной
             foreach (Static_Component spr2 in Game1.static_objects)
             {
                 if (spr2.Object_type == "wall")
@@ -63,9 +64,11 @@ namespace SpaceSaver
             {
                 foreach (Enemy enemy in Game1.enemies)
                 {
-                    if (Collision_manager.CheckCollision(this, enemy))
+                    if (Collision_manager.CheckCollision(this, enemy) && enemy.Object_type != "enemy_simple")
                     {
-                        enemy.GetHitIsDead(Param.Damage);
+                        Game1.sounds["enemy_roar1"].Play();
+                        enemy.GetHitIsDead(Param.Damage, 1, Position);
+                        IsDead = true;
                     }
                 }
             }
@@ -74,7 +77,9 @@ namespace SpaceSaver
             {
                 if (Collision_manager.CheckCollision(this, Game1.player))
                 {
-                    Game1.player.GetHitIsDead(Param.Damage);
+                    Game1.sounds["player_get_hit"].Play();
+                    Game1.player.GetHitIsDead(Param.Damage, 1, Position);
+                    IsDead = true;
                 }
             }
         }

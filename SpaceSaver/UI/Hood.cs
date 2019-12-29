@@ -85,20 +85,20 @@ namespace SpaceSaver
 
             //Вывод здоровья
             string s = Game1.player._Minion_Stats.MaxHealthPoints.ToString()+"/"+ Game1.player._Minion_Stats.CurrentHealthPoints.ToString();
-            spriteBatch.DrawString(Game1.font, s, hp_pos, Color.White, 0, Vector2.Zero, 0.5f,SpriteEffects.None,1);
+            spriteBatch.DrawString(Game1.font, s, hp_pos, Color.White, 0, Vector2.Zero, 0.56f,SpriteEffects.None,1);
 
             //Вывод информации о ключах
             s = Game1.Map.keys_on_lvl + "/" + Game1.player.key_count.ToString();
-            spriteBatch.DrawString(Game1.font, s, key_pos, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
+            spriteBatch.DrawString(Game1.font, s, key_pos, Color.White, 0, Vector2.Zero, 0.56f, SpriteEffects.None, 1);
 
             //Вывод уровня
             if (Game1.player.level_system._skill_points > 0)
             {
-                spriteBatch.DrawString(Game1.font, "Lvl " + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.Yellow);
+                spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.Yellow);
             }
             else
             {
-                spriteBatch.DrawString(Game1.font, "Lvl " + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.White);
+                spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.White);
             }
         }
     }

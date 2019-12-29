@@ -12,6 +12,8 @@ namespace SpaceSaver
 
         public Sword_param Param;
 
+        float damage;
+
         public Sword(Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
         {
             Texture = texture;
@@ -19,8 +21,8 @@ namespace SpaceSaver
             Position = position;
             Object_type = object_type;
             Angle = angle;
-
             Param = param;
+            damage =Param.Damage;
             Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
             Position = position + Direction * 25f;
         }
@@ -45,8 +47,8 @@ namespace SpaceSaver
                 {
                     if (Properties.Intersects(enemy.Properties))
                     {
-                        enemy.GetHitIsDead(Param.Damage);
-                        IsDead = true;
+                        enemy.GetHitIsDead(damage, 0, Position);
+                        damage = 0;
                         return;
                     }
                 }
@@ -58,18 +60,15 @@ namespace SpaceSaver
                         {
                             bullet.IsDead = true;
                             Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], bullet.Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
-                            IsDead = true;
                             return;
                         }
                     }
                 }
             }
-            else
+            else if(Properties.Intersects(Game1.player.Properties))
             {
-                if (Properties.Intersects(Game1.player.Properties))
-                {
-                    Game1.player.GetHitIsDead(Param.Damage);
-                }
+                Game1.player.GetHitIsDead(damage, 0, Position);
+                damage = 0;
             }
         }
     }

@@ -32,11 +32,6 @@ namespace SpaceSaver
             }
 
             PlayerInteraction();
-            if (_Minion_Stats.CurrentHealthPoints < 0)
-            {
-                Game1.Map.IfEnemyDead(gameTime, Position);
-                IsDead = true;
-            }
         }
 
         public virtual void PlayerInteraction()

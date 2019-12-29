@@ -32,6 +32,7 @@
         {
             if (_eperience_points >= _eperience_points_to_lvlup)
             {
+                Game1.sounds["lvlup"].Play();
                 _eperience_points = _eperience_points - _eperience_points_to_lvlup;
 
                 _current_lvl++;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
@@ -22,6 +23,7 @@ namespace SpaceSaver
                 {"enemy_bullet", Content.Load<Texture2D>("Sprites/Enemy_bullet") },
                 {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
                 {"enemy_sword", Content.Load<Texture2D>("Sprites/Monster_slice") },
+                {"enemy_shield", Content.Load<Texture2D>("Sprites/Shield_enemy") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
                 {"buff", Content.Load<Texture2D>("Sprites/Buff") },
                 {"key", Content.Load<Texture2D>("Sprites/Key_Big") },
@@ -36,7 +38,7 @@ namespace SpaceSaver
         }
         public static Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
         {
-            SoundEffect.MasterVolume = 0.05f;
+            SoundEffect.MasterVolume = 0.08f;
             return new Dictionary<string, SoundEffect> {
                 {"player_get_hit", Content.Load<SoundEffect>("Sounds/Player_get_hit") },
                 {"enemy_roar1", Content.Load<SoundEffect>("Sounds/Monster_roar1") },
@@ -64,5 +66,6 @@ namespace SpaceSaver
                 {"lvl2", Content.Load<Song>("Music/Lvl_2") },
             };
         }
+        
     }
 }

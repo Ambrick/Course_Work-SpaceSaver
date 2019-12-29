@@ -12,39 +12,49 @@ namespace SpaceSaver
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        int[,] Level1 = {
+        int[,] Level3 = {
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
-           { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1  },
+           { 1, 6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 1  },
            { 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
+           { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 3, 0, 1  },
-           { 1, 0, 7, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
+           { 1, 0, 7, 0, 3, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 6, 0, 0, 0, 1, 5, 5, 1, 0, 7, 0, 1  },
            { 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 6, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 1, 0, 1  },
-           { 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1  },
+           { 1, 8, 3, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 1  },
+           { 1, 6, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 2, 0, 1  },
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
            };
         int[,] Level2 = {
-           { 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1    },
-           { 5, 5, 5, 1, 0, 0, 1, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1    },
-           { 5, 5, 5, 1, 0, 0, 1, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1    },
-           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,1,1,1,0,0,0,0,1    },
-           { 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1    },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1    },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,0,0,0,0,1,1,1,1,0,0,0,0,1    },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1    },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,0,0,0,0,0,0,0,1    },
-           { 1, 0, 0, 10, 1, 0, 0, 0, 1, 0, 0,0,1,5,5,5,1,0,0,0,0,0,0,0,1    },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,1,5,5,1,1,1,1,0,0,0,0,0,1   },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,1,5,5,1,2,0,0,0,0,0,0,0,1    },
+           { 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1   },
+           { 5, 5, 5, 1, 6, 0, 1, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
+           { 5, 5, 5, 1, 0, 0, 1, 0, 0, 7, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
+           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,1,1,1,0,0,0,0,1   },
+           { 1, 8, 0, 1, 1, 1, 0, 4, 0, 1, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1   },
+           { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1   },
+           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,1,1,1,0,0,3,0,1   },
+           { 1, 3, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
+           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,0,0,0,0,0,0,0,1   },
+           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,1,5,5,5,1,0,0,0,0,4,0,0,1    },
+           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 3, 0,1,5,5,1,1,1,1,0,0,0,0,0,1   },
+           { 1, 6, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,1,5,5,1,2,0,0,0,7,0,0,8,1   },
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,5,5,1,1,1,1,1,1,1,1,1,1  },
+           };
+
+        public static int[,] Level1 = {
+           { 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1 },
+           { 1, 8, 1, 1, 1, 0, 0, 0, 0, 6, 1 },
+           { 1, 0, 0, 7, 0, 0, 3, 0, 0, 0, 1 },
+           { 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
+           { 1, 0, 1, 5, 1, 0, 0, 0, 4, 0, 1 },
+           { 1, 2, 1, 5, 1, 0, 0, 0, 0, 0, 1 },
+           { 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1 },
            };
 
         public static Player player;
@@ -64,7 +74,11 @@ namespace SpaceSaver
         public static List<Explosion> explosions = new List<Explosion> { };
 
         public static SpriteFont font;
-        public int game_state = 0;
+        public static int game_state;
+
+        public static int menuState = 0;
+        public static int score;
+        public static ScoreManager _scoreManager;
 
         public Game1()
         {
@@ -90,51 +104,100 @@ namespace SpaceSaver
             textures = LoadManager.LoadTextures(Content);
             sounds = LoadManager.LoadSounds(Content);
             songs = LoadManager.LoadSongs(Content);
-            font= Content.Load<SpriteFont>("Text");
-            Map = new Level(1, Level1);
-            game_state = 3;
+            font= Content.Load<SpriteFont>("rus_text");
+            _scoreManager = ScoreManager.Load();
+
+            game_state = -3;
         }
+
+        public static bool alow_next = true;
 
         protected override void Update(GameTime gameTime)
         {
-            if (game_state == 0) //Очки результатов
+            if (game_state == -4) 
             {
+                Map.UnloadLvl(false);
+                _scoreManager.Add(new Score() { PlayerName = Nick_input.name, Value = score, });
+                ScoreManager.Save(_scoreManager);
+                Nick_input.name = "";
+                score = 0;
+                game_state = -3;
+            }
 
-            }
-            if (game_state == 1) //Начальное меню
-            {
 
-            }
-            else if (game_state == 2 && Map.Finished != 0)
+            if (game_state == -3 && alow_next)
             {
-                Map = new Level(1, Level1);
+                MediaPlayer.Play(songs["menu"]);
+                alow_next = false;
             }
-            else if (game_state == 3 && Map.Finished != 0)
+            if (game_state == -2 && alow_next)
             {
+                alow_next = false;
+            }
+            else if (game_state == 1 && alow_next)
+            {
+                MediaPlayer.Play(songs["lvl1"]);
+                alow_next = false;
+            }
+            else if (game_state == 2 && alow_next)
+            {
+                MediaPlayer.Play(songs["lvl2"]);
+                Map.UnloadLvl(true);
                 Map = new Level(2, Level2);
+                alow_next = false;
+            }
+            else if (game_state == 3 && alow_next)
+            {
+                MediaPlayer.Play(songs["lvl1"]);
+                Map.UnloadLvl(true);
+                Map = new Level(3, Level3);
+                alow_next = false;
             }
 
-            if (game_state != 0 && game_state != 1)
+
+            if (game_state >= 0 )
             {
                 Camera.Follow(player.Properties);
                 ComponentsManager.UpdateComponents(gameTime);
-                if (Map.Finished != 0)
-                {
-                    if (Map.Finished == 2 || (Map.Finished == 1 && game_state == 3)) // если проигрышь  или завершение последнего уровня, то
-                    {
-                        game_state = 0;
-                    }
-                }
-                else if (Map.Finished == 1)
-                {
-                    game_state++;
-                }
+            }
+            else if (game_state == -1)
+            {
+                ScoreManager.Update(gameTime);
+            }
+            else if (game_state == -3)
+            {
+                Menu.Update(gameTime);
+            }
+            else if (game_state == -2)
+            {
+                Nick_input.Update(gameTime);
             }
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            if (game_state != 0)
+            if (game_state == -3)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
+                Menu.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            else if (game_state == -2)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
+                Nick_input.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            else if (game_state == -1)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
+                ScoreManager.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            else if (game_state >= 0)
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);

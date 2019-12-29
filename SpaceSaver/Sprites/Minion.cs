@@ -5,10 +5,6 @@ namespace SpaceSaver
 {
     public class Minion : Dynamic_Component
     {
-        public float InitialDamage { get; set; }
-
-        public float InitialHealthPoints { get; set; }
-
         public double _bullet_timer = 0;
 
         public double _sword_timer = 0;
@@ -34,12 +30,19 @@ namespace SpaceSaver
             AnimationManager.Update(gameTime);
         }
 
-        public void GetHitIsDead(float IncomeDamage)
+        public void GetHitIsDead(float IncomeDamage, int type, Vector2 pos)
         {
             _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
 
+            if (type == 1)
+            {
+                Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, pos, "explosion"));
+            }
+
             if (_Minion_Stats.CurrentHealthPoints < 0)
             {
+                Game1.Map.IfEnemyDead(Position);
+                Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position, "explosion"));
                 IsDead = true;
             }
         }

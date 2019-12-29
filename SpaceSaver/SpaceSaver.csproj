@@ -67,6 +67,10 @@
     <Compile Include="Sprites\Static_Component.cs" />
     <Compile Include="Sprites\Skills\Sword.cs" />
     <Compile Include="UI\Hood.cs" />
+    <Compile Include="UI\Menu.cs" />
+    <Compile Include="UI\Nick_input.cs" />
+    <Compile Include="Models\Score.cs" />
+    <Compile Include="UI\ScoreManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

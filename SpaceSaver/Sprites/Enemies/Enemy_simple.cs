@@ -5,42 +5,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
     public class Enemy_simple : Enemy
     {
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            sprBatch.Draw(sheild_txt, new Vector2(Position.X - sheild_txt.Width / 2, Position.Y - sheild_txt.Height / 2), Color.White);
+            AnimationManager.Draw(sprBatch, Angle);
+        }
+        private Texture2D sheild_txt;
+
         public Enemy_simple(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl) : base(animations, position, object_type, lvl)
         {
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
             
             //Сбалансить врагов
-            //Пули не берут ближников
-            //Подрисовать псевдощит для ближних врагов
-            
-            InitialDamage = 30;
-            InitialHealthPoints = 70;
             
             Angle = -(float)Math.Atan(90);
             Get_path();
 
-            
-            _Sword_param = new Sword_param(lvl, InitialDamage);
-            _Minion_Stats = new Minion_Stats(lvl, InitialHealthPoints);
+
+
+            _Sword_param = new Sword_param(lvl, 20, 0.65f);
+            _Minion_Stats = new Minion_Stats(lvl, 50);
 
             Get_path();
+            sheild_txt = Game1.textures["enemy_shield"];
         }
 
         protected override void SkillsTimerUpdate(GameTime gameTime)
         {
-            if (_bullet_timer > 0)
+            if (_sword_timer > 0)
             {
-                _bullet_timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                _sword_timer -= gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (_bullet_timer <= 0)
+            else if (_sword_timer <= 0)
             {
-                _bullet_timer = 0;
+                _sword_timer = 0;
             }
         }
 

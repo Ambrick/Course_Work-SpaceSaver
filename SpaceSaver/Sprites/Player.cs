@@ -22,18 +22,16 @@ namespace SpaceSaver
         public Hood Hood = new Hood();
 
         public bool Buffed = false;
+        private double buff__timer;
 
         public Player(Dictionary<string, Animation> animations, Vector2 position, string object_type) : base (animations, position)
         {
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
 
-            InitialDamage = 30;
-            InitialHealthPoints = 100;
-
-            _Bullet_param = new Bullet_param(1, InitialDamage);
-            _Sword_param = new Sword_param(1, InitialDamage);
-            _Minion_Stats = new Minion_Stats(1, InitialHealthPoints);
+            _Bullet_param = new Bullet_param(1, 30);
+            _Sword_param = new Sword_param(1, 40, 1);
+            _Minion_Stats = new Minion_Stats(1, 150);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
             level_system = new Leveling_up(50, 100, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
@@ -70,6 +68,16 @@ namespace SpaceSaver
             {
                 click__timer = 0;
             }
+            //Buff_timer
+            if (Buffed)
+            {
+                buff__timer += gameTime.ElapsedGameTime.TotalSeconds;
+                if(buff__timer>6)
+                {
+                    buff__timer = 0;
+                    Buffed = false;
+                }
+            }
         }
 
         protected override void Action(GameTime gameTime)
@@ -82,36 +90,34 @@ namespace SpaceSaver
 
             if (mouseSt.LeftButton == ButtonState.Pressed && _bullet_timer <= 0)
             {
+                Game1.sounds["player_shoot"].Play();
+                if (Buffed)
+                {
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle + (float)Math.Atan(90)));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle - (float)Math.Atan(90)));
+                }
                 Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = _Bullet_param.CoolDown;
             }
             if (mouseSt.RightButton == ButtonState.Pressed && _sword_timer <= 0)
             {
+                Game1.sounds["player_sword"].Play();
                 Game1.swords.Add(new Sword(Game1.textures["player_sword"], _Sword_param, Position, "player_sword", Angle));
                 _sword_timer = _Sword_param.CoolDown;
             }
            
             if (keyboardState.GetPressedKeys().Length != 0 && level_system._skill_points != 0 && click__timer <= 0)
             {
-                if (keyboardState.IsKeyDown(Keys.D1))
+                if (keyboardState.IsKeyDown(Keys.D1) || keyboardState.IsKeyDown(Keys.D2) || keyboardState.IsKeyDown(Keys.D3))
                 {
-                    _Bullet_param.SetCurrentBulletParam();
-                    level_system._skill_points--;
+                    if (keyboardState.IsKeyDown(Keys.D1))
+                        _Bullet_param.SetCurrentBulletParam();
+                    else if (keyboardState.IsKeyDown(Keys.D2))
+                        _Sword_param.SetCurrentSwordParam();
+                    else if (keyboardState.IsKeyDown(Keys.D3))
+                        _Minion_Stats.SetCurrentMinionStats();
 
-                    click__timer = 0.4f;
-                }
-                else if (keyboardState.IsKeyDown(Keys.D2))
-                {
-                    _Sword_param.SetCurrentSwordParam();
                     level_system._skill_points--;
-
-                    click__timer = 0.4f;
-                }
-                else if (keyboardState.IsKeyDown(Keys.D3))
-                {
-                    _Minion_Stats.SetCurrentMinionStats();
-                    level_system._skill_points--;
-
                     click__timer = 0.4f;
                 }
             }
@@ -161,6 +167,7 @@ namespace SpaceSaver
                 {
                     if (Properties.Intersects(spr2.Properties))
                     {
+                        Game1.sounds["heal"].Play();
                         GetHeal();
                         spr2.IsDead = true;
                     }
@@ -169,7 +176,7 @@ namespace SpaceSaver
                 {
                     if (Properties.Intersects(spr2.Properties))
                     {
-                        //
+                        Game1.sounds["powerup"].Play();
                         Buffed = true;
                         spr2.IsDead = true;
                     }

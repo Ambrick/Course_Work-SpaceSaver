@@ -15,15 +15,12 @@ namespace SpaceSaver
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
 
-            InitialDamage = 30;
-            InitialHealthPoints = 70;
-            
             Angle += (float)Math.Atan(180);
             Angle += (float)Math.Atan(180);
             Get_path();
 
-            _Bullet_param = new Bullet_param(lvl, InitialDamage);
-            _Minion_Stats = new Minion_Stats(lvl, InitialHealthPoints);
+            _Bullet_param = new Bullet_param(lvl, 20);
+            _Minion_Stats = new Minion_Stats(lvl, 70);
         }
 
         protected override void SkillsTimerUpdate(GameTime gameTime)
@@ -47,11 +44,12 @@ namespace SpaceSaver
 
         protected override bool Skill()
         {
-            if (Math.Sqrt(Math.Pow(Position.X - Game1.player.Position.X, 2) + Math.Pow(Position.Y - Game1.player.Position.Y, 2)) < 150)
+            if (Math.Sqrt(Math.Pow(Position.X - Game1.player.Position.X, 2) + Math.Pow(Position.Y - Game1.player.Position.Y, 2)) < _Bullet_param.Range)
             {
                 Angle = (float)Math.Atan2(Game1.player.Position.Y - Position.Y, Game1.player.Position.X - Position.X);
                 if (_bullet_timer <= 0 )
                 {
+                    Game1.sounds["enemy_shoot"].Play();
                     Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], _Bullet_param, Position, "enemy_bullet", Angle));
 
                     _bullet_timer = _Bullet_param.CoolDown;

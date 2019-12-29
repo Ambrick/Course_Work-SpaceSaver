@@ -28,7 +28,7 @@
 
             MoveSpeed = 4 + Skill_lvl * 1.3f;
             Damage = BaseDamage * Skill_lvl * 0.5f;
-            Range = 70 + Skill_lvl*40;
+            Range = 70 + Skill_lvl*50;
             CoolDown = 1f / Skill_lvl;
         }
     }
