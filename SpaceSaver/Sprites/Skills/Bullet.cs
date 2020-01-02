@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -80,6 +79,18 @@ namespace SpaceSaver
                     Game1.sounds["player_get_hit"].Play();
                     Game1.player.GetHitIsDead(Param.Damage, 1, Position);
                     IsDead = true;
+                }
+                foreach (Sword sword in Game1.swords)
+                {
+                    if (sword.Object_type == "player_sword")
+                    {
+                        if (Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi)
+                        {
+                            IsDead = true;
+                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
+                            return;
+                        }
+                    }
                 }
             }
         }

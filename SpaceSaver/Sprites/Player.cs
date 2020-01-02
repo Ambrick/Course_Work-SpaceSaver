@@ -93,8 +93,9 @@ namespace SpaceSaver
                 Game1.sounds["player_shoot"].Play();
                 if (Buffed)
                 {
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle + (float)Math.Atan(90)));
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle - (float)Math.Atan(90)));
+                    float angle = (float)Math.Atan(30);
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.9f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.1f));
                 }
                 Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = _Bullet_param.CoolDown;
@@ -156,43 +157,41 @@ namespace SpaceSaver
             }
             foreach (Static_Component spr2 in Game1.static_objects)
             {
-                if (spr2.Object_type == "wall")
+                switch (spr2.Object_type)
                 {
-                    if (Collision_manager.Collision_X(this, spr2))
-                        Velocity.X = 0;
-                    if (Collision_manager.Collision_Y(this, spr2))
-                        Velocity.Y = 0;
-                }
-                if (spr2.Object_type == "heal")
-                {
-                    if (Properties.Intersects(spr2.Properties))
-                    {
-                        Game1.sounds["heal"].Play();
-                        GetHeal();
-                        spr2.IsDead = true;
-                    }
-                }
-                if (spr2.Object_type == "buff")
-                {
-                    if (Properties.Intersects(spr2.Properties))
-                    {
-                        Game1.sounds["powerup"].Play();
-                        Buffed = true;
-                        spr2.IsDead = true;
-                    }
-                }
-                if (spr2.Object_type == "key")
-                {
-                    if (Properties.Intersects(spr2.Properties))
-                    {
-                        level_system.IfGetKey();
-                        key_count++;
-                        spr2.IsDead = true;
-                    }
+                    case "wall":
+                        if (Collision_manager.Collision_X(this, spr2))
+                            Velocity.X = 0;
+                        if (Collision_manager.Collision_Y(this, spr2))
+                            Velocity.Y = 0;
+                        break;
+                    case "heal":
+                        if (Properties.Intersects(spr2.Properties))
+                        {
+                            Game1.sounds["heal"].Play();
+                            GetHeal();
+                            spr2.IsDead = true;
+                        }
+                        break;
+                    case "buff":
+                        if (Properties.Intersects(spr2.Properties))
+                        {
+                            Game1.sounds["powerup"].Play();
+                            Buffed = true;
+                            spr2.IsDead = true;
+                        }
+                        break;
+                    case "key":
+                        if (Properties.Intersects(spr2.Properties))
+                        {
+                            level_system.IfGetKey();
+                            key_count++;
+                            spr2.IsDead = true;
+                        }
+                        break;
                 }
             }
         }
-
         public void GetHeal()
         {
             _Minion_Stats.CurrentHealthPoints = _Minion_Stats.MaxHealthPoints;

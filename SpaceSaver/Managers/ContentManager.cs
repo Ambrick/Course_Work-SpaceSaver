@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,6 +27,7 @@ namespace SpaceSaver
                 {"buff", Content.Load<Texture2D>("Sprites/Buff") },
                 {"key", Content.Load<Texture2D>("Sprites/Key_Big") },
                 {"hood", Content.Load<Texture2D>("Sprites/Hood") },
+                {"menu", Content.Load<Texture2D>("Sprites/Menu") },
                 {"sword_icon", Content.Load<Texture2D>("Sprites/Sword_icon") },
                 {"bullet_icon", Content.Load<Texture2D>("Sprites/Bullet_icon") },
                 {"stats_icon", Content.Load<Texture2D>("Sprites/Stats_icon") },
@@ -66,6 +66,14 @@ namespace SpaceSaver
                 {"lvl2", Content.Load<Song>("Music/Lvl_2") },
             };
         }
-        
+
+        public static void LoadContent(ContentManager Content)
+        {
+            Game1.textures = LoadTextures(Content);
+            Game1.sounds = LoadSounds(Content);
+            Game1.songs = LoadSongs(Content);
+
+            Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("Sprites/cursor"), 0, 0));
+        }
     }
 }

@@ -4,11 +4,11 @@
     {
         public float Damage { get; set; }
 
-        public float CoolDown { get; set; }
+        public double CoolDown { get; set; }
 
         public float MoveSpeed { get; set; }
 
-        public float Range { get; set; }
+        public double Range { get; set; }
 
         public int Skill_lvl { get; private set; }
 
@@ -28,8 +28,8 @@
 
             MoveSpeed = 4 + Skill_lvl * 1.3f;
             Damage = BaseDamage * Skill_lvl * 0.5f;
-            Range = 70 + Skill_lvl*50;
-            CoolDown = 1f / Skill_lvl;
+            Range = 75 + Skill_lvl * 50;
+            CoolDown = 0.2f + 1.6 / Skill_lvl;
         }
     }
 }

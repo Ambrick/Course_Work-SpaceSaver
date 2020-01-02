@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceSaver
 {
@@ -39,10 +34,6 @@ namespace SpaceSaver
             {
                 click__timer -= gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (click__timer <= 0)
-            {
-                click__timer = 0;
-            }
 
             if (click__timer <= 0)
             {
@@ -68,15 +59,15 @@ namespace SpaceSaver
                 {
                     if (Game1.menuState == 0)
                     {
-                        Game1.game_state = -2;
+                        Game1.game_state = "name";
                     }
                     else if (Game1.menuState == 1)
                     {
-                        Game1.game_state = -1;
+                        Game1.game_state = "results";
                     }
                     else if (Game1.menuState == 2)
                     {
-                        Game1.game_state = -4;
+                        Game1.game_state = "end";
                     }
                     Game1.alow_next = true;
                     Game1.sounds["gong"].Play();

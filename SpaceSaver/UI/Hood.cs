@@ -37,11 +37,6 @@ namespace SpaceSaver
             cur_lvl_pos = Hood_pos + new Vector2(343, 35);
         }
 
-        public void Update(GameTime gameTime)
-        {
-
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             //Отрисовки "худа"

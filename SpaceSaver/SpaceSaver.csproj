@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprites\Static_Component.cs" />
     <Compile Include="Sprites\Skills\Sword.cs" />
+    <Compile Include="UI\Drawing.cs" />
     <Compile Include="UI\Hood.cs" />
     <Compile Include="UI\Menu.cs" />
     <Compile Include="UI\Nick_input.cs" />
@@ -85,6 +86,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

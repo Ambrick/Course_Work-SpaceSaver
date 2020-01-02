@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SpaceSaver
@@ -15,17 +13,13 @@ namespace SpaceSaver
     {
         private static string _fileName = "scores.xml"; // Since we don't give a path, this'll be saved in the "bin" folder
 
-        public List<Score> Highscores { get; private set; }
+        public static List<Score> Highscores { get; private set; }
 
         public List<Score> Scores { get; private set; }
 
         private static Vector2 pos => new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2);
 
-        public ScoreManager()
-          : this(new List<Score>())
-        {
-
-        }
+        public ScoreManager() : this(new List<Score>())   { }
 
         public ScoreManager(List<Score> scores)
         {
@@ -41,6 +35,7 @@ namespace SpaceSaver
             Scores = Scores.OrderByDescending(c => c.Value).ToList(); // Orders the list so that the higher scores are first
 
             UpdateHighscores();
+            Save(this);
         }
 
         public static ScoreManager Load()
@@ -63,12 +58,11 @@ namespace SpaceSaver
 
         public void UpdateHighscores()
         {
-            Highscores = Scores.Take(5).ToList(); // Takes the first 5 elements
+            Highscores = Scores.Take(5).ToList();
         }
 
         public static void Save(ScoreManager scoreManager)
         {
-            // Overrides the file if it alreadt exists
             using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create)))
             {
                 var serilizer = new XmlSerializer(typeof(List<Score>));
@@ -79,19 +73,16 @@ namespace SpaceSaver
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            string s = string.Join("\n", Game1._scoreManager.Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray());
+            string s = string.Join("\n", Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray());
             spriteBatch.DrawString(Game1.font, s, pos, Color.White);
-
-            
         }
 
         public static void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.Escape) || state.IsKeyDown(Keys.D1))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Game1.sounds["gong"].Play();
-                Game1.game_state = -3;
+                Game1.game_state = "menu";
                 Game1.alow_next = true;
             }
         }

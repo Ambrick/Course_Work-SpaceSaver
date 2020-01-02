@@ -40,7 +40,7 @@ namespace SpaceSaver
 
         private void SwordInteraction()
         {
-            //проверка на столкновение удара игрока с врагом/щитом врага/пуля врага
+            //проверка на столкновение удара игрока
             if (Object_type == "player_sword")
             {
                 foreach (Enemy enemy in Game1.enemies)
@@ -50,18 +50,6 @@ namespace SpaceSaver
                         enemy.GetHitIsDead(damage, 0, Position);
                         damage = 0;
                         return;
-                    }
-                }
-                foreach (Bullet bullet in Game1.bullets)
-                {
-                    if (bullet.Object_type == "enemy_bullet")
-                    {
-                        if (Properties.Intersects(bullet.Properties) && Param.IsJedi)
-                        {
-                            bullet.IsDead = true;
-                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], bullet.Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
-                            return;
-                        }
                     }
                 }
             }

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace SpaceSaver
@@ -44,7 +40,7 @@ namespace SpaceSaver
 
         protected override bool Skill()
         {
-            if (Math.Sqrt(Math.Pow(Position.X - Game1.player.Position.X, 2) + Math.Pow(Position.Y - Game1.player.Position.Y, 2)) < _Bullet_param.Range)
+            if (Math.Sqrt(Math.Pow(Position.X - Game1.player.Position.X, 2) + Math.Pow(Position.Y - Game1.player.Position.Y, 2)) <= _Bullet_param.Range)
             {
                 Angle = (float)Math.Atan2(Game1.player.Position.Y - Position.Y, Game1.player.Position.X - Position.X);
                 if (_bullet_timer <= 0 )
@@ -72,7 +68,7 @@ namespace SpaceSaver
                     State++;
                 }
             }
-            if (State == 1)
+            else if (State == 1)
             {
                 Velocity.X = _Minion_Stats.MoveSpeed;
                 if (Position.X > key_points[State].X)

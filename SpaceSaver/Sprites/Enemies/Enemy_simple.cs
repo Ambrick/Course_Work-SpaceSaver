@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -28,8 +24,6 @@ namespace SpaceSaver
             Angle = -(float)Math.Atan(90);
             Get_path();
 
-
-
             _Sword_param = new Sword_param(lvl, 20, 0.65f);
             _Minion_Stats = new Minion_Stats(lvl, 50);
 
@@ -42,10 +36,6 @@ namespace SpaceSaver
             if (_sword_timer > 0)
             {
                 _sword_timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (_sword_timer <= 0)
-            {
-                _sword_timer = 0;
             }
         }
 
@@ -77,41 +67,40 @@ namespace SpaceSaver
 
         protected override void Move()
         {
-            if (State == 0)
+            switch (State)
             {
-                Velocity.X = _Minion_Stats.MoveSpeed;
-                if (Position.X > key_points[State].X)
-                {
-                    Angle -= (float)Math.Atan(90);
-                    State++;
-                }   
-            }
-            else if (State == 1)
-            {
-                Velocity.Y = -_Minion_Stats.MoveSpeed;
-                if (Position.Y < key_points[State].Y)
-                {
-                    Angle -= (float)Math.Atan(90);
-                    State++;
-                }
-            }
-            else if (State == 2)
-            {
-                Velocity.X = -_Minion_Stats.MoveSpeed;
-                if (Position.X < key_points[State].X)
-                {
-                    Angle -= (float)Math.Atan(90);
-                    State++;
-                }
-            }
-            else if (State == 3)
-            {
-                Velocity.Y = _Minion_Stats.MoveSpeed;
-                if (Position.Y > key_points[State].Y)
-                {
-                    Angle -= (float)Math.Atan(90);
-                    State=0;
-                }
+                case 0:
+                    Velocity.X = _Minion_Stats.MoveSpeed;
+                    if (Position.X > key_points[State].X)
+                    {
+                        Angle -= (float)Math.Atan(90);
+                        State++;
+                    }
+                    break;
+                case 1:
+                    Velocity.Y = -_Minion_Stats.MoveSpeed;
+                    if (Position.Y < key_points[State].Y)
+                    {
+                        Angle -= (float)Math.Atan(90);
+                        State++;
+                    }
+                    break;
+                case 2:
+                    Velocity.X = -_Minion_Stats.MoveSpeed;
+                    if (Position.X < key_points[State].X)
+                    {
+                        Angle -= (float)Math.Atan(90);
+                        State++;
+                    }
+                    break;
+                case 3:
+                    Velocity.Y = _Minion_Stats.MoveSpeed;
+                    if (Position.Y > key_points[State].Y)
+                    {
+                        Angle -= (float)Math.Atan(90);
+                        State = 0;
+                    }
+                    break;
             }
         }
     }

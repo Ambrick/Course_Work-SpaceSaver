@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
@@ -15,19 +14,19 @@ namespace SpaceSaver
         int[,] Level3 = {
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
            { 1, 6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 1  },
-           { 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1  },
+           { 1, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 1  },
            { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
+           { 1, 4, 0, 0, 4, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
            { 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 3, 0, 1  },
            { 1, 0, 7, 0, 3, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 6, 0, 0, 0, 1, 5, 5, 1, 0, 7, 0, 1  },
-           { 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 6, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 1, 0, 1  },
-           { 1, 8, 3, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 1  },
+           { 1, 0, 0, 6, 0, 0, 0, 1, 1, 1, 1, 0, 7, 0, 1  },
+           { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 1  },
+           { 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1  },
+           { 1, 8, 0, 0, 0, 4, 0, 3, 0, 0, 1, 0, 0, 0, 1  },
            { 1, 6, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 2, 0, 1  },
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
            };
@@ -35,11 +34,11 @@ namespace SpaceSaver
            { 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1   },
            { 5, 5, 5, 1, 6, 0, 1, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
            { 5, 5, 5, 1, 0, 0, 1, 0, 0, 7, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
-           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,1,1,1,0,0,0,0,1   },
+           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,0,3,0,0,1,1,1,1,0,0,4,0,1   },
            { 1, 8, 0, 1, 1, 1, 0, 4, 0, 1, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1   },
            { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,5,5,1,0,0,0,0,1   },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,1,1,1,0,0,3,0,1   },
-           { 1, 3, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
+           { 1, 0, 3, 0, 0, 4, 0, 0, 0, 8, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,0,0,0,0,0,0,0,1   },
            { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,1,5,5,5,1,0,0,0,0,4,0,0,1    },
            { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 3, 0,1,5,5,1,1,1,1,0,0,0,0,0,1   },
@@ -74,11 +73,12 @@ namespace SpaceSaver
         public static List<Explosion> explosions = new List<Explosion> { };
 
         public static SpriteFont font;
-        public static int game_state;
+        public static string game_state = "menu";
 
         public static int menuState = 0;
         public static int score;
-        public static ScoreManager _scoreManager;
+
+        private ScoreManager _scoreManager;
 
         public Game1()
         {
@@ -95,120 +95,124 @@ namespace SpaceSaver
             IsMouseVisible = true;
             base.Initialize();
         }
-
+             /*
+         Переделать рисунок меню
+         Попробовать другой ввод строки имени
+         ------------------
+         Поменять рисункок процесса работы моногейм с ссылкой на список  эл. ресурсов
+         Исправить нумерацию
+         Расписать аналог Alien Breed
+         Вставить новый код
+             */
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
-            textures = LoadManager.LoadTextures(Content);
-            sounds = LoadManager.LoadSounds(Content);
-            songs = LoadManager.LoadSongs(Content);
-            font= Content.Load<SpriteFont>("rus_text");
-            _scoreManager = ScoreManager.Load();
-
-            game_state = -3;
+            LoadManager.LoadContent(Content);
         }
 
         public static bool alow_next = true;
 
         protected override void Update(GameTime gameTime)
         {
-            if (game_state == -4) 
+            //Переход в другое состояние игры
+            if (alow_next)
             {
-                Map.UnloadLvl(false);
-                _scoreManager.Add(new Score() { PlayerName = Nick_input.name, Value = score, });
-                ScoreManager.Save(_scoreManager);
-                Nick_input.name = "";
-                score = 0;
-                game_state = -3;
+                alow_next = false;
+                switch (game_state)
+                {
+                    case "end":
+                        if (Map != null)
+                        {
+                            Level.UnloadLvl(false);
+                            _scoreManager.Add(new Score() { PlayerName = Nick_input.name, Value = score, });
+                            Nick_input.name = "";
+                            score = 0;
+                            game_state = "menu";
+                            alow_next = true;
+                        }
+                        else
+                        {
+                            Level.UnloadLvl(false);
+                            Exit();
+                        }
+                        break;
+                    case "menu":
+                        MediaPlayer.Play(songs["menu"]);
+                        break;
+                    case "lvl1":
+                        MediaPlayer.Play(songs["lvl1"]);
+                        player = new Player(new Dictionary<string, Animation>() {{ "Move", new Animation(textures["player_run"], 8, 0.15f) },  }, Vector2.Zero, "player");
+                        Map = new Level(1, Level1);
+                        break;
+                    case "lvl2":
+                        MediaPlayer.Play(songs["lvl2"]);
+                        Level.UnloadLvl(true);
+                        Map = new Level(2, Level2);
+                        break;
+                    case "lvl3":
+                        MediaPlayer.Play(songs["lvl1"]);
+                        Level.UnloadLvl(true);
+                        Map = new Level(3, Level3);
+                        break;
+                }
             }
 
-
-            if (game_state == -3 && alow_next)
+            //Прогон соответствующих апдейтов
+            switch (game_state)
             {
-                MediaPlayer.Play(songs["menu"]);
-                alow_next = false;
-            }
-            if (game_state == -2 && alow_next)
-            {
-                alow_next = false;
-            }
-            else if (game_state == 1 && alow_next)
-            {
-                MediaPlayer.Play(songs["lvl1"]);
-                alow_next = false;
-            }
-            else if (game_state == 2 && alow_next)
-            {
-                MediaPlayer.Play(songs["lvl2"]);
-                Map.UnloadLvl(true);
-                Map = new Level(2, Level2);
-                alow_next = false;
-            }
-            else if (game_state == 3 && alow_next)
-            {
-                MediaPlayer.Play(songs["lvl1"]);
-                Map.UnloadLvl(true);
-                Map = new Level(3, Level3);
-                alow_next = false;
-            }
-
-
-            if (game_state >= 0 )
-            {
-                Camera.Follow(player.Properties);
-                ComponentsManager.UpdateComponents(gameTime);
-            }
-            else if (game_state == -1)
-            {
-                ScoreManager.Update(gameTime);
-            }
-            else if (game_state == -3)
-            {
-                Menu.Update(gameTime);
-            }
-            else if (game_state == -2)
-            {
-                Nick_input.Update(gameTime);
+                case "end":
+                    break;
+                case "menu":
+                    Menu.Update(gameTime);
+                    break;
+                case "name":
+                    Nick_input.Update(gameTime);
+                    break;
+                case "results":
+                    ScoreManager.Update(gameTime);
+                    break;
+                default:
+                    Camera.Follow(player.Properties);
+                    ComponentsManager.UpdateComponents(gameTime);
+                    break;
             }
         }
 
+        public static Texture2D menu => textures["menu"];
+
         protected override void Draw(GameTime gameTime)
         {
-            if (game_state == -3)
+            spriteBatch.Begin();
+            spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
+            switch (game_state)
             {
-                spriteBatch.Begin();
-                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
-                Menu.Draw(spriteBatch);
-                spriteBatch.End();
+                case "menu":
+                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
+                    Menu.Draw(spriteBatch);
+                    break;
+                case "name":
+                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
+                    Nick_input.Draw(spriteBatch);
+                    break;
+                case "results":
+                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
+                    ScoreManager.Draw(spriteBatch);
+                    break;
+                default:
+                    spriteBatch.End();
+                    spriteBatch.Begin(transformMatrix: Camera.Transform);
+                    ComponentsManager.DrawComponents(spriteBatch);
+                    spriteBatch.End();
+                    spriteBatch.Begin();
+                    if (player != null)
+                    {
+                        player.Hood.Draw(spriteBatch);
+                    }
+                    break;
             }
-            else if (game_state == -2)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
-                Nick_input.Draw(spriteBatch);
-                spriteBatch.End();
-            }
-            else if (game_state == -1)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
-                ScoreManager.Draw(spriteBatch);
-                spriteBatch.End();
-            }
-            else if (game_state >= 0)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
-                spriteBatch.End();
-                spriteBatch.Begin(transformMatrix: Camera.Transform);
-                ComponentsManager.DrawComponents(spriteBatch);
-                spriteBatch.End();
-                spriteBatch.Begin();
-                player.Hood.Draw(spriteBatch);
-                spriteBatch.End();
-            }
+            spriteBatch.End();
         }
     }
 }
