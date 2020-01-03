@@ -46,33 +46,21 @@ namespace SpaceSaver
             {
                 _bullet_timer -= gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (_bullet_timer <= 0)
-            {
-                _bullet_timer = 0;
-            }
             //Sword timer
             if (_sword_timer > 0)
             {
                 _sword_timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (_sword_timer <= 0)
-            {
-                _sword_timer = 0;
             }
             //Click timer
             if (click__timer > 0)
             {
                 click__timer -= gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (click__timer <= 0)
-            {
-                click__timer = 0;
-            }
             //Buff_timer
             if (Buffed)
             {
                 buff__timer += gameTime.ElapsedGameTime.TotalSeconds;
-                if(buff__timer>6)
+                if(buff__timer > 6)
                 {
                     buff__timer = 0;
                     Buffed = false;
@@ -119,7 +107,7 @@ namespace SpaceSaver
                         _Minion_Stats.SetCurrentMinionStats();
 
                     level_system._skill_points--;
-                    click__timer = 0.4f;
+                    click__timer = 0.3f;
                 }
             }
 

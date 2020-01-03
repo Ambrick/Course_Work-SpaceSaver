@@ -10,8 +10,6 @@ namespace SpaceSaver
 {
     public static class Drawing
     {
-        private static object spriteBatch;
-
         public static Texture2D menu => Game1.textures["menu"];
 
         public static void Draw(SpriteBatch spriteBatch)

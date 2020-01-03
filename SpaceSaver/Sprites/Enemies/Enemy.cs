@@ -1,31 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace SpaceSaver
 {
-    public class Enemy : Minion
+    public abstract class Enemy : Minion
     {
-        protected List<Vector2> key_points = new List<Vector2> { };
+        protected IStrategy Strategy { get; set; }
+
+        protected float Angl90 => (float) Math.Atan(90);
+
+        public List<Vector2> key_points = new List<Vector2> { };
 
         protected int State;
 
-        public Enemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl) : base(animations, position) { }
+        public Enemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy) : base(animations, position) { }
 
-        protected virtual void Get_path()  { }
+        protected virtual void Get_path() { }
 
-        protected virtual bool Skill() { return false; }
-
-        protected virtual void Move() {  }
+        protected virtual void Move() { }
 
         protected override void Action(GameTime gameTime)
         {
-            SkillsTimerUpdate(gameTime);
-            if (!Skill())
+            if (!Strategy.Skill(gameTime,this))
             {
                 Move();
                 AnimationManager.Play(Animations["Move"]);
             }
-
+            else
+            {
+                AnimationManager.Play(Animations["Action"]);
+            }
             PlayerInteraction();
         }
 

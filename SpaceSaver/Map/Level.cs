@@ -82,17 +82,17 @@ namespace SpaceSaver
                     else if (LVL[i, j] == 3)
                     {
                         keys_on_lvl++;
-                        Game1.enemies.Add(new Enemy_simple(new Dictionary<string, Animation>() {
+                        Game1.enemies.Add(new SimpleEnemy(new Dictionary<string, Animation>() {
                             { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
-                            { "Hit", new Animation(Game1.textures["enemy_slice"], 5, 0.1f) } }, Position, "enemy_simple", Map_lvl));
+                            { "Action", new Animation(Game1.textures["enemy_slice"], 5, 0.1f) } }, Position, "enemy_simple", Map_lvl, new MeleeStrategy()));
 
                     }
                     else if (LVL[i, j] == 4)
                     {
                         keys_on_lvl++;
-                        Game1.enemies.Add(new Enemy_hard(new Dictionary<string, Animation>() {
+                        Game1.enemies.Add(new ComplexEnemy(new Dictionary<string, Animation>() {
                             { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
-                            { "Shoot", new Animation(Game1.textures["enemy_shoot"], 2, 0.3f) } }, Position, "enemy_hard", Map_lvl));
+                            { "Action", new Animation(Game1.textures["enemy_shoot"], 2, 0.3f) } }, Position, "enemy_hard", Map_lvl, new RangeStrategy()));
 
                     }
                     else if (LVL[i, j] == 6)

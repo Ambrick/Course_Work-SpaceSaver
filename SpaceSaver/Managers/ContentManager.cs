@@ -72,7 +72,7 @@ namespace SpaceSaver
             Game1.textures = LoadTextures(Content);
             Game1.sounds = LoadSounds(Content);
             Game1.songs = LoadSongs(Content);
-
+            Game1.font= Content.Load<SpriteFont>("rus_text");
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("Sprites/cursor"), 0, 0));
         }
     }

@@ -8,7 +8,7 @@ namespace SpaceSaver
 
         protected Vector2 _position;
 
-        public Vector2 Velo { get { return Velocity; }}
+        public Vector2 Velo { get { return Velocity; } set => Velocity = value; }
 
         public string Object_type { get; set; }
 

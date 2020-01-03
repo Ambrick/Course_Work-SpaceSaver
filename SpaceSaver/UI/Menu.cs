@@ -72,7 +72,7 @@ namespace SpaceSaver
                     Game1.alow_next = true;
                     Game1.sounds["gong"].Play();
                 }
-                click__timer = 0.16;
+                click__timer = 0.12;
             }
         }
 

@@ -59,8 +59,8 @@ namespace SpaceSaver
         public static Player player;
         public static Level Map;
 
-        public static int ScreenWidth => GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        public static int ScreenHeight => GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        public static int ScreenWidth => 1000;
+        public static int ScreenHeight => 700;
         
         public static Dictionary<string, Texture2D> textures;
         public static Dictionary<string, SoundEffect> sounds;
@@ -100,7 +100,6 @@ namespace SpaceSaver
          Попробовать другой ввод строки имени
          ------------------
          Поменять рисункок процесса работы моногейм с ссылкой на список  эл. ресурсов
-         Исправить нумерацию
          Расписать аналог Alien Breed
          Вставить новый код
              */
@@ -108,7 +107,7 @@ namespace SpaceSaver
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
-
+            _scoreManager = ScoreManager.Load();
             LoadManager.LoadContent(Content);
         }
 
