@@ -1,26 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace SpaceSaver
 {
-    public class ComplexEnemy:Enemy
+    public class EnemySimpleMove : Enemy
     {
-        public ComplexEnemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy) : base(animations, position, object_type, lvl, strategy)
+        public EnemySimpleMove(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy)
+            : base(animations, position, object_type, lvl, strategy)
         {
             Strategy = strategy;
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
-
-            _Sword_param = new Sword_param(lvl, 20, 0.65f);
+            
             _Minion_Stats = new Minion_Stats(lvl, 70);
-            _Bullet_param = new Bullet_param(lvl, 20);
 
-            Angle += (float)Math.Atan(180);
-            Angle += (float)Math.Atan(180);
+            Angle -= Angl90*2;
             State = 0;
             Get_path();
         }
@@ -38,8 +32,7 @@ namespace SpaceSaver
                 Velo = new Vector2(-_Minion_Stats.MoveSpeed, 0);
                 if (Position.X < key_points[State].X)
                 {
-                    Angle += (float)Math.Atan(180);
-                    Angle += (float)Math.Atan(180);
+                    Angle += Angl90 * 2;
                     State++;
                 }
             }
@@ -48,8 +41,7 @@ namespace SpaceSaver
                 Velo = new Vector2(_Minion_Stats.MoveSpeed, 0);
                 if (Position.X > key_points[State].X)
                 {
-                    Angle += (float)Math.Atan(180);
-                    Angle += (float)Math.Atan(180);
+                    Angle += Angl90 * 2;
                     State = 0;
                 }
             }

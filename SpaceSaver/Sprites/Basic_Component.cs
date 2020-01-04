@@ -8,13 +8,15 @@ namespace SpaceSaver
 
         protected Vector2 _position;
 
+        protected float angle;
+
         public Vector2 Velo { get { return Velocity; } set => Velocity = value; }
 
         public string Object_type { get; set; }
 
         public bool IsDead { get; set; }
 
-        public float Angle { get; set; }
+        public float Angle { get { return angle; } set => angle = value; }
 
         public virtual Vector2 Position { get { return _position; } set { _position = value; } }
 

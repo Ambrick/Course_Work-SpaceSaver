@@ -1,34 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceSaver.UI
+namespace SpaceSaver
 {
-   /* public class UiFacade
+    public class UiFacade
     {
-        Menu SA;
-        Nick_input SB;
-        ScoreManager SC;
-        ComponentsManager SD;
+        Menu MenuC;
+        public Nick_input NickInputC;
+        public ScoreManager ScoreManagerC;
+        ComponentsManager ComponentManagerC;
+        Drawing DrawingC;
 
-        public UiFacade(Menu sa, Nick_input sb, ScoreManager sc, ComponentsManager sd)
+        public UiFacade(Menu menuC, Nick_input nickInputC, ScoreManager scoreManagerC, ComponentsManager componentManagerC, Drawing drawingC)
         {
-            subsystemA = sa;
-            subsystemB = sb;
-            subsystemC = sc;
+            MenuC = menuC;
+            NickInputC = nickInputC;
+            ScoreManagerC = scoreManagerC;
+            ComponentManagerC = componentManagerC;
+            DrawingC = drawingC;
         }
-        public void Operation1()
+        public void DrawMenu(SpriteBatch spriteBatch)
         {
-            subsystemA.A1();
-            subsystemB.B1();
-            subsystemC.C1();
+            DrawingC.DrawBack(spriteBatch);
+            DrawingC.DrawMenuImg(spriteBatch);
+            MenuC.Draw(spriteBatch);
         }
-        public void Operation2()
+        public void DrawNickInput(SpriteBatch spriteBatch)
         {
-            subsystemB.B1();
-            subsystemC.C1();
+            DrawingC.DrawBack(spriteBatch);
+            DrawingC.DrawMenuImg(spriteBatch);
+            NickInputC.Draw(spriteBatch);
         }
-    }*/
+        public void DrawGame(SpriteBatch spriteBatch)
+        {
+            DrawingC.DrawBack(spriteBatch);
+            spriteBatch.End();
+            spriteBatch.Begin(transformMatrix: Camera.Transform);
+            ComponentManagerC.DrawComponents(spriteBatch);
+            spriteBatch.End();
+            spriteBatch.Begin();
+            if (Game1.player != null)
+            {
+                Game1.player.Hood.Draw(spriteBatch);
+            }
+        }
+        public void DrawResults(SpriteBatch spriteBatch)
+        {
+            DrawingC.DrawBack(spriteBatch);
+            DrawingC.DrawMenuImg(spriteBatch);
+            ScoreManagerC.Draw(spriteBatch);
+        }
+
+        public void UpdateMenu(GameTime gameTime)
+        {
+            MenuC.Update(gameTime);
+        }
+        public void UpdateNickInput(GameTime gameTime)
+        {
+            NickInputC.Update(gameTime);
+        }
+        public void UpdateGame(GameTime gameTime)
+        {
+            Camera.Follow(Game1.player.Properties);
+            ComponentManagerC.UpdateComponents(gameTime);
+        }
+        public void UpdateResults(GameTime gameTime)
+        {
+            ScoreManagerC.Update(gameTime);
+        }
+
+        public void ClearScorePair()
+        {
+            NickInputC.name = "";
+            Game1.score = 0;
+        }
+    }
 }

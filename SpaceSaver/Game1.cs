@@ -30,6 +30,7 @@ namespace SpaceSaver
            { 1, 6, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 2, 0, 1  },
            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
            };
+
         int[,] Level2 = {
            { 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1   },
            { 5, 5, 5, 1, 6, 0, 1, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,1   },
@@ -75,10 +76,10 @@ namespace SpaceSaver
         public static SpriteFont font;
         public static string game_state = "menu";
 
-        public static int menuState = 0;
+        public static bool alow_next = true;
         public static int score;
 
-        private ScoreManager _scoreManager;
+        UiFacade Facade = new UiFacade(new Menu(), new Nick_input(), ScoreManager.Load(), new ComponentsManager(), new Drawing());
 
         public Game1()
         {
@@ -97,21 +98,18 @@ namespace SpaceSaver
         }
              /*
          Переделать рисунок меню
-         Попробовать другой ввод строки имени
          ------------------
          Поменять рисункок процесса работы моногейм с ссылкой на список  эл. ресурсов
          Расписать аналог Alien Breed
          Вставить новый код
+         Расписать паттерны (Стратегию, фасад)
              */
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
-            _scoreManager = ScoreManager.Load();
             LoadManager.LoadContent(Content);
         }
-
-        public static bool alow_next = true;
 
         protected override void Update(GameTime gameTime)
         {
@@ -125,9 +123,8 @@ namespace SpaceSaver
                         if (Map != null)
                         {
                             Level.UnloadLvl(false);
-                            _scoreManager.Add(new Score() { PlayerName = Nick_input.name, Value = score, });
-                            Nick_input.name = "";
-                            score = 0;
+                            Facade.ScoreManagerC.Add(new Score() { PlayerName = Facade.NickInputC.name, Value = score, });
+                            Facade.ClearScorePair();
                             game_state = "menu";
                             alow_next = true;
                         }
@@ -164,51 +161,36 @@ namespace SpaceSaver
                 case "end":
                     break;
                 case "menu":
-                    Menu.Update(gameTime);
+                    Facade.UpdateMenu(gameTime);
                     break;
                 case "name":
-                    Nick_input.Update(gameTime);
+                    Facade.UpdateNickInput(gameTime);
                     break;
                 case "results":
-                    ScoreManager.Update(gameTime);
+                    Facade.UpdateResults(gameTime);
                     break;
                 default:
-                    Camera.Follow(player.Properties);
-                    ComponentsManager.UpdateComponents(gameTime);
+                    Facade.UpdateGame(gameTime);
                     break;
             }
         }
 
-        public static Texture2D menu => textures["menu"];
-
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(textures["background"], Vector2.Zero, Color.White);
             switch (game_state)
             {
                 case "menu":
-                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
-                    Menu.Draw(spriteBatch);
+                    Facade.DrawMenu(spriteBatch);
                     break;
                 case "name":
-                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
-                    Nick_input.Draw(spriteBatch);
+                    Facade.DrawNickInput(spriteBatch);
                     break;
                 case "results":
-                    spriteBatch.Draw(menu, new Vector2(ScreenWidth / 2 - menu.Width / 2, ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
-                    ScoreManager.Draw(spriteBatch);
+                    Facade.DrawResults(spriteBatch);
                     break;
                 default:
-                    spriteBatch.End();
-                    spriteBatch.Begin(transformMatrix: Camera.Transform);
-                    ComponentsManager.DrawComponents(spriteBatch);
-                    spriteBatch.End();
-                    spriteBatch.Begin();
-                    if (player != null)
-                    {
-                        player.Hood.Draw(spriteBatch);
-                    }
+                    Facade.DrawGame(spriteBatch);
                     break;
             }
             spriteBatch.End();

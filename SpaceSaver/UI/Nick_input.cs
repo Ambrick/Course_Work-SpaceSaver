@@ -1,25 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace SpaceSaver
 {
-    public static class Nick_input
+    public class Nick_input
     {
-        private static Vector2 pos1 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2);
-        private static Vector2 pos2 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50);
+        private Vector2 pos1 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2);
+        private Vector2 pos2 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50);
 
-        private static double click__timer = 0;
+        private double click__timer = 0;
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Game1.font, "Введите никнейм:", pos1, Color.Red);
             spriteBatch.DrawString(Game1.font, name, pos2, Color.White);
         }
-        public static string name = "";
+        public string name = "";
 
-        public static void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (click__timer > 0)
             {
@@ -53,7 +52,8 @@ namespace SpaceSaver
                 click__timer = 0.11;
             }
         }
-        private static string GetLetter(Keys key)
+
+        private string GetLetter(Keys key)
         {
             switch (key)
             {

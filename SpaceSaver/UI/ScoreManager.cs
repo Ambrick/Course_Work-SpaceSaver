@@ -61,7 +61,7 @@ namespace SpaceSaver
             Highscores = Scores.Take(5).ToList();
         }
 
-        public static void Save(ScoreManager scoreManager)
+        public void Save(ScoreManager scoreManager)
         {
             using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create)))
             {
@@ -71,13 +71,13 @@ namespace SpaceSaver
             }
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             string s = string.Join("\n", Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray());
             spriteBatch.DrawString(Game1.font, s, pos, Color.White);
         }
 
-        public static void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {

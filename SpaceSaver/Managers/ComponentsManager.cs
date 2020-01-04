@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
-    public static class ComponentsManager
+    public class ComponentsManager
     {
-        public static void UpdateComponents(GameTime gameTime)
+        public void UpdateComponents(GameTime gameTime)
         {
             Game1.Map.Update(gameTime);
 
@@ -59,7 +59,7 @@ namespace SpaceSaver
             }
         }
 
-        public static void DrawComponents(SpriteBatch sprBatch)
+        public void DrawComponents(SpriteBatch sprBatch)
         {
             foreach (var component in Game1.static_objects)
                 component.Draw(sprBatch);

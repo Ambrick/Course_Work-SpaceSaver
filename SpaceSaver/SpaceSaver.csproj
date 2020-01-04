@@ -46,10 +46,10 @@
     <Compile Include="Managers\Leveling_up.cs" />
     <Compile Include="Managers\ComponentsManager.cs" />
     <Compile Include="Map\Level.cs" />
-    <Compile Include="Sprites\Enemies\ComplexEnemy.cs" />
+    <Compile Include="Sprites\Enemies\EnemySimpleMove.cs" />
     <Compile Include="Sprites\Enemies\RangeStrategy.cs" />
     <Compile Include="Sprites\Enemies\MeleeStrategy.cs" />
-    <Compile Include="Sprites\Enemies\SimpleEnemy.cs" />
+    <Compile Include="Sprites\Enemies\EnemyComplexMove.cs" />
     <Compile Include="Sprites\Enemies\Strategy_interface.cs" />
     <Compile Include="Sprites\Explosion.cs" />
     <Compile Include="Sprites\Enemies\Enemy.cs" />
@@ -90,7 +90,6 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,20 +3,21 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceSaver
 {
-    public class SimpleEnemy : Enemy
+    public class EnemyComplexMove : Enemy
     {
-        public SimpleEnemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy) : base(animations, position, object_type, lvl, strategy)
+        public EnemyComplexMove(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy)
+            : base(animations, position, object_type, lvl, strategy)
         {
             Strategy = strategy;
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
 
-            _Sword_param = new Sword_param(lvl, 20, 0.7f);
             _Minion_Stats = new Minion_Stats(lvl, 70);
-            _Bullet_param = new Bullet_param(lvl, 20);
+
             Angle -= Angl90;
             Get_path();
         }
+
         protected override void Get_path()
         {
             State = 1;

@@ -4,6 +4,6 @@ namespace SpaceSaver
 {
     public interface IStrategy
     {
-        bool Skill(GameTime gameTime, Enemy Parent);
+        bool Skill(GameTime gameTime, Vector2 Position, ref float Angle);
     }
 }

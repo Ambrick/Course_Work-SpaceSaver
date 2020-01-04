@@ -9,10 +9,6 @@ namespace SpaceSaver
 
         public double _sword_timer = 0;
 
-        public Bullet_param _Bullet_param;
-
-        public Sword_param _Sword_param;
-
         public Minion_Stats _Minion_Stats;
 
         public Minion(Dictionary<string, Animation> animations, Vector2 position) : base (animations, position) { }
@@ -39,6 +35,11 @@ namespace SpaceSaver
                 Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, pos));
             }
 
+            CheckIfDead();
+        }
+
+        private void CheckIfDead()
+        {
             if (_Minion_Stats.CurrentHealthPoints < 0)
             {
                 Game1.Map.IfEnemyDead(Position);

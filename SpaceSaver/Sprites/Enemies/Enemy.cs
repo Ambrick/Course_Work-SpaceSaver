@@ -6,7 +6,7 @@ namespace SpaceSaver
 {
     public abstract class Enemy : Minion
     {
-        protected IStrategy Strategy { get; set; }
+        protected IStrategy Strategy;
 
         protected float Angl90 => (float) Math.Atan(90);
 
@@ -22,7 +22,7 @@ namespace SpaceSaver
 
         protected override void Action(GameTime gameTime)
         {
-            if (!Strategy.Skill(gameTime,this))
+            if (!Strategy.Skill(gameTime, Position, ref angle))
             {
                 Move();
                 AnimationManager.Play(Animations["Move"]);

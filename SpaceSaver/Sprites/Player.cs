@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceSaver
 {
@@ -22,7 +16,12 @@ namespace SpaceSaver
         public Hood Hood = new Hood();
 
         public bool Buffed = false;
+
         private double buff__timer;
+
+        public Bullet_param _Bullet_param;
+
+        public Sword_param _Sword_param;
 
         public Player(Dictionary<string, Animation> animations, Vector2 position, string object_type) : base (animations, position)
         {
@@ -36,7 +35,6 @@ namespace SpaceSaver
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
             level_system = new Leveling_up(50, 100, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
             _bullet_timer = _sword_timer = click__timer = 0;
-
         }
 
         protected override void SkillsTimerUpdate(GameTime gameTime)
