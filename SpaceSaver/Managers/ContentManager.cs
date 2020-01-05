@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace SpaceSaver
 {
-    public static class LoadManager
+    public class LoadManager
     {
-        public static Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
+        private static Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
         {
             return new Dictionary<string, Texture2D> {
                 {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
@@ -36,7 +36,8 @@ namespace SpaceSaver
                 {"background", Content.Load<Texture2D>("Sprites/background") },
             };
         }
-        public static Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
+
+        private static Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
         {
             SoundEffect.MasterVolume = 0.08f;
             return new Dictionary<string, SoundEffect> {
@@ -45,6 +46,7 @@ namespace SpaceSaver
                 {"enemy_roar2", Content.Load<SoundEffect>("Sounds/Monster_roar2") },
                 {"player_shoot", Content.Load<SoundEffect>("Sounds/Player_shoot") },
                 {"enemy_shoot", Content.Load<SoundEffect>("Sounds/Enemy_shoot") },
+                {"enemy_sword", Content.Load<SoundEffect>("Sounds/Monster_slice") },
                 {"player_sword", Content.Load<SoundEffect>("Sounds/Player_slice") },
                 {"gong", Content.Load<SoundEffect>("Sounds/Gong") },
                 {"heal", Content.Load<SoundEffect>("Sounds/Heal") },
@@ -56,7 +58,7 @@ namespace SpaceSaver
             };
         }
 
-        public static Dictionary<string, Song> LoadSongs(ContentManager Content)
+        private static Dictionary<string, Song> LoadSongs(ContentManager Content)
         {
             MediaPlayer.Volume = 0.05f;
             MediaPlayer.IsRepeating = true;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
@@ -13,18 +14,26 @@ namespace SpaceSaver
             Object_type = object_type;
 
             _Minion_Stats = new Minion_Stats(lvl, 70);
-
-            Angle -= Angl90;
+            
             Get_path();
         }
 
         protected override void Get_path()
         {
-            State = 1;
             key_points.Add(new Vector2(Position.X + 64, Position.Y));
             key_points.Add(new Vector2(Position.X, Position.Y - 64));
             key_points.Add(new Vector2(Position.X - 64, Position.Y));
             key_points.Add(new Vector2(Position.X, Position.Y + 64));
+        }
+
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            sprBatch.Draw(Game1.textures["enemy_shield"],
+                new Vector2(Position.X - Game1.textures["enemy_shield"].Width / 2, Position.Y - Game1.textures["enemy_shield"].Height / 2), Color.White);
+
+            string s = _Minion_Stats.CurrentHealthPoints.ToString();
+            sprBatch.DrawString(Game1.font, s, Position + new Vector2(0, -30), Color.Red, 0, Vector2.Zero, 0.60f, SpriteEffects.None, 1);
+            AnimationManager.Draw(sprBatch, Angle);
         }
 
         protected override void Move()
@@ -35,7 +44,7 @@ namespace SpaceSaver
                     Velo = new Vector2(_Minion_Stats.MoveSpeed, 0);
                     if (Position.X > key_points[State].X)
                     {
-                        Angle -= Angl90;
+                        Angle = Angl90 * 3;
                         State++;
                     }
                     break;
@@ -43,7 +52,7 @@ namespace SpaceSaver
                     Velo = new Vector2(0, -_Minion_Stats.MoveSpeed);
                     if (Position.Y < key_points[State].Y)
                     {
-                        Angle -= Angl90;
+                        Angle = Angl90*2;
                         State++;
                     }
                     break;
@@ -51,7 +60,7 @@ namespace SpaceSaver
                     Velo = new Vector2(-_Minion_Stats.MoveSpeed, 0);
                     if (Position.X < key_points[State].X)
                     {
-                        Angle -= Angl90;
+                        Angle = Angl90;
                         State++;
                     }
                     break;
@@ -59,7 +68,7 @@ namespace SpaceSaver
                     Velo = new Vector2(0, _Minion_Stats.MoveSpeed);
                     if (Position.Y > key_points[State].Y)
                     {
-                        Angle -= Angl90;
+                        Angle = 0;
                         State = 0;
                     }
                     break;

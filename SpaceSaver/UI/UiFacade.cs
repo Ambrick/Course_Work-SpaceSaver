@@ -69,8 +69,9 @@ namespace SpaceSaver
             ScoreManagerC.Update(gameTime);
         }
 
-        public void ClearScorePair()
+        public void UpdateScore()
         {
+            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.name, Value = Game1.score});
             NickInputC.name = "";
             Game1.score = 0;
         }

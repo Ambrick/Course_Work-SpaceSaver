@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 namespace SpaceSaver
@@ -13,10 +14,15 @@ namespace SpaceSaver
             Object_type = object_type;
             
             _Minion_Stats = new Minion_Stats(lvl, 70);
-
-            Angle -= Angl90*2;
-            State = 0;
+           
             Get_path();
+        }
+
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            string s = _Minion_Stats.CurrentHealthPoints.ToString();
+            sprBatch.DrawString(Game1.font, s, Position + new Vector2(0, -30), Color.Red, 0, Vector2.Zero, 0.60f, SpriteEffects.None, 1);
+            AnimationManager.Draw(sprBatch, Angle);
         }
 
         protected override void Get_path()
@@ -32,7 +38,7 @@ namespace SpaceSaver
                 Velo = new Vector2(-_Minion_Stats.MoveSpeed, 0);
                 if (Position.X < key_points[State].X)
                 {
-                    Angle += Angl90 * 2;
+                    Angle = 0;
                     State++;
                 }
             }
@@ -41,7 +47,7 @@ namespace SpaceSaver
                 Velo = new Vector2(_Minion_Stats.MoveSpeed, 0);
                 if (Position.X > key_points[State].X)
                 {
-                    Angle += Angl90 * 2;
+                    Angle = Angl90 * 2;
                     State = 0;
                 }
             }

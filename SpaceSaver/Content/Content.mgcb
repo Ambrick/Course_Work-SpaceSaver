@@ -86,6 +86,12 @@
 /processorParam:Quality=Best
 /build:Sounds/Monster_roar2.wav
 
+#begin Sounds/Monster_slice.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_slice.wav
+
 #begin Sounds/Player_get_hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

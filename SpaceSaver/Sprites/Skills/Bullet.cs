@@ -33,9 +33,7 @@ namespace SpaceSaver
         public void Update(GameTime gameTime)
         {
             if (Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range)
-            {
                 IsDead = true;
-            }
 
             //--------------------------------
             BulletInteraction();
@@ -48,22 +46,15 @@ namespace SpaceSaver
         {
             //проверка на столкновение со стеной
             foreach (Static_Component spr2 in Game1.static_objects)
-            {
-                if (spr2.Object_type == "wall")
-                {
-                    if (Collision_manager.CheckCollision(this, spr2))
-                    {
-                        IsDead = true;
-                        return;
-                    }
-                }
-            }
+                if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
+                    IsDead = true;
+
             //проверка на столкновение пули игрока с врагом
             if (Object_type == "player_bullet")
             {
                 foreach (Enemy enemy in Game1.enemies)
                 {
-                    if (Collision_manager.CheckCollision(this, enemy) && enemy.Object_type != "enemy_simple")
+                    if (enemy.Object_type == "enemy_range" && Collision_manager.CheckCollision(this, enemy))
                     {
                         Game1.sounds["enemy_roar1"].Play();
                         enemy.GetHitIsDead(Param.Damage, 1, Position);
@@ -74,23 +65,20 @@ namespace SpaceSaver
             //проверка на столкновение вражеской пули с игроком
             if (Object_type == "enemy_bullet")
             {
+                foreach (Sword sword in Game1.swords)
+                {
+                    if (Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi && sword.Object_type == "player_sword")
+                    {
+                        IsDead = true;
+                        Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
+                        return;
+                    }
+                }
                 if (Collision_manager.CheckCollision(this, Game1.player))
                 {
                     Game1.sounds["player_get_hit"].Play();
                     Game1.player.GetHitIsDead(Param.Damage, 1, Position);
                     IsDead = true;
-                }
-                foreach (Sword sword in Game1.swords)
-                {
-                    if (sword.Object_type == "player_sword")
-                    {
-                        if (Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi)
-                        {
-                            IsDead = true;
-                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
-                            return;
-                        }
-                    }
                 }
             }
         }

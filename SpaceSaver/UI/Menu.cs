@@ -6,69 +6,42 @@ namespace SpaceSaver
 {
     public class Menu
     {
-        private Vector2 pos_start => new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 );
-        private Vector2 pos_result => new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 +  50);
-        private Vector2 pos_end => new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100);
-
         private double click__timer = 0;
 
-        public int menuState = 0;
+        private int menuState = 0;
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Game1.font, "Играть", pos_start, Color.White);
-            spriteBatch.DrawString(Game1.font, "Результаты", pos_result, Color.White);
-            spriteBatch.DrawString(Game1.font, "Выход", pos_end, Color.White);
-
-            spriteBatch.DrawString(Game1.font, "*", new Vector2(pos_start.X - 25, pos_start.Y + menuState * 50), Color.White);
+            spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.White);
+            spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.White);
+            spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.White);
+            spriteBatch.DrawString(Game1.font, "*", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + menuState * 50), Color.White);
         }
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState keyState = Keyboard.GetState();
             //Click timer update
-            if (click__timer > 0)
-            {
-                click__timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            if (click__timer <= 0)
+            if (click__timer <= 0 && Keyboard.GetState().GetPressedKeys().Length!=0)
             {
-                if (keyState.IsKeyDown(Keys.Down))
+                switch (Keyboard.GetState().GetPressedKeys().GetValue(0))
                 {
-                    menuState++;
-                    if (menuState > 2)
-                    {
-                        menuState = 0;
-                    }
-                    Game1.sounds["gong"].Play();
+                    case Keys.Down:
+                        menuState = menuState + 1 > 2 ? 0 : menuState + 1;
+                        break;
+                    case Keys.Up:
+                        menuState = menuState - 1 < 0 ? 2 : menuState - 1;
+                        break;
+                    case Keys.Enter:
+                        Game1.game_state = menuState == 0 ? "name" :
+                                           menuState == 1 ? "results" :
+                                           menuState == 2 ? "end" : Game1.game_state;
+
+                        Game1.alow_next = true;
+                        break;
                 }
-                else if (keyState.IsKeyDown(Keys.Up))
-                {
-                    menuState--;
-                    if (menuState < 0)
-                    {
-                        menuState = 2;
-                    }
-                    Game1.sounds["gong"].Play();
-                }
-                else if (keyState.IsKeyDown(Keys.Enter))
-                {
-                    if (menuState == 0)
-                    {
-                        Game1.game_state = "name";
-                    }
-                    else if (menuState == 1)
-                    {
-                        Game1.game_state = "results";
-                    }
-                    else if (menuState == 2)
-                    {
-                        Game1.game_state = "end";
-                    }
-                    Game1.alow_next = true;
-                    Game1.sounds["gong"].Play();
-                }
+                Game1.sounds["gong"].Play(); ;
                 click__timer = 0.12;
             }
         }

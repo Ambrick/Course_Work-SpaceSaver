@@ -2,7 +2,7 @@
 {
     public class Sword_param
     {
-        public double Duration { get { return 0.3f; } }
+        public double Duration => 0.3f;
 
         public float Damage { get; set; }
 
@@ -15,6 +15,8 @@
         private double AtackRate { get; set; }
 
         public int Skill_lvl { get; private set; }
+
+        public double Range => 70;
 
         public Sword_param(int skill_lvl, float InitialDamage, float atackRate)
         {
@@ -30,17 +32,10 @@
             Skill_lvl++;
 
             Damage = BaseDamage * Skill_lvl * 0.45f;
-            CoolDown = 2 / Skill_lvl  * AtackRate;
 
-            if (CoolDown < 0.32)
-            {
-                CoolDown = 0.32;
-            }
+            CoolDown = (0.2f + 1.6 / Skill_lvl) * AtackRate < 0.32 ? 0.32 : (0.2f + 1.6 / Skill_lvl) * AtackRate;
 
-            if (Skill_lvl == 4)
-            {
-                IsJedi = true;
-            }
+            IsJedi = Skill_lvl == 4 ? true : false;
         }
     }
 }

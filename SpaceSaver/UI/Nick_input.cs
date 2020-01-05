@@ -6,24 +6,20 @@ namespace SpaceSaver
 {
     public class Nick_input
     {
-        private Vector2 pos1 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2);
-        private Vector2 pos2 => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50);
-
         private double click__timer = 0;
+
+        public string name = "";
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Game1.font, "Введите никнейм:", pos1, Color.Red);
-            spriteBatch.DrawString(Game1.font, name, pos2, Color.White);
+            spriteBatch.DrawString(Game1.font, "Введите никнейм:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2), Color.Red);
+            spriteBatch.DrawString(Game1.font, name, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
         }
-        public string name = "";
 
         public void Update(GameTime gameTime)
         {
-            if (click__timer > 0)
-            {
-                click__timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            //Click timer update
+            click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
             KeyboardState state = Keyboard.GetState();
             if (click__timer <= 0 && (name == null || name.Length <= 14))

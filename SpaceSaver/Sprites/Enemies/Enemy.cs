@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
@@ -10,9 +11,9 @@ namespace SpaceSaver
 
         protected float Angl90 => (float) Math.Atan(90);
 
-        public List<Vector2> key_points = new List<Vector2> { };
+        protected List<Vector2> key_points = new List<Vector2> { };
 
-        protected int State;
+        protected int State = 0;
 
         public Enemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy) : base(animations, position) { }
 
@@ -22,24 +23,22 @@ namespace SpaceSaver
 
         protected override void Action(GameTime gameTime)
         {
-            if (!Strategy.Skill(gameTime, Position, ref angle))
+            if (Strategy.Skill(gameTime, Position, ref angle))
+            {
+                AnimationManager.Play(Animations["Action"]);
+            }
+            else
             {
                 Move();
                 AnimationManager.Play(Animations["Move"]);
             }
-            else
-            {
-                AnimationManager.Play(Animations["Action"]);
-            }
-            PlayerInteraction();
         }
 
-        public virtual void PlayerInteraction()
+        public override void Draw(SpriteBatch sprBatch)
         {
-            if (Collision_manager.Collision_X(this, Game1.player))
-                Velocity.X = 0;
-            if (Collision_manager.Collision_Y(this, Game1.player))
-                Velocity.Y = 0;
+            string s = _Minion_Stats.CurrentHealthPoints.ToString();
+            sprBatch.DrawString(Game1.font, s, Position+new Vector2(0,-30), Color.White, 0, Vector2.Zero, 0.40f, SpriteEffects.None, 1);
+            AnimationManager.Draw(sprBatch, Angle);
         }
     }
 }

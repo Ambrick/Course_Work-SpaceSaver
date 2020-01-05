@@ -102,12 +102,13 @@ namespace SpaceSaver
          Поменять рисункок процесса работы моногейм с ссылкой на список  эл. ресурсов
          Расписать аналог Alien Breed
          Вставить новый код
-         Расписать паттерны (Стратегию, фасад)
+         Расписать паттерны (Стратегию, фасад)в разработке прогрмаммы
              */
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
+
             LoadManager.LoadContent(Content);
         }
 
@@ -123,8 +124,7 @@ namespace SpaceSaver
                         if (Map != null)
                         {
                             Level.UnloadLvl(false);
-                            Facade.ScoreManagerC.Add(new Score() { PlayerName = Facade.NickInputC.name, Value = score, });
-                            Facade.ClearScorePair();
+                            Facade.UpdateScore();
                             game_state = "menu";
                             alow_next = true;
                         }

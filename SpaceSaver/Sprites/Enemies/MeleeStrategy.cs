@@ -3,31 +3,25 @@ using System;
 
 namespace SpaceSaver
 {
-    public class MeleeStrategy : IStrategy
+    public class MeleeStrategy : CommonForSkills, IStrategy
     {
-        double timer;
+        Sword_param Param;
 
-        Sword_param SwordParam;
-
-        public MeleeStrategy(Sword_param swordParam)
+        public MeleeStrategy(Sword_param param)
         {
-            SwordParam = swordParam;
+            Param = param;
         }
 
         public bool Skill(GameTime gameTime, Vector2 Position, ref float Angle)
         {
-            if (timer > 0)
+            if (UpdateState(gameTime, Position, ref Angle, Param.Range))
             {
-                timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (Math.Sqrt(Math.Pow(Position.X - Game1.player.Position.X, 2) + Math.Pow(Position.Y - Game1.player.Position.Y, 2)) <= 70)
-            {
-                Angle = (float)Math.Atan2(Game1.player.Position.Y - Position.Y, Game1.player.Position.X - Position.X);
-                if (timer <= 0)
+                if (CheckTimer())
                 {
-                    Game1.swords.Add(new Sword(Game1.textures["enemy_sword"], SwordParam, Position, "enemy_sword", Angle));
+                    Game1.sounds["enemy_sword"].Play();
+                    Game1.swords.Add(new Sword(Game1.textures["enemy_sword"], Param, Position, "enemy_sword", Angle));
 
-                    timer = SwordParam.CoolDown;
+                    timer = Param.CoolDown;
                 }
                 return true;
             }

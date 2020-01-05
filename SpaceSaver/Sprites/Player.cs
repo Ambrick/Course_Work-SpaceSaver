@@ -40,25 +40,16 @@ namespace SpaceSaver
         protected override void SkillsTimerUpdate(GameTime gameTime)
         {
             //Bullet timer
-            if (_bullet_timer > 0)
-            {
-                _bullet_timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            _bullet_timer -= _bullet_timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
             //Sword timer
-            if (_sword_timer > 0)
-            {
-                _sword_timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            _sword_timer -= _sword_timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
             //Click timer
-            if (click__timer > 0)
-            {
-                click__timer -= gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
             //Buff_timer
             if (Buffed)
             {
                 buff__timer += gameTime.ElapsedGameTime.TotalSeconds;
-                if(buff__timer > 6)
+                if(buff__timer > 7.2)
                 {
                     buff__timer = 0;
                     Buffed = false;
@@ -105,7 +96,7 @@ namespace SpaceSaver
                         _Minion_Stats.SetCurrentMinionStats();
 
                     level_system._skill_points--;
-                    click__timer = 0.3f;
+                    click__timer = 0.17f;
                 }
             }
 
@@ -128,28 +119,21 @@ namespace SpaceSaver
             else
                 AnimationManager.Stop();
         }
-
+        
         public void PlayerInteraction()
         {
             foreach (Enemy enemy in Game1.enemies)
             {
-                if (enemy.Object_type == "enemy")
-                {
-                    if (Collision_manager.Collision_X(this, enemy))
-                        Velocity.X = 0;
-                    if (Collision_manager.Collision_Y(this, enemy))
-                        Velocity.Y = 0;
-                }
+                Velocity.X = Collision_manager.Collision_X(this, enemy) ? 0 : Velocity.X;
+                Velocity.Y = Collision_manager.Collision_Y(this, enemy) ? 0 : Velocity.Y;
             }
             foreach (Static_Component spr2 in Game1.static_objects)
             {
                 switch (spr2.Object_type)
                 {
                     case "wall":
-                        if (Collision_manager.Collision_X(this, spr2))
-                            Velocity.X = 0;
-                        if (Collision_manager.Collision_Y(this, spr2))
-                            Velocity.Y = 0;
+                        Velocity.X = Collision_manager.Collision_X(this, spr2) ? 0 : Velocity.X;
+                        Velocity.Y = Collision_manager.Collision_Y(this, spr2) ? 0 : Velocity.Y;
                         break;
                     case "heal":
                         if (Properties.Intersects(spr2.Properties))

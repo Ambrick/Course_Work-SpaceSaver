@@ -43,7 +43,6 @@ namespace SpaceSaver
             if (_Minion_Stats.CurrentHealthPoints < 0)
             {
                 Game1.Map.IfEnemyDead(Position);
-                Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position));
                 IsDead = true;
             }
         }

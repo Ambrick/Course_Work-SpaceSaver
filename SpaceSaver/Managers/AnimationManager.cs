@@ -50,6 +50,5 @@ namespace SpaceSaver
         {
             sprBatch.Draw( _animation.Texture, Position, _animation.DrawableRect, Color.White, Angle, _animation.FrameCenter, 1, SpriteEffects.None, 0.5f);
         }
-
     }
 }

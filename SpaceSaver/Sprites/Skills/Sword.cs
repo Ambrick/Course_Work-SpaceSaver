@@ -31,9 +31,7 @@ namespace SpaceSaver
         {
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (Timer >= Param.Duration)
-            {
                 IsDead = true;
-            }
 
             SwordInteraction();
         }
@@ -48,16 +46,26 @@ namespace SpaceSaver
                     if (Properties.Intersects(enemy.Properties))
                     {
                         enemy.GetHitIsDead(damage, 0, Position);
+                        if (damage != 0)
+                        {
+                            Game1.sounds["enemy_roar1"].Play();
+                        }
                         damage = 0;
                         return;
                     }
                 }
             }
-            else if(Properties.Intersects(Game1.player.Properties))
+            else if(Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
             {
                 Game1.player.GetHitIsDead(damage, 0, Position);
+                if (damage != 0)
+                {
+                    Game1.sounds["player_get_hit"].Play();
+                }
                 damage = 0;
             }
         }
     }
 }
+
+    
