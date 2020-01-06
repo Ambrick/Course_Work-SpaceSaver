@@ -4,7 +4,7 @@ using System;
 
 namespace SpaceSaver
 {
-    public class Bullet: Static_Component
+    public class Bullet : Static_Component
     {
         private Vector2 Direction;
 
@@ -32,8 +32,7 @@ namespace SpaceSaver
 
         public void Update(GameTime gameTime)
         {
-            if (Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range)
-                IsDead = true;
+            IsDead = Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range ? true : false;
 
             //--------------------------------
             BulletInteraction();

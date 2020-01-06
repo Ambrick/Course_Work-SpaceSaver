@@ -77,9 +77,9 @@ namespace SpaceSaver
         public static string game_state = "menu";
 
         public static bool alow_next = true;
-        public static int score;
+        public static int score = 0;
 
-        UiFacade Facade = new UiFacade(new Menu(), new Nick_input(), ScoreManager.Load(), new ComponentsManager(), new Drawing());
+        UiFacade Facade = new UiFacade(new Menu(), new Nick_input(), ScoreManager.Load(), new ComponentsManager(), new ResultBoard());
 
         public Game1()
         {
@@ -99,10 +99,9 @@ namespace SpaceSaver
              /*
          Переделать рисунок меню
          ------------------
-         Поменять рисункок процесса работы моногейм с ссылкой на список  эл. ресурсов
          Расписать аналог Alien Breed
          Вставить новый код
-         Расписать паттерны (Стратегию, фасад)в разработке прогрмаммы
+         Расписать паттерны (Стратегию, фасад) в разработке прогрмаммы
              */
         protected override void LoadContent()
         {
@@ -120,22 +119,13 @@ namespace SpaceSaver
                 alow_next = false;
                 switch (game_state)
                 {
-                    case "end":
-                        if (Map != null)
-                        {
-                            Level.UnloadLvl(false);
-                            Facade.UpdateScore();
-                            game_state = "menu";
-                            alow_next = true;
-                        }
-                        else
-                        {
-                            Level.UnloadLvl(false);
-                            Exit();
-                        }
+                    case "result":
+                        Facade.AddFinalScores();
+                        Level.UnloadLvl(false);
                         break;
                     case "menu":
                         MediaPlayer.Play(songs["menu"]);
+                        Facade.ResetScores();
                         break;
                     case "lvl1":
                         MediaPlayer.Play(songs["lvl1"]);
@@ -152,6 +142,9 @@ namespace SpaceSaver
                         Level.UnloadLvl(true);
                         Map = new Level(3, Level3);
                         break;
+                    case "end":
+                        Exit();
+                        break;
                 }
             }
 
@@ -166,8 +159,11 @@ namespace SpaceSaver
                 case "name":
                     Facade.UpdateNickInput(gameTime);
                     break;
-                case "results":
-                    Facade.UpdateResults(gameTime);
+                case "scoreList":
+                    Facade.UpdateScoreList(gameTime);
+                    break;
+                case "result":
+                    Facade.UpdateResultBoard(gameTime);
                     break;
                 default:
                     Facade.UpdateGame(gameTime);
@@ -186,8 +182,11 @@ namespace SpaceSaver
                 case "name":
                     Facade.DrawNickInput(spriteBatch);
                     break;
-                case "results":
-                    Facade.DrawResults(spriteBatch);
+                case "scoreList":
+                    Facade.DrawScoreList(spriteBatch);
+                    break;
+                case "result":
+                    Facade.DrawResultBoard(spriteBatch);
                     break;
                 default:
                     Facade.DrawGame(spriteBatch);

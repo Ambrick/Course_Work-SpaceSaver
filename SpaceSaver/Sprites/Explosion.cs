@@ -19,11 +19,8 @@ namespace SpaceSaver
 
         public override void Update(GameTime gameTime)
         {
+            IsDead = (Timer += gameTime.ElapsedGameTime.TotalSeconds) >= LifeTime ? true : false;
             AnimationManager.Update(gameTime);
-
-            Timer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (Timer >= LifeTime)
-                IsDead = true;
         }
     }
 }

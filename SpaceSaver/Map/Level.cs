@@ -29,21 +29,15 @@ namespace SpaceSaver
             if (Game1.player.key_count >= keys_on_lvl && Game1.player.Properties.Intersects(new Rectangle((int)Start_position.X, (int)Start_position.Y, cell_size, cell_size))) 
             {
                 //Если это последний уровень
-                if (Map_lvl == 3)
-                {
-                    Game1.game_state = "end";
-                    Game1.sounds["win"].Play();
-                }
-                else
-                    Game1.game_state = "lvl" + (Map_lvl + 1);
-
+                Game1.sounds["win"].Play();
+                Game1.game_state = Map_lvl == 3? "result" : "lvl" + (Map_lvl + 1);
                 Game1.alow_next = true;
             }
             //Если игрок умер
             else if (Game1.player.IsDead)
             {
                 Game1.sounds["lose"].Play();
-                Game1.game_state = "end";
+                Game1.game_state = "result";
                 Game1.alow_next = true;
             }
         }

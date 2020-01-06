@@ -23,7 +23,7 @@ namespace SpaceSaver
             //Click timer update
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            if (click__timer <= 0 && Keyboard.GetState().GetPressedKeys().Length!=0)
+            if (Keyboard.GetState().GetPressedKeys().Length != 0 && click__timer <= 0 )
             {
                 switch (Keyboard.GetState().GetPressedKeys().GetValue(0))
                 {
@@ -35,7 +35,7 @@ namespace SpaceSaver
                         break;
                     case Keys.Enter:
                         Game1.game_state = menuState == 0 ? "name" :
-                                           menuState == 1 ? "results" :
+                                           menuState == 1 ? "scoreList" :
                                            menuState == 2 ? "end" : Game1.game_state;
 
                         Game1.alow_next = true;

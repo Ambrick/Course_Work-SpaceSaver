@@ -71,7 +71,7 @@ namespace SpaceSaver
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void DrawScoreList(SpriteBatch spriteBatch)
         {
             string s = string.Join("\n", Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray());
             spriteBatch.DrawString(Game1.font, s, pos, Color.White);

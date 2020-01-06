@@ -38,7 +38,7 @@ namespace SpaceSaver
             CheckIfDead();
         }
 
-        private void CheckIfDead()
+        protected virtual void CheckIfDead()
         {
             if (_Minion_Stats.CurrentHealthPoints < 0)
             {

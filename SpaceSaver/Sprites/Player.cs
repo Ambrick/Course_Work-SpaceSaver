@@ -30,7 +30,7 @@ namespace SpaceSaver
 
             _Bullet_param = new Bullet_param(1, 30);
             _Sword_param = new Sword_param(1, 40, 1);
-            _Minion_Stats = new Minion_Stats(1, 150);
+            _Minion_Stats = new Minion_Stats(1, 110);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
             level_system = new Leveling_up(50, 100, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
@@ -84,7 +84,7 @@ namespace SpaceSaver
                 _sword_timer = _Sword_param.CoolDown;
             }
            
-            if (keyboardState.GetPressedKeys().Length != 0 && level_system._skill_points != 0 && click__timer <= 0)
+            if (level_system._skill_points != 0 && keyboardState.GetPressedKeys().Length != 0 &&  click__timer <= 0)
             {
                 if (keyboardState.IsKeyDown(Keys.D1) || keyboardState.IsKeyDown(Keys.D2) || keyboardState.IsKeyDown(Keys.D3))
                 {
@@ -165,6 +165,10 @@ namespace SpaceSaver
         public void GetHeal()
         {
             _Minion_Stats.CurrentHealthPoints = _Minion_Stats.MaxHealthPoints;
+        }
+        protected override void CheckIfDead()
+        {
+            IsDead = _Minion_Stats.CurrentHealthPoints < 0 ? true: false;
         }
     }
 }

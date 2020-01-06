@@ -29,9 +29,7 @@ namespace SpaceSaver
 
         public void Update(GameTime gameTime)
         {
-            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (Timer >= Param.Duration)
-                IsDead = true;
+            IsDead = (Timer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= Param.Duration ? true : false;
 
             SwordInteraction();
         }

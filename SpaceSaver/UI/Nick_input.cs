@@ -8,12 +8,12 @@ namespace SpaceSaver
     {
         private double click__timer = 0;
 
-        public string name = "";
+        public string GetSetName { get; set; } = "";
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Game1.font, "Введите никнейм:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2), Color.Red);
-            spriteBatch.DrawString(Game1.font, name, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
+            spriteBatch.DrawString(Game1.font, GetSetName, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -22,13 +22,13 @@ namespace SpaceSaver
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
             KeyboardState state = Keyboard.GetState();
-            if (click__timer <= 0 && (name == null || name.Length <= 14))
+            if (click__timer <= 0 && (GetSetName == null || GetSetName.Length <= 14))
             {
                 if (state.GetPressedKeys().Length != 0)
                 {
                     foreach (var key in state.GetPressedKeys())
                     {
-                        if (name.Length > 9 || (key == Keys.Enter && name.Length > 0))
+                        if (GetSetName.Length > 13 || (key == Keys.Enter && GetSetName.Length > 0))
                         {
                             Game1.sounds["gong"].Play();
                             Game1.game_state = "lvl1";
@@ -36,13 +36,19 @@ namespace SpaceSaver
                         }
                         else if (key != Keys.Back && key != Keys.Enter)
                         {
-                            name += GetLetter(key);
+                            GetSetName += GetLetter(key);
+                        }
+                        else if (key ==Keys.Escape)
+                        {
+                            GetSetName = "";
+                            Game1.sounds["gong"].Play();
+                            Game1.game_state = "menu";
+                            Game1.alow_next = true;
                         }
                         else if (key==Keys.Back)
                         {
-                            name = name.Remove(name.Length - 1);
+                            GetSetName = GetSetName.Remove(GetSetName.Length - 1);
                         }
-                        
                     }
                 }
                 click__timer = 0.11;
