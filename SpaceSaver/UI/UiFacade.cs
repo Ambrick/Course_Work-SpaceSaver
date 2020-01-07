@@ -13,8 +13,6 @@ namespace SpaceSaver
 
         private Texture2D menu => Game1.textures["menu"];
 
-
-
         public UiFacade(Menu menuC, Nick_input nickInputC, ScoreManager scoreManagerC, ComponentsManager componentManagerC, ResultBoard resultBoardC)
         {
             MenuC = menuC;
@@ -25,9 +23,9 @@ namespace SpaceSaver
         }
 
         //----------Draws-----------------------------------------
-        private void DrawBack(SpriteBatch spriteBatch)
+        private void DrawBack(SpriteBatch spriteBatch, Texture2D texture)
         {
-            spriteBatch.Draw(Game1.textures["background"], Vector2.Zero, Color.White);
+            spriteBatch.Draw(texture, Vector2.Zero, Color.White);
         }
 
         private void DrawMenuImg(SpriteBatch spriteBatch)
@@ -37,19 +35,23 @@ namespace SpaceSaver
 
         public void DrawMenu(SpriteBatch spriteBatch)
         {
-            DrawBack(spriteBatch);
+            DrawBack(spriteBatch, Game1.textures["back1"]);
             DrawMenuImg(spriteBatch);
             MenuC.Draw(spriteBatch);
         }
         public void DrawNickInput(SpriteBatch spriteBatch)
         {
-            DrawBack(spriteBatch);
+            DrawBack(spriteBatch, Game1.textures["back1"]);
             DrawMenuImg(spriteBatch);
             NickInputC.Draw(spriteBatch);
         }
         public void DrawGame(SpriteBatch spriteBatch)
         {
-            DrawBack(spriteBatch);
+            Texture2D t = Game1.game_state == "lvl1" ? Game1.textures["back3"] :
+                          Game1.game_state == "lvl2" ? Game1.textures["back1"] :
+                          Game1.game_state == "lvl3" ? Game1.textures["back2"] : Game1.textures["back1"];
+
+            DrawBack(spriteBatch, t);
             spriteBatch.End();
             spriteBatch.Begin(transformMatrix: Camera.Transform);
             ComponentManagerC.DrawComponents(spriteBatch);
@@ -62,13 +64,13 @@ namespace SpaceSaver
         }
         public void DrawResultBoard(SpriteBatch spriteBatch)
         {
-            DrawBack(spriteBatch);
+            DrawBack(spriteBatch, Game1.textures["back1"]);
             DrawMenuImg(spriteBatch);
             ResultBoardC.DrawResultBoard(spriteBatch, NickInputC.GetSetName, Game1.score);
         }
         public void DrawScoreList(SpriteBatch spriteBatch)
         {
-            DrawBack(spriteBatch);
+            DrawBack(spriteBatch, Game1.textures["back1"]);
             DrawMenuImg(spriteBatch);
             ScoreManagerC.DrawScoreList(spriteBatch);
         }
@@ -96,12 +98,11 @@ namespace SpaceSaver
             ScoreManagerC.Update(gameTime);
         }
 
-
+        //----------Updates-----------------------------------------
         public void AddFinalScores()
         {
-            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score});
+            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score });
         }
-
         public void ResetScores()
         {
             ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score });

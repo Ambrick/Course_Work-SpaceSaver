@@ -12,10 +12,18 @@ namespace SpaceSaver
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.White);
-            spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.White);
-            spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.White);
-            spriteBatch.DrawString(Game1.font, "*", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + menuState * 50), Color.White);
+            if (menuState == 0)
+                spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.Red);
+            else
+                spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.White);
+            if (menuState == 1)
+                spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.Red);
+            else
+                spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.White);
+            if (menuState == 2)
+                spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.Red);
+            else
+                spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.White);
         }
 
         public void Update(GameTime gameTime)

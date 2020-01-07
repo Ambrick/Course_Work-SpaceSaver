@@ -99,7 +99,7 @@ namespace SpaceSaver
              /*
          Переделать рисунок меню
          ------------------
-         Расписать аналог Alien Breed
+         Обновить этапы разработки 
          Вставить новый код
          Расписать паттерны (Стратегию, фасад) в разработке прогрмаммы
              */
@@ -138,7 +138,7 @@ namespace SpaceSaver
                         Map = new Level(2, Level2);
                         break;
                     case "lvl3":
-                        MediaPlayer.Play(songs["lvl1"]);
+                        MediaPlayer.Play(songs["lvl3"]);
                         Level.UnloadLvl(true);
                         Map = new Level(3, Level3);
                         break;

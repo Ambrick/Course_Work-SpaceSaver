@@ -33,7 +33,9 @@ namespace SpaceSaver
                 {"stats_icon", Content.Load<Texture2D>("Sprites/Stats_icon") },
                 {"player_point", Content.Load<Texture2D>("Sprites/Player_point") },
                 {"explosion", Content.Load<Texture2D>("Sprites/Explosion") },
-                {"background", Content.Load<Texture2D>("Sprites/background") },
+                {"back1", Content.Load<Texture2D>("Sprites/back1") },
+                {"back2", Content.Load<Texture2D>("Sprites/back2") },
+                {"back3", Content.Load<Texture2D>("Sprites/back3") },
             };
         }
 
@@ -66,6 +68,7 @@ namespace SpaceSaver
                 {"menu", Content.Load<Song>("Music/Menu") },
                 {"lvl1", Content.Load<Song>("Music/Lvl_1") },
                 {"lvl2", Content.Load<Song>("Music/Lvl_2") },
+                {"lvl3", Content.Load<Song>("Music/Lvl_3") },
             };
         }
 

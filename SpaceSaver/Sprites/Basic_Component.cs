@@ -18,9 +18,9 @@ namespace SpaceSaver
 
         public float Angle { get { return angle; } set => angle = value; }
 
-        public virtual Vector2 Position { get { return _position; } set { _position = value; } }
+        public virtual Vector2 Position { get { return _position; } set => _position = value;  }
 
-        public Rectangle Rectangle { get; set; }
+        public Rectangle Rectangle { get; protected set; }
 
         public Rectangle Properties => new Rectangle((int)Position.X - Rectangle.Width / 2, (int)Position.Y - Rectangle.Height / 2, Rectangle.Width, Rectangle.Height);
     }

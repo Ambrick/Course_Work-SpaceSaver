@@ -25,6 +25,12 @@
 /processorParam:Quality=Best
 /build:Music/Lvl_2.mp3
 
+#begin Music/Lvl_3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Lvl_3.mp3
+
 #begin Music/Menu.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -122,7 +128,7 @@
 /processorParam:Quality=Best
 /build:Sounds/Win.wav
 
-#begin Sprites/background.jpg
+#begin Sprites/back1.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -132,7 +138,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/background.jpg
+/build:Sprites/back1.jpg
+
+#begin Sprites/back2.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/back2.jpg
+
+#begin Sprites/back3.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/back3.jpg
 
 #begin Sprites/Buff.png
 /importer:TextureImporter
@@ -229,6 +259,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Hood.png
+
+#begin Sprites/Hood2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Hood2.png
 
 #begin Sprites/Key_Big.png
 /importer:TextureImporter
