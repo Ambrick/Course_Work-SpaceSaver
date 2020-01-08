@@ -17,7 +17,7 @@ namespace SpaceSaver
 
         public List<Score> Scores { get; private set; }
 
-        private static Vector2 pos => new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2);
+        private static Vector2 pos => new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2+25);
 
         public ScoreManager() : this(new List<Score>())   { }
 
@@ -73,7 +73,8 @@ namespace SpaceSaver
 
         public void DrawScoreList(SpriteBatch spriteBatch)
         {
-            string s = string.Join("\n", Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray());
+            spriteBatch.DrawString(Game1.font, "Лучшие игроки:", pos + new Vector2(0,-40), Color.Red);
+            string s = string.Join("\n", Highscores.Select(a => a.PlayerName + " - " + a.Value).ToArray());
             spriteBatch.DrawString(Game1.font, s, pos, Color.White);
         }
 

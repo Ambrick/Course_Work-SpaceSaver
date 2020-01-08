@@ -6,51 +6,41 @@ namespace SpaceSaver
 {
     public class Menu
     {
-        private double click__timer = 0;
+        private double timer = 0; //задержка от залипания
 
-        private int menuState = 0;
+        private int menu = 0; //состояние меню
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (menuState == 0)
-                spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.Red);
-            else
-                spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), Color.White);
-            if (menuState == 1)
-                spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.Red);
-            else
-                spriteBatch.DrawString(Game1.font, "Результаты", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), Color.White);
-            if (menuState == 2)
-                spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.Red);
-            else
-                spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), Color.White);
+            spriteBatch.DrawString(Game1.font, "Играть", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2), menu == 0 ? Color.Red : Color.White);
+            spriteBatch.DrawString(Game1.font, "Лидеры", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 50), menu == 1 ? Color.Red : Color.White);
+            spriteBatch.DrawString(Game1.font, "Выход", new Vector2(Game1.ScreenWidth / 2 - 75, Game1.ScreenHeight / 2 + 100), menu == 2 ? Color.Red : Color.White);
         }
 
         public void Update(GameTime gameTime)
         {
-            //Click timer update
-            click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
+            timer -= timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            if (Keyboard.GetState().GetPressedKeys().Length != 0 && click__timer <= 0 )
+            if (Keyboard.GetState().GetPressedKeys().Length != 0 && timer <= 0 )
             {
                 switch (Keyboard.GetState().GetPressedKeys().GetValue(0))
                 {
                     case Keys.Down:
-                        menuState = menuState + 1 > 2 ? 0 : menuState + 1;
+                        menu = menu + 1 > 2 ? 0 : menu + 1;
                         break;
                     case Keys.Up:
-                        menuState = menuState - 1 < 0 ? 2 : menuState - 1;
+                        menu = menu - 1 < 0 ? 2 : menu - 1;
                         break;
                     case Keys.Enter:
-                        Game1.game_state = menuState == 0 ? "name" :
-                                           menuState == 1 ? "scoreList" :
-                                           menuState == 2 ? "end" : Game1.game_state;
+                        Game1.game_state = menu == 0 ? "name" :
+                                           menu == 1 ? "scoreList" :
+                                           menu == 2 ? "end" : Game1.game_state;
 
                         Game1.alow_next = true;
                         break;
                 }
                 Game1.sounds["gong"].Play(); ;
-                click__timer = 0.12;
+                timer = 0.12;
             }
         }
     }

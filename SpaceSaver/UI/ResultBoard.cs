@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace SpaceSaver
 {
@@ -9,9 +8,9 @@ namespace SpaceSaver
     {
         public void DrawResultBoard(SpriteBatch spriteBatch, string Nickname, int Scores)
         {
-            spriteBatch.DrawString(Game1.font, "Поздравляем:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 ), Color.White);
+            spriteBatch.DrawString(Game1.font, "Поздравляем:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 ), Color.Red);
             spriteBatch.DrawString(Game1.font, Nickname, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 25), Color.White);
-            spriteBatch.DrawString(Game1.font, "Вы набрали:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
+            spriteBatch.DrawString(Game1.font, "Вы набрали:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.Red);
             spriteBatch.DrawString(Game1.font, Scores.ToString(), new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 75), Color.White);
         }
 

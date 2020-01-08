@@ -18,39 +18,29 @@ namespace SpaceSaver
 
         public void Update(GameTime gameTime)
         {
-            //Click timer update
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            KeyboardState state = Keyboard.GetState();
-            if (click__timer <= 0 && (GetSetName == null || GetSetName.Length <= 14))
+            Keys[] keys_array = Keyboard.GetState().GetPressedKeys();
+            if (keys_array.Length != 0 && click__timer <= 0)
             {
-                if (state.GetPressedKeys().Length != 0)
+                Keys first_key = keys_array[0];
+                if (GetSetName.Length > 13 || (first_key == Keys.Enter && GetSetName.Length > 0))
                 {
-                    foreach (var key in state.GetPressedKeys())
-                    {
-                        if (GetSetName.Length > 13 || (key == Keys.Enter && GetSetName.Length > 0))
-                        {
-                            Game1.sounds["gong"].Play();
-                            Game1.game_state = "lvl1";
-                            Game1.alow_next = true;
-                        }
-                        else if (key != Keys.Back && key != Keys.Enter)
-                        {
-                            GetSetName += GetLetter(key);
-                        }
-                        else if (key ==Keys.Escape)
-                        {
-                            GetSetName = "";
-                            Game1.sounds["gong"].Play();
-                            Game1.game_state = "menu";
-                            Game1.alow_next = true;
-                        }
-                        else if (key==Keys.Back)
-                        {
-                            GetSetName = GetSetName.Remove(GetSetName.Length - 1);
-                        }
-                    }
+                    Game1.game_state = "lvl1";
+                    Game1.alow_next = true;
                 }
+                else if (first_key == Keys.Escape)
+                {
+                    GetSetName = "";
+                    Game1.game_state = "menu";
+                    Game1.alow_next = true;
+                }
+                else if (first_key == Keys.Back)
+                    GetSetName = GetSetName.Remove(GetSetName.Length - 1);
+                else
+                    GetSetName += GetLetter(first_key);
+
+                Game1.sounds["gong"].Play();
                 click__timer = 0.11;
             }
         }

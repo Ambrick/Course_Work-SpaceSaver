@@ -13,7 +13,7 @@ namespace SpaceSaver
         protected double timer;
 
         protected bool CheckIfInRange(Vector2 Position1, Vector2 Position2, double Range) =>
-            Math.Sqrt(Math.Pow(Position1.X - Position2.X, 2) + Math.Pow(Position1.Y - Position2.Y, 2)) <= Range ? true : false;
+            Math.Sqrt(Math.Pow(Position1.X - Position2.X, 2) + Math.Pow(Position1.Y - Position2.Y, 2)) <= Range;
 
         protected float CurrentAngle(Vector2 Position1, Vector2 Position2) => (float) Math.Atan2(Position2.Y - Position1.Y, Position2.X - Position1.X);
 

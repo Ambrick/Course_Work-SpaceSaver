@@ -65,7 +65,7 @@
     <Compile Include="Sprites\Enemies\RangeStrategy.cs" />
     <Compile Include="Sprites\Enemies\MeleeStrategy.cs" />
     <Compile Include="Sprites\Enemies\EnemyComplexMove.cs" />
-    <Compile Include="Sprites\Enemies\Strategy_interface.cs" />
+    <Compile Include="Sprites\Enemies\Strategy.cs" />
     <Compile Include="Sprites\Explosion.cs" />
     <Compile Include="Sprites\Enemies\Enemy.cs" />
     <Compile Include="Sprites\Skill_Param\Sword_param .cs" />

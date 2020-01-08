@@ -9,10 +9,10 @@ namespace SpaceSaver
 
         private Vector2 Hood_pos, b_icon_pos, sw_icon_pos, st_icon_pos, b_lvl_pos, sw_lvl_pos, st_lvl_pos, cur_lvl_pos, hp_pos, key_pos;
 
-        private Vector2 icon_shift => new Vector2(93, 0);
-
         public Hood()
         {
+            Vector2 icon_shift = new Vector2(93, 0);
+
             Hood_texture = Game1.textures["hood"];
             Bullet_icon = Game1.textures["bullet_icon"];
             Sword_icon = Game1.textures["sword_icon"];
@@ -41,8 +41,7 @@ namespace SpaceSaver
             if (Game1.player._bullet_timer > 0)
             {
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, Color.Orchid);
-                int i = (int) (Game1.player._bullet_timer/0.1);
-                spriteBatch.DrawString(Game1.font, i.ToString(), b_icon_pos+new Vector2(21, 15), Color.White);
+                spriteBatch.DrawString(Game1.font, ((int)(Game1.player._bullet_timer / 0.1)).ToString(), b_icon_pos+new Vector2(21, 15), Color.White);
             }
             else if (Game1.player.Buffed)
             {
@@ -57,8 +56,7 @@ namespace SpaceSaver
             if (Game1.player._sword_timer > 0)
             {
                 spriteBatch.Draw(Sword_icon, sw_icon_pos, Color.Orchid);
-                int i = (int)(Game1.player._sword_timer / 0.1);
-                spriteBatch.DrawString(Game1.font, i.ToString(), sw_icon_pos + new Vector2(21, 15), Color.White);
+                spriteBatch.DrawString(Game1.font, ((int)(Game1.player._sword_timer / 0.1)).ToString(), sw_icon_pos + new Vector2(21, 15), Color.White);
             }
             else
             {
@@ -82,14 +80,8 @@ namespace SpaceSaver
             spriteBatch.DrawString(Game1.font, s, key_pos, Color.White, 0, Vector2.Zero, 0.56f, SpriteEffects.None, 1);
 
             //Вывод уровня
-            if (Game1.player.level_system._skill_points > 0)
-            {
-                spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.Yellow);
-            }
-            else
-            {
-                spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, Color.White);
-            }
+            Color col = Game1.player.level_system._skill_points > 0 ? Color.Yellow : Color.White;
+            spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, col);
         }
     }
 }

@@ -6,8 +6,8 @@ namespace SpaceSaver
     public class UiFacade
     {
         Menu MenuC;
-        public Nick_input NickInputC;
-        public ScoreManager ScoreManagerC;
+        Nick_input NickInputC;
+        ScoreManager ScoreManagerC;
         ComponentsManager ComponentManagerC;
         ResultBoard ResultBoardC;
 
@@ -98,14 +98,13 @@ namespace SpaceSaver
             ScoreManagerC.Update(gameTime);
         }
 
-        //----------Updates-----------------------------------------
+        //----------Other-----------------------------------------
         public void AddFinalScores()
         {
             ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score });
         }
         public void ResetScores()
         {
-            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score });
             NickInputC.GetSetName = "";
             Game1.score = 0;
         }
