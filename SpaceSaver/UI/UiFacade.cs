@@ -21,18 +21,15 @@ namespace SpaceSaver
             ComponentManagerC = componentManagerC;
             ResultBoardC = resultBoardC;
         }
-
         //----------Draws-----------------------------------------
         private void DrawBack(SpriteBatch spriteBatch, Texture2D texture)
         {
             spriteBatch.Draw(texture, Vector2.Zero, Color.White);
         }
-
         private void DrawMenuImg(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(menu, new Vector2(Game1.ScreenWidth / 2 - menu.Width / 2, Game1.ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
         }
-
         public void DrawMenu(SpriteBatch spriteBatch)
         {
             DrawBack(spriteBatch, Game1.textures["back1"]);
@@ -66,7 +63,7 @@ namespace SpaceSaver
         {
             DrawBack(spriteBatch, Game1.textures["back1"]);
             DrawMenuImg(spriteBatch);
-            ResultBoardC.DrawResultBoard(spriteBatch, NickInputC.GetSetName, Game1.score);
+            ResultBoardC.DrawResultBoard(spriteBatch, NickInputC.UserInputName, Game1.score);
         }
         public void DrawScoreList(SpriteBatch spriteBatch)
         {
@@ -74,7 +71,6 @@ namespace SpaceSaver
             DrawMenuImg(spriteBatch);
             ScoreManagerC.DrawScoreList(spriteBatch);
         }
-
         //----------Updates-----------------------------------------
         public void UpdateMenu(GameTime gameTime)
         {
@@ -101,11 +97,11 @@ namespace SpaceSaver
         //----------Other-----------------------------------------
         public void AddFinalScores()
         {
-            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.GetSetName, Value = Game1.score });
+            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.UserInputName, Value = Game1.score });
         }
         public void ResetScores()
         {
-            NickInputC.GetSetName = "";
+            NickInputC.UserInputName = "";
             Game1.score = 0;
         }
     }

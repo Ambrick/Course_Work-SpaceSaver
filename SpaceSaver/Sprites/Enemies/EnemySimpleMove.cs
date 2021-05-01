@@ -39,7 +39,7 @@ namespace SpaceSaver
                 if (Position.X < key_points[State].X)
                 {
                     Angle = 0;
-                    State++;
+                    State = 1;
                 }
             }
             else if (State == 1)

@@ -31,20 +31,17 @@ namespace SpaceSaver
             _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
 
             if (type == 1)
-            {
                 Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, pos));
-            }
 
             CheckIfDead();
         }
 
         protected virtual void CheckIfDead()
         {
-            if (_Minion_Stats.CurrentHealthPoints < 0)
-            {
-                Game1.Map.IfEnemyDead(Position);
-                IsDead = true;
-            }
+            if (_Minion_Stats.CurrentHealthPoints > 0) return;
+
+            Game1.Map.IfEnemyDead(Position);
+            IsDead = true;
         }
     }
 }

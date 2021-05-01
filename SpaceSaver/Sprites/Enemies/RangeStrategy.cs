@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 
 namespace SpaceSaver
 {
@@ -14,18 +13,16 @@ namespace SpaceSaver
 
         public bool Skill(GameTime gameTime, Vector2 Position, ref float Angle)
         {
-            if (UpdateState(gameTime, Position, ref Angle, Param.Range))
-            {
-                if (CheckTimer())
-                {
-                    Game1.sounds["enemy_shoot"].Play();
-                    Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "enemy_bullet", Angle));
+            if (!UpdateState(gameTime, Position, ref Angle, Param.Range))
+                return false;
 
-                    timer = Param.CoolDown;
-                }
-                return true;
+            if (CheckTimer())
+            {
+                Game1.sounds["enemy_shoot"].Play();
+                Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "enemy_bullet", Angle));
+                timer = Param.CoolDown;
             }
-            return false;
+            return true;
         }
     }
 }

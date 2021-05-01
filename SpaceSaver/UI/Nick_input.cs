@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace SpaceSaver
 {
@@ -8,12 +9,12 @@ namespace SpaceSaver
     {
         private double click__timer = 0;
 
-        public string GetSetName { get; set; } = "";
+        public string UserInputName { get; set; } = "";
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Game1.font, "Введите никнейм:", new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2), Color.Red);
-            spriteBatch.DrawString(Game1.font, GetSetName, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
+            spriteBatch.DrawString(Game1.font, UserInputName, new Vector2(Game1.ScreenWidth / 2 - 100, Game1.ScreenHeight / 2 + 50), Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -24,96 +25,67 @@ namespace SpaceSaver
             if (keys_array.Length != 0 && click__timer <= 0)
             {
                 Keys first_key = keys_array[0];
-                if (GetSetName.Length > 13 || (first_key == Keys.Enter && GetSetName.Length > 0))
+                if (UserInputName.Length > 13 || (first_key == Keys.Enter && UserInputName.Length > 0))
                 {
                     Game1.game_state = "lvl1";
                     Game1.alow_next = true;
                 }
                 else if (first_key == Keys.Escape)
                 {
-                    GetSetName = "";
+                    UserInputName = "";
                     Game1.game_state = "menu";
                     Game1.alow_next = true;
                 }
                 else if (first_key == Keys.Back)
-                    GetSetName = GetSetName.Remove(GetSetName.Length - 1);
+                    UserInputName = UserInputName.Remove(UserInputName.Length - 1);
                 else
-                    GetSetName += GetLetter(first_key);
+                    UserInputName += GetLetter(first_key);
 
                 Game1.sounds["gong"].Play();
-                click__timer = 0.11;
+                click__timer = 0.13;
             }
         }
 
         private string GetLetter(Keys key)
         {
-            switch (key)
-            {
-                case Keys.Q:
-                    return "Й";
-                case Keys.W:
-                    return "Ц";
-                case Keys.E:
-                    return "У";
-                case Keys.R:
-                    return "К";
-                case Keys.T:
-                    return "Е";
-                case Keys.Y:
-                    return "Н";
-                case Keys.U:
-                    return "Г";
-                case Keys.I:
-                    return "Ш";
-                case Keys.O:
-                    return "Щ";
-                case Keys.P:
-                    return "З";
-                case Keys.OemOpenBrackets:
-                    return "Х";
-                case Keys.OemCloseBrackets:
-                    return "Ъ";
-                case Keys.A:
-                    return "Ф";
-                case Keys.S:
-                    return "Ы";
-                case Keys.D:
-                    return "В";
-                case Keys.F:
-                    return "А";
-                case Keys.G:
-                    return "П";
-                case Keys.H:
-                    return "Р";
-                case Keys.J:
-                    return "О";
-                case Keys.K:
-                    return "Л";
-                case Keys.L:
-                    return "Д";
-                case Keys.Z:
-                    return "Я";
-                case Keys.X:
-                    return "Ч";
-                case Keys.C:
-                    return "С";
-                case Keys.V:
-                    return "М";
-                case Keys.B:
-                    return "И";
-                case Keys.N:
-                    return "Т";
-                case Keys.M:
-                    return "Ь";
-                case Keys.Space:
-                    return " ";
-                case Keys.OemQuotes:
-                    return "Э";
-                case Keys.OemQuestion:
-                    return ".";
-                default:
-                    return "*";
-            }
+            Dictionary<Keys, string> alphabetEquivalents = new Dictionary<Keys, string> {
+            { Keys.Q, "Й" },
+            { Keys.W, "Ц" },
+            { Keys.E, "У" },
+            { Keys.R, "К" },
+            { Keys.T, "Е" },
+            { Keys.Y, "Н" },
+            { Keys.U, "Г" },
+            { Keys.I, "Ш" },
+            { Keys.O, "Щ" },
+            { Keys.P, "З" },
+            { Keys.OemOpenBrackets, "Х" },
+            { Keys.OemCloseBrackets, "Ъ" },
+            { Keys.A, "Ф" },
+            { Keys.S, "Ы" },
+            { Keys.D, "В" },
+            { Keys.F, "А" },
+            { Keys.G, "П" },
+            { Keys.H, "Р" },
+            { Keys.J, "О" },
+            { Keys.K, "Л" },
+            { Keys.L, "Д" },
+            { Keys.Z, "Я" },
+            { Keys.X, "Ч" },
+            { Keys.C, "С" },
+            { Keys.V, "М" },
+            { Keys.B, "И" },
+            { Keys.N, "Т" },
+            { Keys.M, "Ь" },
+            { Keys.OemQuotes, "Э" },
+            { Keys.OemComma, "Б" },
+            { Keys.OemPeriod, "Ю" },
+            { Keys.OemQuestion, "." },
+            { Keys.Space, " " },};
+            
+            string value = "*";
+            alphabetEquivalents.TryGetValue(key, out value);
+            return value;
         }
     }
 }

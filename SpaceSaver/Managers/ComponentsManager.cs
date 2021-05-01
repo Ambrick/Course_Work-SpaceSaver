@@ -67,10 +67,10 @@ namespace SpaceSaver
                 component.Draw(sprBatch);
             foreach (var component in Game1.enemies)
                 component.Draw(sprBatch);
+
             if (Game1.player != null)
-            {
                 Game1.player.Draw(sprBatch);
-            }
+
             foreach (var component in Game1.explosions)
                 component.Draw(sprBatch);
             foreach (var component in Game1.swords)

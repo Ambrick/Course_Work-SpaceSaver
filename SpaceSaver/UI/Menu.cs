@@ -21,9 +21,10 @@ namespace SpaceSaver
         {
             timer -= timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            if (Keyboard.GetState().GetPressedKeys().Length != 0 && timer <= 0 )
+            Keys[] keys_array = Keyboard.GetState().GetPressedKeys();
+            if (keys_array.Length != 0 && timer <= 0 )
             {
-                switch (Keyboard.GetState().GetPressedKeys().GetValue(0))
+                switch (keys_array.GetValue(0))
                 {
                     case Keys.Down:
                         menu = menu + 1 > 2 ? 0 : menu + 1;
@@ -35,7 +36,6 @@ namespace SpaceSaver
                         Game1.game_state = menu == 0 ? "name" :
                                            menu == 1 ? "scoreList" :
                                            menu == 2 ? "end" : Game1.game_state;
-
                         Game1.alow_next = true;
                         break;
                 }

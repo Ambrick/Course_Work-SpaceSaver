@@ -26,12 +26,11 @@ namespace SpaceSaver
             if (Strategy.Skill(gameTime, Position, ref angle))
             {
                 AnimationManager.Play(Animations["Action"]);
+                return;
             }
-            else
-            {
-                Move();
-                AnimationManager.Play(Animations["Move"]);
-            }
+
+            Move();
+            AnimationManager.Play(Animations["Move"]);
         }
 
         public override void Draw(SpriteBatch sprBatch)

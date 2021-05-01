@@ -96,12 +96,6 @@ namespace SpaceSaver
             IsMouseVisible = true;
             base.Initialize();
         }
-             /*
-         ------------------
-         Обновить этапы разработки 
-         Вставить новый код
-         Расписать паттерны (Стратегию, фасад) в разработке прогрмаммы
-             */
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);

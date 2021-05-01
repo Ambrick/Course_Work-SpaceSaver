@@ -30,7 +30,7 @@ namespace SpaceSaver
             {
                 //Если это последний уровень
                 Game1.sounds["win"].Play();
-                Game1.game_state = Map_lvl == 3? "result" : "lvl" + (Map_lvl + 1);
+                Game1.game_state = Map_lvl == 3 ? "result" : "lvl" + (Map_lvl + 1);
                 Game1.alow_next = true;
             }
             //Если игрок умер
@@ -111,7 +111,7 @@ namespace SpaceSaver
             Game1.explosions.Clear();
             Game1.enemies.Clear();
             Game1.Map = null;
-            //Если выигрышь, то обнуление "ключей", нет - обнуляем "Игрока"
+            //Если достигнута "победа" на уровне, то обнуление игровых "ключей", если "поражение" - обнуляем "Игрока"
             if (Win)
                 Game1.player.key_count = 0;
             else
