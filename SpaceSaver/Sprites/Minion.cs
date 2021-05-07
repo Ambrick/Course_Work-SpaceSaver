@@ -26,22 +26,16 @@ namespace SpaceSaver
             AnimationManager.Update(gameTime);
         }
 
-        public void GetHitIsDead(float IncomeDamage, int type, Vector2 pos)
+        public void GetHitIsDead(float IncomeDamage, string type, Vector2 pos)
         {
             _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
 
-            if (type == 1)
+            if (type == "bullet_damage_was_dealt")
                 Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, pos));
 
             CheckIfDead();
         }
 
-        protected virtual void CheckIfDead()
-        {
-            if (_Minion_Stats.CurrentHealthPoints > 0) return;
-
-            Game1.Map.IfEnemyDead(Position);
-            IsDead = true;
-        }
+        protected virtual void CheckIfDead() {    }
     }
 }

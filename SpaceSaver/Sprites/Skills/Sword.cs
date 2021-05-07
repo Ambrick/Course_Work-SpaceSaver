@@ -31,11 +31,6 @@ namespace SpaceSaver
         {
             IsDead = (Timer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= Param.Duration ? true : false;
 
-            SwordInteraction();
-        }
-
-        private void SwordInteraction()
-        {
             //проверка на столкновение удара игрока
             if (Object_type == "player_sword")
             {
@@ -43,7 +38,7 @@ namespace SpaceSaver
                 {
                     if (Properties.Intersects(enemy.Properties))
                     {
-                        enemy.GetHitIsDead(damage, 0, Position);
+                        enemy.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
                         if (damage != 0)
                         {
                             Game1.sounds["enemy_roar1"].Play();
@@ -51,11 +46,12 @@ namespace SpaceSaver
                         damage = 0;
                         return;
                     }
+
                 }
             }
-            else if(Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
+            else if (Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
             {
-                Game1.player.GetHitIsDead(damage, 0, Position);
+                Game1.player.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
                 if (damage != 0)
                 {
                     Game1.sounds["player_get_hit"].Play();

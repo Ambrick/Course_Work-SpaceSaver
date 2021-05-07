@@ -21,7 +21,7 @@ namespace SpaceSaver
         {
             timer -= timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            Keys[] keys_array = Keyboard.GetState().GetPressedKeys();
+            var keys_array = Keyboard.GetState().GetPressedKeys();
             if (keys_array.Length != 0 && timer <= 0 )
             {
                 switch (keys_array.GetValue(0))
@@ -40,7 +40,7 @@ namespace SpaceSaver
                         break;
                 }
                 Game1.sounds["gong"].Play(); ;
-                timer = 0.12;
+                timer = 0.13;
             }
         }
     }

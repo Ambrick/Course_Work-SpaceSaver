@@ -55,9 +55,7 @@ namespace SpaceSaver
             spriteBatch.End();
             spriteBatch.Begin();
             if (Game1.player != null)
-            {
                 Game1.player.Hood.Draw(spriteBatch);
-            }
         }
         public void DrawResultBoard(SpriteBatch spriteBatch)
         {

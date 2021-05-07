@@ -14,20 +14,18 @@ namespace SpaceSaver
 
         private Vector2 initial_pos;
 
-        public Bullet(Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base( texture, position, object_type)
+        public Bullet(Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
         {
             Texture = texture;
             Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            Position = position;
             Object_type = object_type;
             Angle = angle;
 
             Param = param;
             Direction = new Vector2((float) Math.Cos(Angle), (float) Math.Sin(Angle));
-            Position = position + Direction * 25f;
+            initial_pos = Position = position + Direction * 25f;
             Velocity = Direction * Param.MoveSpeed;
-
-            initial_pos = Position;
+            
         }
 
         public void Update(GameTime gameTime)
@@ -35,14 +33,6 @@ namespace SpaceSaver
             IsDead = Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range ? true : false;
 
             //--------------------------------
-            BulletInteraction();
-            //--------------------------------
-            Position += Velocity;
-        }
-
-       
-        public void BulletInteraction()
-        {
             //проверка на столкновение со стеной
             foreach (Static_Component spr2 in Game1.static_objects)
                 if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
@@ -56,7 +46,7 @@ namespace SpaceSaver
                     if (enemy.Object_type == "enemy_range" && Collision_manager.CheckCollision(this, enemy))
                     {
                         Game1.sounds["enemy_roar1"].Play();
-                        enemy.GetHitIsDead(Param.Damage, 1, Position);
+                        enemy.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
                         IsDead = true;
                     }
                 }
@@ -76,10 +66,12 @@ namespace SpaceSaver
                 if (Collision_manager.CheckCollision(this, Game1.player))
                 {
                     Game1.sounds["player_get_hit"].Play();
-                    Game1.player.GetHitIsDead(Param.Damage, 1, Position);
+                    Game1.player.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
                     IsDead = true;
                 }
-            }
+            };
+            //--------------------------------
+            Position += Velocity;
         }
     }
 }

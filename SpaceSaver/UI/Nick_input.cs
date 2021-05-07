@@ -21,7 +21,7 @@ namespace SpaceSaver
         {
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            Keys[] keys_array = Keyboard.GetState().GetPressedKeys();
+            var keys_array = Keyboard.GetState().GetPressedKeys();
             if (keys_array.Length != 0 && click__timer <= 0)
             {
                 Keys first_key = keys_array[0];

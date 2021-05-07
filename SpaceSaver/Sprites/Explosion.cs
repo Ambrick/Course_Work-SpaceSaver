@@ -6,7 +6,7 @@ namespace SpaceSaver
 {
     public class Explosion : Dynamic_Component
     {
-        private float LifeTime;
+        private readonly float LifeTime;
 
         private double Timer;
 
@@ -16,6 +16,7 @@ namespace SpaceSaver
             LifeTime = Animations.First().Value.FrameSpeed * Animations.First().Value.FrameCount;
             AnimationManager.Play(Animations["Action"]);
         }
+
 
         public override void Update(GameTime gameTime)
         {

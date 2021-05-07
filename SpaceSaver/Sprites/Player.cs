@@ -71,8 +71,8 @@ namespace SpaceSaver
                 if (Buffed)
                 {
                     float angle = (float)Math.Atan(30);
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.9f));
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.1f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.8f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.2f));
                 }
                 Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = _Bullet_param.CoolDown;

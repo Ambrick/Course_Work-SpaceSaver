@@ -18,16 +18,17 @@ namespace SpaceSaver
             Sword_icon = Game1.textures["sword_icon"];
             Stats_icon = Game1.textures["stats_icon"];
 
-            Hood_pos = new Vector2(Game1.ScreenWidth / 2 - Hood_texture.Width / 2, Game1.ScreenHeight - Hood_texture.Height-50);
+            Hood_pos = new Vector2(Game1.ScreenWidth / 2 - Hood_texture.Width / 2, Game1.ScreenHeight - Hood_texture.Height - 50);
+            //Задаем значения для позиций иконок в UI
             b_icon_pos = Hood_pos + new Vector2(38,5);
             sw_icon_pos = b_icon_pos+ icon_shift;
             st_icon_pos = sw_icon_pos + icon_shift;
-
+            //Задаем значения для позиций отрисовки значения уровней в UI
             b_lvl_pos = Hood_pos + new Vector2(106, 39);
             sw_lvl_pos = b_lvl_pos + icon_shift;
             st_lvl_pos = sw_lvl_pos + icon_shift;
-
-            hp_pos= Hood_pos+ new Vector2(465, 40);
+            //Задаем значения для отрисовки побочных значений в UI
+            hp_pos = Hood_pos+ new Vector2(465, 40);
             key_pos = Hood_pos + new Vector2(578, 40);
             cur_lvl_pos = Hood_pos + new Vector2(343, 35);
         }
@@ -44,13 +45,9 @@ namespace SpaceSaver
                 spriteBatch.DrawString(Game1.font, ((int)(Game1.player._bullet_timer / 0.1)).ToString(), b_icon_pos+new Vector2(21, 15), Color.White);
             }
             else if (Game1.player.Buffed)
-            {
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, new Color(30, 50, 255));
-            }
             else
-            {
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, Color.White);
-            }
 
             //Отрисовка иконки "удар"
             if (Game1.player._sword_timer > 0)
@@ -59,9 +56,7 @@ namespace SpaceSaver
                 spriteBatch.DrawString(Game1.font, ((int)(Game1.player._sword_timer / 0.1)).ToString(), sw_icon_pos + new Vector2(21, 15), Color.White);
             }
             else
-            {
                 spriteBatch.Draw(Sword_icon, sw_icon_pos, Color.White);
-            }
 
             //Отрисовка иконки "статов"
             spriteBatch.Draw(Stats_icon, st_icon_pos, Color.White);
@@ -72,11 +67,11 @@ namespace SpaceSaver
             spriteBatch.DrawString(Game1.font, Game1.player._Minion_Stats.Skill_lvl.ToString(), st_lvl_pos, Color.White);
 
             //Вывод здоровья
-            string s = Game1.player._Minion_Stats.MaxHealthPoints.ToString()+"/"+ Game1.player._Minion_Stats.CurrentHealthPoints.ToString();
+            string s = Game1.player._Minion_Stats.CurrentHealthPoints.ToString()+"/"+ Game1.player._Minion_Stats.MaxHealthPoints.ToString();
             spriteBatch.DrawString(Game1.font, s, hp_pos, Color.White, 0, Vector2.Zero, 0.56f,SpriteEffects.None,1);
 
-            //Вывод информации о ключах
-            s = Game1.Map.keys_on_lvl + "/" + Game1.player.key_count.ToString();
+            //Вывод информации об игровых ключах
+            s = Game1.player.key_count.ToString() + "/" + Game1.Map.keys_on_lvl;
             spriteBatch.DrawString(Game1.font, s, key_pos, Color.White, 0, Vector2.Zero, 0.56f, SpriteEffects.None, 1);
 
             //Вывод уровня

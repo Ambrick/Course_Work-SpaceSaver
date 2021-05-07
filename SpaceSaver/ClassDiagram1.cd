@@ -45,7 +45,7 @@
   <Class Name="SpaceSaver.Level">
     <Position X="26.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAYAABAAAQAAAAQAAAAEAIAAAAAACAEAAAAAAAA=</HashCode>
+      <HashCode>AAQAAA4AABAAAAAAAAQAAAAEAIAAAAAACAEAAAAAAAA=</HashCode>
       <FileName>Map\Level.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,7 +66,7 @@
   <Class Name="SpaceSaver.Enemy">
     <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAIAAAgCAAAAAAAIAAAAAAAAAAAAABBAAAAQ=</HashCode>
+      <HashCode>AAAAAAQAAIAAAgCAAAAAAAMAAAAAAAAAAAAABBAAAAQ=</HashCode>
       <FileName>Sprites\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -135,13 +135,6 @@
       <FileName>Sprites\Skills\Bullet.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceSaver.Sword">
-    <Position X="0.75" Y="6.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQQAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
-      <FileName>Sprites\Skills\Sword.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="SpaceSaver.Basic_Component">
     <Position X="0.75" Y="1" Width="1.5" />
     <TypeIdentifier>
@@ -201,7 +194,7 @@
   <Class Name="SpaceSaver.Nick_input">
     <Position X="28" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQAQ=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAAAAQAQ=</HashCode>
       <FileName>UI\Nick_input.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -231,6 +224,13 @@
     <TypeIdentifier>
       <HashCode>AAcAAEAAANAAAwQAAAAMABAAAADEAAgBBAEAAAAAAAQ=</HashCode>
       <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceSaver.Sword">
+    <Position X="0.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Sprites\Skills\Sword.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="SpaceSaver.IStrategy">

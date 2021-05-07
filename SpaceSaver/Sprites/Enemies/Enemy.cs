@@ -39,5 +39,16 @@ namespace SpaceSaver
             sprBatch.DrawString(Game1.font, s, Position+new Vector2(0,-30), Color.White, 0, Vector2.Zero, 0.40f, SpriteEffects.None, 1);
             AnimationManager.Draw(sprBatch, Angle);
         }
+        
+        protected override void CheckIfDead()
+        {
+            if (_Minion_Stats.CurrentHealthPoints > 0) return;
+
+            Game1.sounds["enemy_roar2"].Play();
+            Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position));
+            Game1.static_objects.Add(new Static_Component(Game1.textures["key"], Position, "key"));
+            Game1.score++;
+            IsDead = true;
+        }
     }
 }

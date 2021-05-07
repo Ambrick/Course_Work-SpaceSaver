@@ -17,6 +17,8 @@ namespace SpaceSaver
 
         private Vector2 Start_position;
 
+        private Rectangle Start_position_Rect => new Rectangle((int)Start_position.X, (int)Start_position.Y, cell_size, cell_size);
+
         public Level(int lvl, int[,] level_matrix)
         {
             LVL = level_matrix;
@@ -26,7 +28,7 @@ namespace SpaceSaver
         public void Update(GameTime gameTime)
         {   
             //Если игрок вошел в стартовую позицию со всеми ключами
-            if (Game1.player.key_count >= keys_on_lvl && Game1.player.Properties.Intersects(new Rectangle((int)Start_position.X, (int)Start_position.Y, cell_size, cell_size))) 
+            if (Game1.player.key_count >= keys_on_lvl && Game1.player.Properties.Intersects(Start_position_Rect)) 
             {
                 //Если это последний уровень
                 Game1.sounds["win"].Play();
@@ -40,14 +42,6 @@ namespace SpaceSaver
                 Game1.game_state = "result";
                 Game1.alow_next = true;
             }
-        }
-
-        public void IfEnemyDead(Vector2 position)
-        {
-            Game1.sounds["enemy_roar2"].Play();
-            Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, position));
-            Game1.static_objects.Add(new Static_Component(Game1.textures["key"], position, "key"));
-            Game1.score++;
         }
 
         public void LoadLevel(int lvl)
