@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,10 @@ namespace SpaceSaver
             AnimationManager.Play(Animations["Action"]);
         }
 
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            AnimationManager.Draw(sprBatch, Angle);
+        }
 
         public override void Update(GameTime gameTime)
         {

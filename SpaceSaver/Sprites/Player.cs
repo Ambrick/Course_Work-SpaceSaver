@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -119,7 +120,12 @@ namespace SpaceSaver
             else
                 AnimationManager.Stop();
         }
-        
+
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            AnimationManager.Draw(sprBatch, Angle);
+        }
+
         public void PlayerInteraction()
         {
             foreach (Enemy enemy in Game1.enemies)
@@ -162,10 +168,12 @@ namespace SpaceSaver
                 }
             }
         }
+
         public void GetHeal()
         {
             _Minion_Stats.CurrentHealthPoints = _Minion_Stats.MaxHealthPoints;
         }
+
         protected override void CheckIfDead()
         {
             IsDead = _Minion_Stats.CurrentHealthPoints < 0 ? true: false;
