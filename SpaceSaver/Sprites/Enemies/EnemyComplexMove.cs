@@ -31,8 +31,8 @@ namespace SpaceSaver
             sprBatch.Draw(Game1.textures["enemy_shield"],
                 new Vector2(Position.X - Game1.textures["enemy_shield"].Width / 2, Position.Y - Game1.textures["enemy_shield"].Height / 2), Color.White);
 
-            string s = _Minion_Stats.CurrentHealthPoints.ToString();
-            sprBatch.DrawString(Game1.font, s, Position + new Vector2(0, -30), Color.Red, 0, Vector2.Zero, 0.60f, SpriteEffects.None, 1);
+            string s = ((int)_Minion_Stats.CurrentHealthPoints).ToString();
+            sprBatch.DrawString(Game1.font, s, Position + new Vector2(-7, -35), Color.Red, 0, Vector2.Zero, 0.70f, SpriteEffects.None, 1);
             AnimationManager.Draw(sprBatch, Angle);
         }
 

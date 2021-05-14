@@ -32,13 +32,6 @@ namespace SpaceSaver
             Move();
             AnimationManager.Play(Animations["Move"]);
         }
-
-        public override void Draw(SpriteBatch sprBatch)
-        {
-            string s = _Minion_Stats.CurrentHealthPoints.ToString();
-            sprBatch.DrawString(Game1.font, s, Position+new Vector2(0,-30), Color.White, 0, Vector2.Zero, 0.40f, SpriteEffects.None, 1);
-            AnimationManager.Draw(sprBatch, Angle);
-        }
         
         protected override void CheckIfDead()
         {

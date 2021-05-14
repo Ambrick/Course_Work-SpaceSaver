@@ -67,16 +67,31 @@ namespace SpaceSaver
             spriteBatch.DrawString(Game1.font, Game1.player._Minion_Stats.Skill_lvl.ToString(), st_lvl_pos, Color.White);
 
             //Вывод здоровья
-            string s = Game1.player._Minion_Stats.CurrentHealthPoints.ToString()+"/"+ Game1.player._Minion_Stats.MaxHealthPoints.ToString();
-            spriteBatch.DrawString(Game1.font, s, hp_pos, Color.White, 0, Vector2.Zero, 0.56f,SpriteEffects.None,1);
+            spriteBatch.DrawString(Game1.font,
+                                  ((int)Game1.player._Minion_Stats.CurrentHealthPoints).ToString() + "/" + ((int)Game1.player._Minion_Stats.MaxHealthPoints).ToString(),
+                                   hp_pos,
+                                   Color.White,
+                                   0,
+                                   Vector2.Zero,
+                                   0.56f,
+                                   SpriteEffects.None,1);
 
             //Вывод информации об игровых ключах
-            s = Game1.player.key_count.ToString() + "/" + Game1.Map.keys_on_lvl;
-            spriteBatch.DrawString(Game1.font, s, key_pos, Color.White, 0, Vector2.Zero, 0.56f, SpriteEffects.None, 1);
+            spriteBatch.DrawString(Game1.font,
+                                   Game1.player.key_count.ToString() + "/" + Game1.Map.keys_on_lvl,
+                                   key_pos,
+                                   Color.White,
+                                   0,
+                                   Vector2.Zero,
+                                   0.56f,
+                                   SpriteEffects.None,
+                                   1);
 
             //Вывод уровня
-            Color col = Game1.player.level_system._skill_points > 0 ? Color.Yellow : Color.White;
-            spriteBatch.DrawString(Game1.font, "Ур." + Game1.player.level_system._current_lvl.ToString(), cur_lvl_pos, col);
+            spriteBatch.DrawString(Game1.font,
+                                   "Ур." + Game1.player.level_system._current_lvl.ToString(),
+                                   cur_lvl_pos,
+                                   Game1.player.level_system._skill_points > 0 ? Color.Yellow : Color.White);
         }
     }
 }
