@@ -72,7 +72,7 @@
     <Compile Include="Sprites\Skill_Param\Bullet_param.cs" />
     <Compile Include="Models\Animation.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
-    <Compile Include="Sprites\Skill_Param\Minion_Stats.cs" />
+    <Compile Include="Sprites\Skill_Param\Passive_Stats_Skill.cs" />
     <Compile Include="Sprites\Minion.cs" />
     <Compile Include="Sprites\Player.cs" />
     <Compile Include="Sprites\Basic_Component.cs" />

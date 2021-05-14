@@ -13,7 +13,7 @@ namespace SpaceSaver
             Dynamic_Component_Initialization(animations, position);
             Object_type = object_type;
             
-            _Minion_Stats = new Minion_Stats(lvl, 70);
+            _Minion_Stats = new Passive_Stats_Skill(lvl, 65);
            
             Get_path();
         }

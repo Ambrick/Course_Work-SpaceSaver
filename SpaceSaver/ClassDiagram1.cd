@@ -66,7 +66,7 @@
   <Class Name="SpaceSaver.Enemy">
     <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAIAAAgCAAAAAAAMAAAAAAAAAAAAABBAAAAQ=</HashCode>
+      <HashCode>AAAAAAQAAIAAAACAAAAAAAMAAAAAAAAAAAAABBAAAAQ=</HashCode>
       <FileName>Sprites\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -114,11 +114,11 @@
       <FileName>Sprites\Skill_Param\Bullet_param.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceSaver.Minion_Stats">
+  <Class Name="SpaceSaver.Passive_Stats_Skill">
     <Position X="18.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAEAAABAAQAAAAAAAAgAAAAAAAAAAAAAAAAE=</HashCode>
-      <FileName>Sprites\Skill_Param\Minion_Stats.cs</FileName>
+      <HashCode>AAAAAAAAAEAAABAAQAAAAAAAAgAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Sprites\Skill_Param\Passive_Stats_Skill.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceSaver.Sword_param">
@@ -131,7 +131,7 @@
   <Class Name="SpaceSaver.Bullet">
     <Position X="2.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEQAAAIAAAACAEAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEQAAAIAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Sprites\Skills\Bullet.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -152,7 +152,7 @@
   <Class Name="SpaceSaver.Explosion">
     <Position X="6.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAQAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Sprites\Explosion.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -166,7 +166,7 @@
   <Class Name="SpaceSaver.Player">
     <Position X="6.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAIAAEAAAABCAAAAAACUAAAgAAAAAAAAAgAAAQAQ=</HashCode>
+      <HashCode>IAAAAIAAEAAAAhCAAAAAACUAAAgAAAAAAAAAgAAAQAQ=</HashCode>
       <FileName>Sprites\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -229,7 +229,7 @@
   <Class Name="SpaceSaver.Sword">
     <Position X="0.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAQAAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Sprites\Skills\Sword.cs</FileName>
     </TypeIdentifier>
   </Class>

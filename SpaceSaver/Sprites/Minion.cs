@@ -9,7 +9,7 @@ namespace SpaceSaver
 
         public double _sword_timer = 0;
 
-        public Minion_Stats _Minion_Stats;
+        public Passive_Stats_Skill _Minion_Stats;
 
         public Minion(Dictionary<string, Animation> animations, Vector2 position) : base (animations, position) { }
 

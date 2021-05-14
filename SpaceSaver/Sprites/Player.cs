@@ -31,7 +31,7 @@ namespace SpaceSaver
 
             _Bullet_param = new Bullet_param(1, 30);
             _Sword_param = new Sword_param(1, 40, 1);
-            _Minion_Stats = new Minion_Stats(1, 100);
+            _Minion_Stats = new Passive_Stats_Skill(1, 70);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
             level_system = new Leveling_up(50, 100, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
