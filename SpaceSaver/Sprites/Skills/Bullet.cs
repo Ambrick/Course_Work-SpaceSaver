@@ -54,7 +54,7 @@ namespace SpaceSaver
             {
                 foreach (Sword sword in Game1.swords)
                 {
-                    if (Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi && sword.Object_type == "player_sword")
+                    if (sword.Object_type == "player_sword" && Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi)
                     {
                         IsDead = true;
                         Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "player_bullet", Game1.player.Angle));
