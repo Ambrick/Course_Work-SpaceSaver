@@ -10,6 +10,8 @@ namespace SpaceSaver
     {
         public Leveling_up level_system;
 
+        public int amount_of_keys_on_a_level { get; set; } = 0;
+
         private double click__timer = 0;
 
         public int key_count = 0;
@@ -161,7 +163,13 @@ namespace SpaceSaver
                         {
                             level_system.IfGetKey();
                             key_count++;
+                            if (key_count == amount_of_keys_on_a_level)
+                            {
+                                var pos = Game1.static_objects.Find(iterator => iterator.Object_type == "portal").Position;
+                                Game1.static_objects.Add(new Static_Component(Game1.textures["portal2"], pos, "portal2"));
+                            }
                             spr2.IsDead = true;
+                            return;
                         }
                         break;
                 }

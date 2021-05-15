@@ -38,7 +38,9 @@ namespace SpaceSaver
                 {
                     Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() {
                         { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position));
+                    Game1.sounds["explosion"].Play();
                     IsDead = true;
+                    return;
                 }
 
             //проверка на столкновение пули игрока с врагом

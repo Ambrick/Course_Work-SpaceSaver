@@ -33,6 +33,7 @@ namespace SpaceSaver
             Rectangle = new Rectangle(0, 0, Animations.First().Value.FrameWidth, Animations.First().Value.FrameHeight);
             Position = position;
         }
+
         public virtual void Update(GameTime gameTime) { }
 
         public virtual void Draw(SpriteBatch sprBatch)

@@ -20,7 +20,6 @@ namespace SpaceSaver
             {
                 Game1.sounds["enemy_shoot"].Play();
                 Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "enemy_bullet", Angle));
-
                 timer = Param.CoolDown;
             }
             return true;

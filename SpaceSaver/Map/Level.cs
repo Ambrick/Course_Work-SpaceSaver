@@ -43,6 +43,7 @@ namespace SpaceSaver
                 Game1.alow_next = true;
             }
         }
+        
 
         public void LoadLevel(int lvl)
         {
@@ -62,7 +63,7 @@ namespace SpaceSaver
                             Game1.static_objects.Add(new Static_Component(Game1.textures["wall"], Position, "wall"));
                             break;
                         case 2:
-                            Game1.static_objects.Add(new Static_Component(Game1.textures["player_point"], Position, "player_point"));
+                            Game1.static_objects.Add(new Static_Component(Game1.textures["portal"], Position, "portal"));
                             Game1.player.Position = Start_position = Position;
                             break;
                         case 3:
@@ -93,6 +94,8 @@ namespace SpaceSaver
                             break;
                     }
                 }
+
+                Game1.player.amount_of_keys_on_a_level = keys_on_lvl;
             }
         }
 
