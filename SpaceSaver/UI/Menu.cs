@@ -33,7 +33,7 @@ namespace SpaceSaver
                         menu = menu - 1 < 0 ? 2 : menu - 1;
                         break;
                     case Keys.Enter:
-                        Game1.game_state = menu == 0 ? "name" :
+                        Game1.game_state = menu == 0 ? "name_input" :
                                            menu == 1 ? "scoreList" :
                                            menu == 2 ? "end" : Game1.game_state;
                         Game1.alow_next = true;

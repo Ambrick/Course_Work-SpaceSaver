@@ -8,8 +8,6 @@ namespace SpaceSaver
     {
         private Vector2 Direction;
 
-        public bool Debuff = false;
-
         public Bullet_param Param;
 
         private Vector2 initial_pos;

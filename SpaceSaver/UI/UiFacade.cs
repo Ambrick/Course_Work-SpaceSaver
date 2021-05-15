@@ -11,7 +11,7 @@ namespace SpaceSaver
         ComponentsManager ComponentManagerC;
         ResultBoard ResultBoardC;
 
-        private Texture2D menu => Game1.textures["menu"];
+        private Texture2D menu_txtr => Game1.textures["menu"];
 
         public UiFacade(Menu menuC, Nick_input nickInputC, ScoreManager scoreManagerC, ComponentsManager componentManagerC, ResultBoard resultBoardC)
         {
@@ -28,7 +28,7 @@ namespace SpaceSaver
         }
         private void DrawMenuImg(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(menu, new Vector2(Game1.ScreenWidth / 2 - menu.Width / 2, Game1.ScreenHeight / 2 - menu.Height / 2 + 75), Color.White);
+            spriteBatch.Draw(menu_txtr, new Vector2(Game1.ScreenWidth / 2 - menu_txtr.Width / 2, Game1.ScreenHeight / 2 - menu_txtr.Height / 2 + 75), Color.White);
         }
         public void DrawMenu(SpriteBatch spriteBatch)
         {
@@ -95,7 +95,7 @@ namespace SpaceSaver
         //----------Other-----------------------------------------
         public void AddFinalScores()
         {
-            ScoreManagerC.Add(new Score() { PlayerName = NickInputC.UserInputName, Value = Game1.score });
+            ScoreManagerC.Add(new Score(){ PlayerName = NickInputC.UserInputName, Value = Game1.score });
         }
         public void ResetScores()
         {

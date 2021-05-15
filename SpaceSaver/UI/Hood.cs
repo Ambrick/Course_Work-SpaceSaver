@@ -7,7 +7,7 @@ namespace SpaceSaver
     {
         private Texture2D Hood_texture, Bullet_icon, Sword_icon, Stats_icon;
 
-        private Vector2 Hood_pos, b_icon_pos, sw_icon_pos, st_icon_pos, b_lvl_pos, sw_lvl_pos, st_lvl_pos, cur_lvl_pos, hp_pos, key_pos;
+        private Vector2 Hood_pos, b_icon_pos, sw_icon_pos, st_icon_pos, b_lvl_pos, sw_lvl_pos, st_lvl_pos;
 
         public Hood()
         {
@@ -21,16 +21,12 @@ namespace SpaceSaver
             Hood_pos = new Vector2(Game1.ScreenWidth / 2 - Hood_texture.Width / 2, Game1.ScreenHeight - Hood_texture.Height - 50);
             //Задаем значения для позиций иконок в UI
             b_icon_pos = Hood_pos + new Vector2(38,5);
-            sw_icon_pos = b_icon_pos+ icon_shift;
+            sw_icon_pos = b_icon_pos + icon_shift;
             st_icon_pos = sw_icon_pos + icon_shift;
             //Задаем значения для позиций отрисовки значения уровней в UI
             b_lvl_pos = Hood_pos + new Vector2(106, 39);
             sw_lvl_pos = b_lvl_pos + icon_shift;
             st_lvl_pos = sw_lvl_pos + icon_shift;
-            //Задаем значения для отрисовки побочных значений в UI
-            hp_pos = Hood_pos+ new Vector2(465, 40);
-            key_pos = Hood_pos + new Vector2(578, 40);
-            cur_lvl_pos = Hood_pos + new Vector2(343, 35);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -42,7 +38,7 @@ namespace SpaceSaver
             if (Game1.player._bullet_timer > 0)
             {
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, Color.Orchid);
-                spriteBatch.DrawString(Game1.font, ((int)(Game1.player._bullet_timer / 0.1)).ToString(), b_icon_pos+new Vector2(21, 15), Color.White);
+                spriteBatch.DrawString(Game1.font, ((int)(Game1.player._bullet_timer / 0.1)).ToString(), b_icon_pos + new Vector2(21, 15), Color.White);
             }
             else if (Game1.player.Buffed)
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, new Color(30, 50, 255));
@@ -69,7 +65,7 @@ namespace SpaceSaver
             //Вывод здоровья
             spriteBatch.DrawString(Game1.font,
                                   ((int)Game1.player._Minion_Stats.CurrentHealthPoints).ToString() + "/" + ((int)Game1.player._Minion_Stats.MaxHealthPoints).ToString(),
-                                   hp_pos,
+                                   Hood_pos + new Vector2(465, 40),
                                    Color.White,
                                    0,
                                    Vector2.Zero,
@@ -79,7 +75,7 @@ namespace SpaceSaver
             //Вывод информации об игровых ключах
             spriteBatch.DrawString(Game1.font,
                                    Game1.player.key_count.ToString() + "/" + Game1.Map.keys_on_lvl,
-                                   key_pos,
+                                   Hood_pos + new Vector2(578, 40),
                                    Color.White,
                                    0,
                                    Vector2.Zero,
@@ -90,7 +86,7 @@ namespace SpaceSaver
             //Вывод уровня
             spriteBatch.DrawString(Game1.font,
                                    "Ур." + Game1.player.level_system._current_lvl.ToString(),
-                                   cur_lvl_pos,
+                                   Hood_pos + new Vector2(343, 35),
                                    Game1.player.level_system._skill_points > 0 ? Color.Yellow : Color.White);
         }
     }

@@ -149,7 +149,7 @@ namespace SpaceSaver
                 case "menu":
                     Facade.UpdateMenu(gameTime);
                     break;
-                case "name":
+                case "name_input":
                     Facade.UpdateNickInput(gameTime);
                     break;
                 case "scoreList":
@@ -172,7 +172,7 @@ namespace SpaceSaver
                 case "menu":
                     Facade.DrawMenu(spriteBatch);
                     break;
-                case "name":
+                case "name_input":
                     Facade.DrawNickInput(spriteBatch);
                     break;
                 case "scoreList":
