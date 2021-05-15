@@ -57,7 +57,7 @@ namespace SpaceSaver
                     if (Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi && sword.Object_type == "player_sword")
                     {
                         IsDead = true;
-                        Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Game1.player.Position, "player_bullet", Game1.player.Angle));
+                        Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "player_bullet", Game1.player.Angle));
                         return;
                     }
                 }

@@ -6,7 +6,7 @@ namespace SpaceSaver
 {
     public class Menu
     {
-        private double timer = 0; //задержка от залипания
+        private double click__timer = 0; //задержка от залипания
 
         private int menu = 0; //состояние меню
 
@@ -19,29 +19,29 @@ namespace SpaceSaver
 
         public void Update(GameTime gameTime)
         {
-            timer -= timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
+            click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
             var keys_array = Keyboard.GetState().GetPressedKeys();
-            if (keys_array.Length != 0 && timer <= 0 )
+            if (keys_array.Length == 0 || click__timer > 0)
+                return;
+
+            switch (keys_array.GetValue(0))
             {
-                switch (keys_array.GetValue(0))
-                {
-                    case Keys.Down:
-                        menu = menu + 1 > 2 ? 0 : menu + 1;
-                        break;
-                    case Keys.Up:
-                        menu = menu - 1 < 0 ? 2 : menu - 1;
-                        break;
-                    case Keys.Enter:
-                        Game1.game_state = menu == 0 ? "name_input" :
-                                           menu == 1 ? "scoreList" :
-                                           menu == 2 ? "end" : Game1.game_state;
-                        Game1.alow_next = true;
-                        break;
-                }
-                Game1.sounds["gong"].Play(); ;
-                timer = 0.13;
+                case Keys.Down:
+                    menu = menu + 1 > 2 ? 0 : menu + 1;
+                    break;
+                case Keys.Up:
+                    menu = menu - 1 < 0 ? 2 : menu - 1;
+                    break;
+                case Keys.Enter:
+                    Game1.game_state = menu == 0 ? "name_input" :
+                                       menu == 1 ? "scoreList" :
+                                       menu == 2 ? "end" : Game1.game_state;
+                    Game1.alow_next = true;
+                    break;
             }
+            Game1.sounds["gong"].Play();
+            click__timer = 0.13;
         }
     }
 }

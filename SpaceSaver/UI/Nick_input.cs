@@ -22,28 +22,27 @@ namespace SpaceSaver
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
             var keys_array = Keyboard.GetState().GetPressedKeys();
-            if (keys_array.Length != 0 && click__timer <= 0)
+            if (keys_array.Length == 0 || click__timer > 0)
+                return;
+            
+            if (UserInputName.Length > 13 || (keys_array[0] == Keys.Enter && UserInputName.Length > 0))
             {
-                Keys first_key = keys_array[0];
-                if (UserInputName.Length > 13 || (first_key == Keys.Enter && UserInputName.Length > 0))
-                {
-                    Game1.game_state = "lvl1";
-                    Game1.alow_next = true;
-                }
-                else if (first_key == Keys.Escape)
-                {
-                    UserInputName = "";
-                    Game1.game_state = "menu";
-                    Game1.alow_next = true;
-                }
-                else if (first_key == Keys.Back)
-                    UserInputName = UserInputName.Remove(UserInputName.Length - 1);
-                else
-                    UserInputName += GetLetter(first_key);
-
-                Game1.sounds["gong"].Play();
-                click__timer = 0.13;
+                Game1.game_state = "lvl1";
+                Game1.alow_next = true;
             }
+            else if (keys_array[0] == Keys.Escape)
+            {
+                UserInputName = "";
+                Game1.game_state = "menu";
+                Game1.alow_next = true;
+            }
+            else if (keys_array[0] == Keys.Back)
+                UserInputName = UserInputName.Remove(UserInputName.Length - 1);
+            else
+                UserInputName += GetLetter(keys_array[0]);
+
+            Game1.sounds["gong"].Play();
+            click__timer = 0.13;
         }
 
         private string GetLetter(Keys key)
@@ -81,7 +80,7 @@ namespace SpaceSaver
             { Keys.OemComma, "Б" },
             { Keys.OemPeriod, "Ю" },
             { Keys.OemQuestion, "." },
-            { Keys.Space, " " },};
+            { Keys.Space, " " }};
             
             string value = "*";
             alphabetEquivalents.TryGetValue(key, out value);

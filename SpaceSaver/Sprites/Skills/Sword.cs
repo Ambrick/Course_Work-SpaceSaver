@@ -22,7 +22,7 @@ namespace SpaceSaver
             Object_type = object_type;
             Angle = angle;
             Param = param;
-            damage =Param.Damage;
+            damage = Param.Damage;
             Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
             Position = position + Direction * 25f;
         }

@@ -69,13 +69,12 @@ namespace SpaceSaver
             if (mouseSt.LeftButton == ButtonState.Pressed && _bullet_timer <= 0)
             {
                 Game1.sounds["player_shoot"].Play();
+                Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 if (Buffed)
                 {
-                    float angle = (float)Math.Atan(30);
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.8f));
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.2f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.85f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.15f));
                 }
-                Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
                 _bullet_timer = _Bullet_param.CoolDown;
             }
             if (mouseSt.RightButton == ButtonState.Pressed && _sword_timer <= 0)
