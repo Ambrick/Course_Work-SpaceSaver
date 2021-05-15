@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace SpaceSaver
 {
@@ -20,7 +21,7 @@ namespace SpaceSaver
             Angle = angle;
 
             Param = param;
-            Direction = new Vector2((float) Math.Cos(Angle), (float) Math.Sin(Angle));
+            Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
             initial_pos = Position = position + Direction * 25f;
             Velocity = Direction * Param.MoveSpeed;
             
@@ -34,18 +35,24 @@ namespace SpaceSaver
             //проверка на столкновение со стеной
             foreach (Static_Component spr2 in Game1.static_objects)
                 if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
+                {
+                    Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() {
+                        { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position));
                     IsDead = true;
+                }
 
             //проверка на столкновение пули игрока с врагом
             if (Object_type == "player_bullet")
             {
                 foreach (Enemy enemy in Game1.enemies)
                 {
-                    if (enemy.Object_type == "enemy_range" && Collision_manager.CheckCollision(this, enemy))
+                    if (Collision_manager.CheckCollision(this, enemy))
                     {
-                        Game1.sounds["enemy_roar1"].Play();
                         enemy.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
+                        if (enemy.Object_type == "enemy_melee")
+                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "enemy_bullet", Game1.player.Angle + (float)Math.Atan(90) * 2));
                         IsDead = true;
+                        return;
                     }
                 }
             }
@@ -56,8 +63,8 @@ namespace SpaceSaver
                 {
                     if (sword.Object_type == "player_sword" && Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi)
                     {
-                        IsDead = true;
                         Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "player_bullet", Game1.player.Angle));
+                        IsDead = true;
                         return;
                     }
                 }
@@ -66,6 +73,7 @@ namespace SpaceSaver
                     Game1.sounds["player_get_hit"].Play();
                     Game1.player.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
                     IsDead = true;
+                    return;
                 }
             };
             //--------------------------------

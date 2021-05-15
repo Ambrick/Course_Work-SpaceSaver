@@ -175,6 +175,7 @@ namespace SpaceSaver
 
         protected override void CheckIfDead()
         {
+            Game1.sounds["player_get_hit"].Play();
             IsDead = _Minion_Stats.CurrentHealthPoints < 0 ? true: false;
         }
     }

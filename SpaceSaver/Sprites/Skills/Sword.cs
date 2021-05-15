@@ -14,6 +14,8 @@ namespace SpaceSaver
 
         float damage;
 
+        bool active = true;
+
         public Sword(Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
         {
             Texture = texture;
@@ -31,6 +33,9 @@ namespace SpaceSaver
         {
             IsDead = (Timer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= Param.Duration ? true : false;
 
+            if (!active)
+                return;
+
             //проверка на столкновение удара игрока
             if (Object_type == "player_sword")
             {
@@ -38,25 +43,17 @@ namespace SpaceSaver
                 {
                     if (Properties.Intersects(enemy.Properties))
                     {
+                        active = false;
                         enemy.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
-                        if (damage != 0)
-                        {
-                            Game1.sounds["enemy_roar1"].Play();
-                        }
-                        damage = 0;
                         return;
                     }
-
                 }
             }
             else if (Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
             {
+                active = false;
                 Game1.player.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
-                if (damage != 0)
-                {
-                    Game1.sounds["player_get_hit"].Play();
-                }
-                damage = 0;
+                return;
             }
         }
     }

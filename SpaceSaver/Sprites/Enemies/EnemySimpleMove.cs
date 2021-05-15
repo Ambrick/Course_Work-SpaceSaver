@@ -47,7 +47,7 @@ namespace SpaceSaver
                 Velo = new Vector2(_Minion_Stats.MoveSpeed, 0);
                 if (Position.X > key_points[State].X)
                 {
-                    Angle = Angl90 * 2;
+                    Angle = Angl80 * 2;
                     State = 0;
                 }
             }
