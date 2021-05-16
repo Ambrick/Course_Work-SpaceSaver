@@ -28,11 +28,12 @@
       <FileName>Managers\ComponentsManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceSaver.LoadManager">
+  <Class Name="SpaceSaver.LevelContent">
     <Position X="14.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAAQ=</HashCode>
-      <FileName>Managers\ContentManager.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABAAAA=</HashCode>
+      <FileName>Managers\LevelContent.cs</FileName>
+      <NewMemberFileName>Managers\ContentManager.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceSaver.Leveling_up">
@@ -45,7 +46,7 @@
   <Class Name="SpaceSaver.Level">
     <Position X="26.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAA4AABAAAAAAAAQAAAAEAIAAAAAACAEAAAAAAAA=</HashCode>
+      <HashCode>AAQAAA4AABAAQAAAAAQAAAAAABAAAAAACAEAAAAAAAA=</HashCode>
       <FileName>Map\Level.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,29 +67,23 @@
   <Class Name="SpaceSaver.Enemy">
     <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAIAAAACAAAAAAAMAAAAAAAAAAAAABBAAAAQ=</HashCode>
+      <HashCode>AgAAAAAAAAAAAgAAAAAgAAEAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Sprites\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceSaver.EnemyComplexMove">
+  <Class Name="SpaceSaver.EnemySquareMove">
     <Position X="2.75" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\EnemyComplexMove.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Sprites\Enemies\MovingStategy\EnemySquareMove.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="SpaceSaver.EnemySimpleMove">
-    <Position X="4.75" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\EnemySimpleMove.cs</FileName>
-    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SpaceSaver.MeleeStrategy">
     <Position X="28.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\MeleeStrategy.cs</FileName>
+      <FileName>Sprites\Enemies\AtackStategy\MeleeStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -96,15 +91,16 @@
     <Position X="32.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\RangeStrategy.cs</FileName>
+      <FileName>Sprites\Enemies\AtackStategy\RangeStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SpaceSaver.CommonForSkills">
+  <Class Name="SpaceSaver.CommonForMove">
     <Position X="30.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAgAAAAgAAAAAAAAAAAAAAAABAIAAAA=</HashCode>
-      <FileName>Sprites\Enemies\Strategy.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAQAIAAAAAAAAAAAAABACAABA=</HashCode>
+      <FileName>Sprites\Enemies\MovingStategy\MoveStrategy.cs</FileName>
+      <NewMemberFileName>Sprites\Enemies\AtackStategy\AtackStrategy.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceSaver.Bullet_param">
@@ -131,7 +127,7 @@
   <Class Name="SpaceSaver.Bullet">
     <Position X="2.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEQAAAIAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAIAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Sprites\Skills\Bullet.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -166,7 +162,7 @@
   <Class Name="SpaceSaver.Player">
     <Position X="6.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAIAAEAAAAhCAAAAAACUAAAgAAAAAAAAAgAAAQAQ=</HashCode>
+      <HashCode>IAAAAIAAEAAAAhCAAAAAACUAAAgAAAAAAAAAoAAAQAQ=</HashCode>
       <FileName>Sprites\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -180,14 +176,14 @@
   <Class Name="SpaceSaver.Hood">
     <Position X="18.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAQAAAAAgAAAAiCAAIAAAACAAAQBARQBAAABAA=</HashCode>
+      <HashCode>AAAQAAAQAAAAAgAAAAiCAAIAAAAAAAAQBABQBAAAAAA=</HashCode>
       <FileName>UI\Hood.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceSaver.Menu">
     <Position X="14.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>UI\Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -215,29 +211,30 @@
   <Class Name="SpaceSaver.UiFacade">
     <Position X="22.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAIAhgAACAAACkACAAgIAgAAAEAABAQAAgAIAACAAA=</HashCode>
+      <HashCode>EAAIAhgAACAAACkACAAgMAAAAAEAABAQAAgAIAACAAA=</HashCode>
       <FileName>UI\UiFacade.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SpaceSaver.Game1">
-    <Position X="13" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAcAAEAAANAAAwQAAAAMABAAAADEAAgBBAEAAAAAAAQ=</HashCode>
-      <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceSaver.Sword">
     <Position X="0.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAQAAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAIAAEAAA=</HashCode>
       <FileName>Sprites\Skills\Sword.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="SpaceSaver.IStrategy">
+  <Class Name="SpaceSaver.Game1">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACcAAEAAANBAAwQAAAAMABAAAADEAAgBBAEAAAAAAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SpaceSaver.IMoveStrategy">
     <Position X="30.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\Strategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Sprites\Enemies\MovingStategy\MoveStrategy.cs</FileName>
+      <NewMemberFileName>Sprites\Enemies\AtackStategy\AtackStrategy.cs</NewMemberFileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

@@ -12,17 +12,21 @@ namespace SpaceSaver
         private static Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
         {
             return new Dictionary<string, Texture2D> {
-                {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
+                //Enemy animations
+                {"enemy_idle", Content.Load<Texture2D>("Sprites/Monster_idle") },
                 {"enemy_run", Content.Load<Texture2D>("Sprites/Monster_run") },
                 {"enemy_shoot", Content.Load<Texture2D>("Sprites/Monster_shoot") },
                 {"enemy_slice", Content.Load<Texture2D>("Sprites/Monster_hit") },
+                //Enemy additional sprites
+                {"enemy_sword", Content.Load<Texture2D>("Sprites/Monster_slice") },
+                {"enemy_bullet", Content.Load<Texture2D>("Sprites/Enemy_bullet") },
+                {"enemy_shield", Content.Load<Texture2D>("Sprites/Shield_enemy") },
+
+                {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
+                {"player_bullet", Content.Load<Texture2D>("Sprites/Player_bullet") },
+                {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
                 {"wall", Content.Load<Texture2D>("Sprites/Wall2") },
                 {"floor", Content.Load<Texture2D>("Sprites/Floor2") },
-                {"player_bullet", Content.Load<Texture2D>("Sprites/Player_bullet") },
-                {"enemy_bullet", Content.Load<Texture2D>("Sprites/Enemy_bullet") },
-                {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
-                {"enemy_sword", Content.Load<Texture2D>("Sprites/Monster_slice") },
-                {"enemy_shield", Content.Load<Texture2D>("Sprites/Shield_enemy") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
                 {"buff", Content.Load<Texture2D>("Sprites/Buff") },
                 {"key", Content.Load<Texture2D>("Sprites/Key_Big") },

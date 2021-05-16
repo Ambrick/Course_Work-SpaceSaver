@@ -48,6 +48,7 @@ namespace SpaceSaver
                         return;
                     }
                 }
+                return;
             }
             else if (Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
             {

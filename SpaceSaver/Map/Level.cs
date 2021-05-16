@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
 namespace SpaceSaver
@@ -9,7 +10,7 @@ namespace SpaceSaver
 
         private int[,] LVL;
 
-        private const int cell_size = 64;
+        private int cell_size = 64;
 
         public int keys_on_lvl;
 
@@ -19,35 +20,19 @@ namespace SpaceSaver
 
         private Rectangle Start_position_Rect => new Rectangle((int)Start_position.X, (int)Start_position.Y, cell_size, cell_size);
 
-        public Level(int lvl, int[,] level_matrix)
-        {
-            LVL = level_matrix;
-            LoadLevel(lvl);
-        }
+        private bool isEnd = false;
 
-        public void Update(GameTime gameTime)
-        {   
-            //Если игрок вошел в стартовую позицию со всеми ключами
-            if (Game1.player.key_count >= keys_on_lvl && Game1.player.Properties.Intersects(Start_position_Rect)) 
-            {
-                //Если это последний уровень
-                Game1.sounds["win"].Play();
-                Game1.game_state = Map_lvl == 3 ? "result" : "lvl" + (Map_lvl + 1);
-                Game1.alow_next = true;
-            }
-            //Если игрок умер
-            else if (Game1.player.IsDead)
-            {
-                Game1.sounds["lose"].Play();
-                Game1.game_state = "result";
-                Game1.alow_next = true;
-            }
-        }
-        
+        private bool win = false;
 
-        public void LoadLevel(int lvl)
+        public Level(int Map_lvl, int cell_size)
         {
-            Map_lvl = lvl;
+            LevelContent level_content = new LevelContent();
+            this.Map_lvl = Map_lvl;
+            this.cell_size = cell_size;
+            LVL = level_content.LevelMap(Map_lvl);
+            var enemyList = level_content.GetEnemyList(this.Map_lvl, this.cell_size);
+
+            MediaPlayer.Play(Game1.songs["lvl" + Map_lvl.ToString()]);
             for (int i = 0; i < LVL.GetLongLength(0); i++)
             {
                 for (int j = 0; j < LVL.GetLongLength(1); j++)
@@ -69,19 +54,12 @@ namespace SpaceSaver
                         case 3:
                             {
                                 keys_on_lvl++;
-                                Game1.enemies.Add(new EnemyComplexMove(new Dictionary<string, Animation>() {
-                                 { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
-                                 { "Action", new Animation(Game1.textures["enemy_slice"], 5, 0.1f) } }, Position, "enemy_melee", Map_lvl, new MeleeStrategy(new Sword_param(lvl, 20, 0.7f))));
+                                var a = enemyList[0];
+                                a.Get_path(Position);
+                                Game1.enemies.Add(a);
+                                enemyList.RemoveAt(0);
                             }
                             break;
-                        case 4:
-                            {
-                                keys_on_lvl++;
-                                Game1.enemies.Add(new EnemySimpleMove(new Dictionary<string, Animation>() {
-                                    { "Move", new Animation(Game1.textures["enemy_run"], 8, 0.2f) },
-                                    { "Action", new Animation(Game1.textures["enemy_shoot"], 2, 0.3f) } }, Position, "enemy_range", Map_lvl, new RangeStrategy(new Bullet_param(lvl, 27))));
-                            break;
-                            }
                         case 6:
                             keys_on_lvl++;
                             Game1.static_objects.Add(new Static_Component(Game1.textures["key"], Position, "key"));
@@ -94,12 +72,33 @@ namespace SpaceSaver
                             break;
                     }
                 }
-
                 Game1.player.amount_of_keys_on_a_level = keys_on_lvl;
             }
         }
 
-        public static void UnloadLvl(bool Win)
+        public void Update(GameTime gameTime)
+        {   
+            //Если игрок вошел в стартовую позицию со всеми ключами
+            if (Game1.player.key_count >= keys_on_lvl && Game1.player.Properties.Intersects(Start_position_Rect)) 
+            {
+                //Если это последний уровень
+                Game1.sounds["win"].Play();
+                Game1.game_state = Map_lvl == 3 ? "result" : "lvl" + (Map_lvl + 1);
+                Game1.alow_next = true;
+                win = true;
+                isEnd = true;
+            }
+            //Если игрок умер
+            else if (Game1.player.IsDead)
+            {
+                Game1.sounds["lose"].Play();
+                Game1.game_state = "result";
+                Game1.alow_next = true;
+                isEnd = true;
+            }
+        }
+        
+        ~Level()
         {
             //Обнуление карты
             Game1.static_objects.Clear();
@@ -107,12 +106,15 @@ namespace SpaceSaver
             Game1.bullets.Clear();
             Game1.explosions.Clear();
             Game1.enemies.Clear();
-            Game1.Map = null;
+
+            if (isEnd)
             //Если достигнута "победа" на уровне, то обнуление игровых "ключей", если "поражение" - обнуляем "Игрока"
-            if (Win)
-                Game1.player.key_count = 0;
-            else
-                Game1.player = null;
+            {
+                if (win)
+                    Game1.player.key_count = 0;
+                else
+                    Game1.player = null;
+            }
         }
     }
 }

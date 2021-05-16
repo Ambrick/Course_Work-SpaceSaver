@@ -129,11 +129,11 @@ namespace SpaceSaver
 
         public void PlayerInteraction()
         {
-            foreach (Enemy enemy in Game1.enemies)
-            {
+            Game1.enemies.ForEach(enemy => {
                 Velocity.X = Collision_manager.Collision_X(this, enemy) ? 0 : Velocity.X;
                 Velocity.Y = Collision_manager.Collision_Y(this, enemy) ? 0 : Velocity.Y;
-            }
+            });
+
             foreach (Static_Component spr2 in Game1.static_objects)
             {
                 switch (spr2.Object_type)

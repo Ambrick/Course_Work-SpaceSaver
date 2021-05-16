@@ -5,40 +5,71 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceSaver
 {
-    public abstract class Enemy : Minion
+    public class Enemy : Minion
     {
-        protected IStrategy Strategy;
+        protected IAtackStrategy AtackStrategy;
 
-        protected float Angl80 => (float) Math.Atan(90);
+        protected IMoveStrategy MoveStrategy;
 
-        protected List<Vector2> key_points = new List<Vector2> { };
+        public Enemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl,
+            IAtackStrategy atack_strategy, IMoveStrategy move_strategy): base(animations, position)
+        {
+            Dynamic_Component_Initialization(animations, position);
+            Position = position;
+            Object_type = object_type;
+            _Minion_Stats = new Passive_Stats_Skill(lvl, 65);
 
-        protected int State = 0;
+            AtackStrategy = atack_strategy;
+            MoveStrategy = move_strategy;
+        }
 
-        public Enemy(Dictionary<string, Animation> animations, Vector2 position, string object_type, int lvl, IStrategy strategy) : base(animations, position) { }
+        public void Get_path(Vector2 position)
+        {
+            Position = position;
+            MoveStrategy.Get_path(position);
+        }
 
-        protected virtual void Get_path() { }
-
-        protected virtual void Move() { }
+        public override void Draw(SpriteBatch sprBatch)
+        {
+            if (Object_type == "enemy_shielded")
+            {
+                sprBatch.Draw(Game1.textures["enemy_shield"],
+                    new Vector2(Position.X - Game1.textures["enemy_shield"].Width / 2, Position.Y - Game1.textures["enemy_shield"].Height / 2), Color.White);
+            }
+            
+            sprBatch.DrawString(Game1.font,
+                                ((int)_Minion_Stats.CurrentHealthPoints).ToString(),
+                                Position + new Vector2(-7, -35),
+                                Color.Red,
+                                0,
+                                Vector2.Zero,
+                                0.70f,
+                                SpriteEffects.None,
+                                1);
+            AnimationManager.Draw(sprBatch, Angle);
+        }
 
         protected override void Action(GameTime gameTime)
         {
-            if (Strategy.Skill(gameTime, Position, ref angle))
+            if (AtackStrategy.Skill(gameTime, Position, ref angle))
             {
                 AnimationManager.Play(Animations["Action"]);
                 return;
             }
 
-            Move();
-            AnimationManager.Play(Animations["Move"]);
+            if (!MoveStrategy.ifIdle && MoveStrategy.MoveOrOnHold(gameTime, Position, ref angle, ref Velocity, _Minion_Stats.MoveSpeed) != "On_hold")
+                AnimationManager.Play(Animations["Move"]);
+            else
+                AnimationManager.Play(Animations["On_hold"]);
         }
         
         protected override void CheckIfDead()
         {
-            if (new Random().Next(1) > 0)
-                Game1.sounds["enemy_roar2"].Play();
-            else
+            //Добавить остальные звуки рычания
+            if (new Random().Next(2) > 1)
                 Game1.sounds["enemy_roar1"].Play();
+            else
+                Game1.sounds["enemy_roar2"].Play();
 
             if (_Minion_Stats.CurrentHealthPoints > 0) return;
 

@@ -24,14 +24,12 @@ namespace SpaceSaver
             Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
             initial_pos = Position = position + Direction * 25f;
             Velocity = Direction * Param.MoveSpeed;
-            
         }
 
         public void Update(GameTime gameTime)
         {
             IsDead = Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range ? true : false;
 
-            //--------------------------------
             //проверка на столкновение со стеной
             foreach (Static_Component spr2 in Game1.static_objects)
                 if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
@@ -51,9 +49,16 @@ namespace SpaceSaver
                     if (Collision_manager.CheckCollision(this, enemy))
                     {
                         enemy.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
-                        if (enemy.Object_type == "enemy_melee")
-                            Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "enemy_bullet", Game1.player.Angle + (float)Math.Atan(90) * 2));
                         IsDead = true;
+                        if (enemy.Object_type == "enemy_shielded")
+                        {
+                            initial_pos = Position;
+                            Angle += (float)Math.Atan(90) * 2;
+                            Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
+                            Velocity = Direction * Param.MoveSpeed;
+                            Object_type = "enemy_bullet";
+                            IsDead = false;
+                        }
                         return;
                     }
                 }
