@@ -9,7 +9,7 @@ namespace SpaceSaver
 
         private float _timer;
 
-        public Vector2 Position { get; set; }
+        public Vector2 Position { get; set; } = Vector2.Zero;
 
         public AnimationManager(Animation animation)
         {

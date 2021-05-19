@@ -1,19 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace SpaceSaver
 {
-    public class Minion : Dynamic_Component
+    public class Minion : AnimatedComponent
     {
-        public double _bullet_timer = 0;
-
-        public double _sword_timer = 0;
+        protected Dictionary<string, Animation> Animations;
 
         public Passive_Stats_Skill _Minion_Stats;
 
-        public Minion(Dictionary<string, Animation> animations, Vector2 position) : base (animations, position) { }
+        public Minion(Dictionary<string, Animation> animations) : base (animations) { }
 
-        protected virtual void SkillsTimerUpdate(GameTime gameTime) {  }
+        protected void Dynamic_Component_Initialization(Dictionary<string, Animation> animations)
+        {
+            //Передаем список полученный анимаций в анимации
+            Animations = animations;
+            //Выставляем первую анимацию
+            AnimationManager = new AnimationManager(Animations.First().Value);
+            //Выставляем значения для позиции и описываемого прямоуголника
+            Rectangle = new Rectangle(0, 0, Animations.First().Value.FrameWidth, Animations.First().Value.FrameHeight);
+        }
 
         protected virtual void Action(GameTime gameTime) { }
         
@@ -21,7 +29,7 @@ namespace SpaceSaver
         {
             Action(gameTime);
             Position += Velocity;
-            Velocity = Vector2.Zero;
+            Velo = Vector2.Zero;
 
             AnimationManager.Update(gameTime);
         }
@@ -31,11 +39,13 @@ namespace SpaceSaver
             _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
 
             if (type == "bullet_damage_was_dealt")
-                Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() { { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, pos));
+                Game1.shortLifeAnimatedComponents.Add(new ShortLifeAnimatedComponents(new Animation(Game1.textures["explosion"], 6, 0.15f), pos));
+            else
+                Game1.static_objects.Add(new StaticComponent(Game1.textures["blood_part"], Position, "blood_part", Angle + (float)Math.Atan(90) * 2));
 
             CheckIfDead();
         }
 
-        protected virtual void CheckIfDead() {    }
+        protected virtual void CheckIfDead() { }
     }
 }

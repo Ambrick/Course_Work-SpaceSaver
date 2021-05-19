@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SpaceSaver
 {
-    public class Bullet : Static_Component
+    public class Bullet : StaticComponent 
     {
         private Vector2 Direction;
 
@@ -26,16 +26,15 @@ namespace SpaceSaver
             Velocity = Direction * Param.MoveSpeed;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             IsDead = Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range ? true : false;
 
             //проверка на столкновение со стеной
-            foreach (Static_Component spr2 in Game1.static_objects)
+            foreach (StaticComponent spr2 in Game1.static_objects)
                 if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
                 {
-                    Game1.explosions.Add(new Explosion(new Dictionary<string, Animation>() {
-                        { "Action", new Animation(Game1.textures["explosion"], 6, 0.15f) }, }, Position));
+                    Game1.shortLifeAnimatedComponents.Add(new ShortLifeAnimatedComponents(new Animation(Game1.textures["explosion"], 6, 0.15f), Position));
                     Game1.sounds["explosion"].Play();
                     IsDead = true;
                     return;
@@ -53,7 +52,7 @@ namespace SpaceSaver
                         if (enemy.Object_type == "enemy_shielded")
                         {
                             initial_pos = Position;
-                            Angle += (float)Math.Atan(90) * 2;
+                            Angle += (float) Math.Atan(50 + new Random().Next(0, 80)) * 2;
                             Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
                             Velocity = Direction * Param.MoveSpeed;
                             Object_type = "enemy_bullet";

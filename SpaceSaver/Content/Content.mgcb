@@ -56,185 +56,125 @@
 /processorParam:TextureFormat=Compressed
 /build:rus_text.spritefont
 
-#begin Sounds/Blip1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip1.mp3
-
-#begin Sounds/Blip2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip2.mp3
-
-#begin Sounds/Blip3.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip3.mp3
-
-#begin Sounds/Blip4.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip4.mp3
-
-#begin Sounds/Blip5.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip5.mp3
-
-#begin Sounds/Blip6.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip6.mp3
-
-#begin Sounds/Blip7.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Blip7.mp3
-
-#begin Sounds/Enemy_shoot.wav
+#begin Sounds/Fight/Enemy_shoot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Enemy_shoot.wav
+/build:Sounds/Fight/Enemy_shoot.wav
 
-#begin Sounds/Explosion.wav
+#begin Sounds/Fight/Explosion.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Explosion.wav
+/build:Sounds/Fight/Explosion.wav
 
-#begin Sounds/FinalWords.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/FinalWords.mp3
-
-#begin Sounds/GameOver1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/GameOver1.mp3
-
-#begin Sounds/GameOver2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/GameOver2.mp3
-
-#begin Sounds/GameOver3.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/GameOver3.mp3
-
-#begin Sounds/GameOver4.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/GameOver4.mp3
-
-#begin Sounds/Gong.wav
+#begin Sounds/Fight/Melee_hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Gong.wav
+/build:Sounds/Fight/Melee_hit.wav
 
-#begin Sounds/Heal.wav
+#begin Sounds/Fight/Monster_roar1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Heal.wav
+/build:Sounds/Fight/Monster_roar1.wav
 
-#begin Sounds/Lose.wav
+#begin Sounds/Fight/Monster_roar2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Lose.wav
+/build:Sounds/Fight/Monster_roar2.wav
 
-#begin Sounds/Lvlup.wav
+#begin Sounds/Fight/Monster_roar3.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Lvlup.wav
+/build:Sounds/Fight/Monster_roar3.wav
 
-#begin Sounds/Monster_roar1.wav
+#begin Sounds/Fight/Monster_slice.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_roar1.wav
+/build:Sounds/Fight/Monster_slice.wav
 
-#begin Sounds/Monster_roar2.wav
+#begin Sounds/Fight/Player_get_hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_roar2.wav
+/build:Sounds/Fight/Player_get_hit.wav
 
-#begin Sounds/Monster_roar3.wav
+#begin Sounds/Fight/Player_shoot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_roar3.wav
+/build:Sounds/Fight/Player_shoot.wav
 
-#begin Sounds/Monster_roar4.wav
+#begin Sounds/Fight/Player_slice.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_roar4.wav
+/build:Sounds/Fight/Player_slice.wav
 
-#begin Sounds/Monster_roar5.wav
+#begin Sounds/Level/Buff.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_roar5.wav
+/build:Sounds/Level/Buff.wav
 
-#begin Sounds/Monster_slice.wav
+#begin Sounds/Level/Face your demons.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Monster_slice.wav
+/build:Sounds/Level/Face your demons.wav
 
-#begin Sounds/Player_get_hit.wav
+#begin Sounds/Level/GameOver.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Player_get_hit.wav
+/build:Sounds/Level/GameOver.wav
 
-#begin Sounds/Player_powerup.wav
+#begin Sounds/Level/Gong.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Player_powerup.wav
+/build:Sounds/Level/Gong.wav
 
-#begin Sounds/Player_shoot.wav
+#begin Sounds/Level/Heal.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Player_shoot.wav
+/build:Sounds/Level/Heal.wav
 
-#begin Sounds/Player_slice.wav
+#begin Sounds/Level/I bring Doom.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Player_slice.wav
+/build:Sounds/Level/I bring Doom.wav
 
-#begin Sounds/Teleport.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Teleport.mp3
-
-#begin Sounds/Win.wav
+#begin Sounds/Level/Key.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Win.wav
+/build:Sounds/Level/Key.wav
+
+#begin Sounds/Level/Lvlup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Level/Lvlup.wav
+
+#begin Sounds/Level/Teleport.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Level/Teleport.wav
+
+#begin Sounds/Level/Win.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Level/Win.wav
 
 #begin Sprites/back1.jpg
 /importer:TextureImporter
@@ -307,6 +247,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Blood.png
+
+#begin Sprites/BloodPart.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/BloodPart.png
 
 #begin Sprites/Buff.png
 /importer:TextureImporter

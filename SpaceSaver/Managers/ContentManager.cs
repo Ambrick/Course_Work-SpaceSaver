@@ -9,7 +9,7 @@ namespace SpaceSaver
 {
     public class LoadManager
     {
-        private static Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
+        private Dictionary<string, Texture2D> LoadTextures(ContentManager Content)
         {
             return new Dictionary<string, Texture2D> {
                 //Enemy animations
@@ -25,6 +25,8 @@ namespace SpaceSaver
                 {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
                 {"player_bullet", Content.Load<Texture2D>("Sprites/Player_bullet") },
                 {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
+                {"blood", Content.Load<Texture2D>("Sprites/Blood") },
+                {"blood_part", Content.Load<Texture2D>("Sprites/BloodPart") },
                 {"wall", Content.Load<Texture2D>("Sprites/Wall2") },
                 {"floor", Content.Load<Texture2D>("Sprites/Floor2") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
@@ -44,30 +46,41 @@ namespace SpaceSaver
             };
         }
 
-        private static Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
+        private Dictionary<string,SoundEffect> LoadSounds(ContentManager Content)
         {
             SoundEffect.MasterVolume = 0.08f;
+
             return new Dictionary<string, SoundEffect> {
-                {"player_get_hit", Content.Load<SoundEffect>("Sounds/Player_get_hit") },
-                {"enemy_roar1", Content.Load<SoundEffect>("Sounds/Monster_roar1") },
-                {"enemy_roar2", Content.Load<SoundEffect>("Sounds/Monster_roar2") },
-                {"player_shoot", Content.Load<SoundEffect>("Sounds/Player_shoot") },
-                {"enemy_shoot", Content.Load<SoundEffect>("Sounds/Enemy_shoot") },
-                {"enemy_sword", Content.Load<SoundEffect>("Sounds/Monster_slice") },
-                {"player_sword", Content.Load<SoundEffect>("Sounds/Player_slice") },
-                {"gong", Content.Load<SoundEffect>("Sounds/Gong") },
-                {"heal", Content.Load<SoundEffect>("Sounds/Heal") },
-                {"explosion", Content.Load<SoundEffect>("Sounds/Explosion") },
-                {"powerup", Content.Load<SoundEffect>("Sounds/Player_powerup") },
-                {"win", Content.Load<SoundEffect>("Sounds/Win") },
-                {"lose", Content.Load<SoundEffect>("Sounds/Lose") },
-                {"lvlup", Content.Load<SoundEffect>("Sounds/Lvlup") },
+                {"enemy_roar1", Content.Load<SoundEffect>("Sounds/Fight/Monster_roar1") },
+                {"enemy_roar2", Content.Load<SoundEffect>("Sounds/Fight/Monster_roar2") },
+                {"enemy_roar3", Content.Load<SoundEffect>("Sounds/Fight/Monster_roar2") },
+                {"enemy_shoot", Content.Load<SoundEffect>("Sounds/Fight/Enemy_shoot") },
+                {"enemy_sword", Content.Load<SoundEffect>("Sounds/Fight/Monster_slice") },
+                {"player_get_hit", Content.Load<SoundEffect>("Sounds/Fight/Player_get_hit") },
+                {"player_shoot", Content.Load<SoundEffect>("Sounds/Fight/Player_shoot") },
+                {"player_sword", Content.Load<SoundEffect>("Sounds/Fight/Player_slice") },
+                {"explosion", Content.Load<SoundEffect>("Sounds/Fight/Explosion") },
+                {"melee_hit", Content.Load<SoundEffect>("Sounds/Fight/Melee_hit") },
+                
+                {"gong", Content.Load<SoundEffect>("Sounds/Level/Gong") },
+                {"key", Content.Load<SoundEffect>("Sounds/Level/Key") },
+                {"buff", Content.Load<SoundEffect>("Sounds/Level/Buff") },
+                {"heal", Content.Load<SoundEffect>("Sounds/Level/Heal") },
+                {"lvlup", Content.Load<SoundEffect>("Sounds/Level/Lvlup") },
+
+                {"win", Content.Load<SoundEffect>("Sounds/Level/Win") },
+                {"teleport", Content.Load<SoundEffect>("Sounds/Level/Teleport") },
+                {"game_over", Content.Load<SoundEffect>("Sounds/Level/GameOver") },
+
+
+                {"face_your_demons", Content.Load<SoundEffect>("Sounds/Level/Face your demons") },
+                {"i_bring_doom", Content.Load<SoundEffect>("Sounds/Level/I bring Doom") },
             };
         }
 
-        private static Dictionary<string, Song> LoadSongs(ContentManager Content)
+        private Dictionary<string, Song> LoadSongs(ContentManager Content)
         {
-            MediaPlayer.Volume = 0.05f;
+            MediaPlayer.Volume = 0.04f;
             MediaPlayer.IsRepeating = true;
             return new Dictionary<string, Song> {
                 {"menu", Content.Load<Song>("Music/Menu") },
@@ -77,7 +90,7 @@ namespace SpaceSaver
             };
         }
 
-        public static void LoadContent(ContentManager Content)
+        public void LoadContent(ContentManager Content)
         {
             Game1.textures = LoadTextures(Content);
             Game1.sounds = LoadSounds(Content);

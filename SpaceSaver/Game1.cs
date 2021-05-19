@@ -79,18 +79,18 @@ namespace SpaceSaver
         public static Player player;
         public static Level Map;
 
-        public static int ScreenWidth => 1000;
-        public static int ScreenHeight => 700;
+        public static int ScreenWidth => 1200;
+        public static int ScreenHeight => 1000;
         
         public static Dictionary<string, Texture2D> textures;
         public static Dictionary<string, SoundEffect> sounds;
         public static Dictionary<string, Song> songs;
 
-        public static List<Static_Component> static_objects = new List<Static_Component> { };
+        public static List<StaticComponent> static_objects = new List<StaticComponent> { };
+        public static List<ShortLifeAnimatedComponents> shortLifeAnimatedComponents = new List<ShortLifeAnimatedComponents> { };
+        public static List<Enemy> enemies = new List<Enemy> { };
         public static List<Bullet> bullets = new List<Bullet> { };
         public static List<Sword> swords = new List<Sword> { };
-        public static List<Enemy> enemies = new List<Enemy> { };
-        public static List<Explosion> explosions = new List<Explosion> { };
 
         public static SpriteFont font;
         public static string game_state = "menu";
@@ -122,7 +122,7 @@ namespace SpaceSaver
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
-            LoadManager.LoadContent(Content);
+            new LoadManager().LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -135,7 +135,7 @@ namespace SpaceSaver
                 {
                     case "result":
                         Facade.AddFinalScores();
-                        Map = null;
+                        Level.UnloadLvl(true);
                         break;
                     case "menu":
                         MediaPlayer.Play(songs["menu"]);
@@ -146,9 +146,15 @@ namespace SpaceSaver
                         Map = new Level(1, cell_size);
                         break;
                     case "lvl2":
-                        Map = new Level(1, cell_size);
+                        Level.UnloadLvl(true);
+                        Map = new Level(2, cell_size);
                         break;
                     case "lvl3":
+                        Level.UnloadLvl(true);
+                        Map = new Level(1, cell_size);
+                        break;
+                    case "lvl4":
+                        Level.UnloadLvl(true);
                         Map = new Level(1, cell_size);
                         break;
                     case "end":

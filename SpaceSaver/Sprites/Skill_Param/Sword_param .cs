@@ -32,7 +32,7 @@
             Skill_lvl++;
             Damage = BaseDamage * Skill_lvl * 0.45f;
             CoolDown = (0.2f + 1.6 / Skill_lvl) * AtackRate < 0.32 ? 0.32 : (0.2f + 1.6 / Skill_lvl) * AtackRate;
-            IsJedi = Skill_lvl > 3 ? true : false;
+            IsJedi = Skill_lvl > 4 ? true : false;
         }
     }
 }

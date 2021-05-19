@@ -74,7 +74,7 @@ namespace SpaceSaver
 
             //Вывод информации об игровых ключах
             spriteBatch.DrawString(Game1.font,
-                                   Game1.player.key_count.ToString() + "/" + Game1.Map.keys_on_lvl,
+                                   Game1.player.key_count.ToString() + "/" + Game1.player.amount_of_keys_on_a_level.ToString(),
                                    Hood_pos + new Vector2(578, 40),
                                    Color.White,
                                    0,
@@ -88,6 +88,9 @@ namespace SpaceSaver
                                    "Ур." + Game1.player.level_system._current_lvl.ToString(),
                                    Hood_pos + new Vector2(343, 35),
                                    Game1.player.level_system._skill_points > 0 ? Color.Yellow : Color.White);
+
+            //Добавить надпись идите к порталу, если собраны все ключи
+            //Добавить надпись прокачайтесь
         }
     }
 }

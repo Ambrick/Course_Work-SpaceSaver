@@ -17,7 +17,7 @@
         public Bullet_param(int skill_lvl, float InitialDamage)
         {
             Damage = BaseDamage = InitialDamage;
-            Skill_lvl = skill_lvl-1;
+            Skill_lvl = skill_lvl - 1;
 
             SetCurrentBulletParam();
         }

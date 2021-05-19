@@ -1,13 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
+using System;
 
 namespace SpaceSaver
 {
     public class Player : Minion
     {
+        public double _bullet_timer = 0;
+
+        public double _sword_timer = 0;
+
         public Leveling_up level_system;
 
         public int amount_of_keys_on_a_level { get; set; } = 0;
@@ -26,21 +30,21 @@ namespace SpaceSaver
 
         public Sword_param _Sword_param;
 
-        public Player(Dictionary<string, Animation> animations, Vector2 position, string object_type) : base (animations, position)
+        public Player(Dictionary<string, Animation> animations, Vector2 Position, string Object_type) : base (animations)
         {
-            Dynamic_Component_Initialization(animations, position);
-            Object_type = object_type;
+            Dynamic_Component_Initialization(animations);
+            this.Position = Position;
+            this.Object_type = Object_type;
 
             _Bullet_param = new Bullet_param(1, 30);
-            _Sword_param = new Sword_param(1, 40, 1);
+            _Sword_param = new Sword_param(1, 35, 1);
             _Minion_Stats = new Passive_Stats_Skill(1, 70);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
-            level_system = new Leveling_up(50, 100, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
-            _bullet_timer = _sword_timer = click__timer = 0;
+            level_system = new Leveling_up(50, 90, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
         }
 
-        protected override void SkillsTimerUpdate(GameTime gameTime)
+        protected void SkillsTimerUpdate(GameTime gameTime)
         {
             //Bullet timer
             _bullet_timer -= _bullet_timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
@@ -130,17 +134,21 @@ namespace SpaceSaver
         public void PlayerInteraction()
         {
             Game1.enemies.ForEach(enemy => {
-                Velocity.X = Collision_manager.Collision_X(this, enemy) ? 0 : Velocity.X;
-                Velocity.Y = Collision_manager.Collision_Y(this, enemy) ? 0 : Velocity.Y;
+                if (Collision_manager.Collision_X(this, enemy))
+                    Velocity.X = 0;
+                if (Collision_manager.Collision_Y(this, enemy))
+                    Velocity.Y = 0;
             });
 
-            foreach (Static_Component spr2 in Game1.static_objects)
+            foreach (StaticComponent spr2 in Game1.static_objects)
             {
                 switch (spr2.Object_type)
                 {
                     case "wall":
-                        Velocity.X = Collision_manager.Collision_X(this, spr2) ? 0 : Velocity.X;
-                        Velocity.Y = Collision_manager.Collision_Y(this, spr2) ? 0 : Velocity.Y;
+                        if (Collision_manager.Collision_X(this, spr2))
+                            Velocity.X = 0;
+                        if (Collision_manager.Collision_Y(this, spr2))
+                            Velocity.Y = 0;
                         break;
                     case "heal":
                         if (Properties.Intersects(spr2.Properties))
@@ -153,20 +161,22 @@ namespace SpaceSaver
                     case "buff":
                         if (Properties.Intersects(spr2.Properties))
                         {
-                            Game1.sounds["powerup"].Play();
+                            Game1.sounds["buff"].Play();
                             Buffed = true;
                             spr2.IsDead = true;
                         }
                         break;
+                        //Доавить еще один бафф
                     case "key":
                         if (Properties.Intersects(spr2.Properties))
                         {
+                            Game1.sounds["key"].Play();
                             level_system.IfGetKey();
                             key_count++;
                             if (key_count == amount_of_keys_on_a_level)
                             {
                                 var pos = Game1.static_objects.Find(iterator => iterator.Object_type == "portal").Position;
-                                Game1.static_objects.Add(new Static_Component(Game1.textures["portal2"], pos, "portal2"));
+                                Game1.static_objects.Add(new StaticComponent(Game1.textures["portal2"], pos, "portal2"));
                             }
                             spr2.IsDead = true;
                             return;

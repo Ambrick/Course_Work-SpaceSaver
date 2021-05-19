@@ -4,7 +4,7 @@ using System;
 
 namespace SpaceSaver
 {
-    public class Sword : Static_Component
+    public class Sword : StaticComponent 
     {
         private float Timer;
 
@@ -29,7 +29,7 @@ namespace SpaceSaver
             Position = position + Direction * 25f;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             IsDead = (Timer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= Param.Duration ? true : false;
 
