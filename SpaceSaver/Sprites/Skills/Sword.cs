@@ -4,56 +4,54 @@ using System;
 
 namespace SpaceSaver
 {
-    public class Sword : StaticComponent 
+    public class Sword : SkillPrototype
     {
-        private float Timer;
+        private float DurationTimer;
 
-        private Vector2 Direction;
+        private bool active = true;
 
-        public Sword_param Param;
-
-        float damage;
-
-        bool active = true;
-
-        public Sword(Texture2D texture, Sword_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
+        public Sword(Texture2D Texture, Vector2 Position, string Object_type, float Angle, AtackParamPrototype Param)
+            : base(Texture, Position, Object_type, Angle, Param)
         {
-            Texture = texture;
-            Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            Position = position;
-            Object_type = object_type;
-            Angle = angle;
-            Param = param;
-            damage = Param.Damage;
-            Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
-            Position = position + Direction * 25f;
+            this.Texture = Texture;
+            this.Object_type = Object_type;
+            this.Angle = Angle;
+            this.Param = Param;
+            this.Position = Position + new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle)) * (float)Param.Range / 3;
+
+            Rectangle = new Rectangle(0, 0, Texture.Width, Texture.Height);
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void InnerUpdate(GameTime gameTime)
         {
-            IsDead = (Timer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= Param.Duration ? true : false;
+            IsDead = (DurationTimer += (float)gameTime.ElapsedGameTime.TotalSeconds) >= 0.3f ? true : false;
+        }
 
+        public override void PlayerSkillUpdate()
+        {
             if (!active)
                 return;
 
-            //проверка на столкновение удара игрока
-            if (Object_type == "player_sword")
+            foreach (Enemy enemy in Game1.enemies)
             {
-                foreach (Enemy enemy in Game1.enemies)
+                if (Properties.Intersects(enemy.Properties))
                 {
-                    if (Properties.Intersects(enemy.Properties))
-                    {
-                        active = false;
-                        enemy.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
-                        return;
-                    }
+                    active = false;
+                    enemy.GetHitIsDead(Param.Damage, Position,false);
+                    return;
                 }
-                return;
             }
-            else if (Object_type == "enemy_sword" && Properties.Intersects(Game1.player.Properties))
+        }
+
+        public override void EnemySkillUpdate()
+        {
+            if (!active)
+                return;
+
+            if (Properties.Intersects(Game1.player.Properties))
             {
                 active = false;
-                Game1.player.GetHitIsDead(damage, "sword_damage_was_dealt", Position);
+                Game1.player.GetHitIsDead(Param.Damage, Position, false);
                 return;
             }
         }

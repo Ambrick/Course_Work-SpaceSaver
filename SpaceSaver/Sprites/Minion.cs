@@ -1,15 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace SpaceSaver
 {
-    public class Minion : AnimatedComponent
+    public abstract class Minion : AnimatedComponent
     {
         protected Dictionary<string, Animation> Animations;
 
-        public Passive_Stats_Skill _Minion_Stats;
+        public PassiveMinionStats _Minion_Stats;
 
         public Minion(Dictionary<string, Animation> animations) : base (animations) { }
 
@@ -34,14 +33,14 @@ namespace SpaceSaver
             AnimationManager.Update(gameTime);
         }
 
-        public void GetHitIsDead(float IncomeDamage, string type, Vector2 pos)
+        public void GetHitIsDead(float IncomeDamage, Vector2 pos, bool ifBulletDamage)
         {
             _Minion_Stats.CurrentHealthPoints -= IncomeDamage;
 
-            if (type == "bullet_damage_was_dealt")
-                Game1.shortLifeAnimatedComponents.Add(new ShortLifeAnimatedComponents(new Animation(Game1.textures["explosion"], 6, 0.15f), pos));
+            if (ifBulletDamage)
+                Game1.shortLifeAnimatedComponents.Add(new ShortLifeAnimatedComponents(new Animation(Game1.textures["explosion"], 0.15f), pos));
             else
-                Game1.static_objects.Add(new StaticComponent(Game1.textures["blood_part"], Position, "blood_part", Angle + (float)Math.Atan(90) * 2));
+                Game1.static_objects.Add(new StaticComponent(Game1.textures["blood_part"], Position, "blood_part", Angle));
 
             CheckIfDead();
         }

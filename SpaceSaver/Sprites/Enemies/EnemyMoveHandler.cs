@@ -15,7 +15,7 @@ namespace SpaceSaver
 
         private int pathSize;
 
-        private void GenerateOnHold() => onHoldTimer = new System.Random().Next(100) > 40 ? 1.2 : 0;
+        private void GenerateOnHold() => onHoldTimer = new System.Random().Next(10) > 6 ? 1.2 : 0;
 
         public bool IfIdle { get; set; } = false;
 
@@ -34,51 +34,52 @@ namespace SpaceSaver
         {
             if (IfIdle)
                 return Position;
+
             if (pathDirection == "up-down")
             {
                 keyPointsList = new List<Vector2>() {
+                    new Vector2(Position.X, Position.Y),
                     new Vector2(Position.X, Position.Y + pathSize),
-                    new Vector2(Position.X , Position.Y),
                 };
             }
             else if (pathDirection == "left-right")
             {
                 keyPointsList = new List<Vector2>() {
-                    new Vector2(Position.X + pathSize, Position.Y ),
                     new Vector2(Position.X, Position.Y),
+                    new Vector2(Position.X + pathSize, Position.Y),
                 };
             }
             else if (pathDirection == "clockwise")
             {
                 keyPointsList = new List<Vector2>() {
-                    new Vector2(Position.X + pathSize, Position.Y ),
+                    new Vector2(Position.X, Position.Y),
+                    new Vector2(Position.X + pathSize, Position.Y),
                     new Vector2(Position.X + pathSize, Position.Y + pathSize),
                     new Vector2(Position.X , Position.Y + pathSize),
-                    new Vector2(Position.X, Position.Y),
                 };
             }
             else if (pathDirection == "counterclockwise")
             {
                 keyPointsList = new List<Vector2>() {
-                    new Vector2(Position.X , Position.Y + pathSize),
-                    new Vector2(Position.X + pathSize, Position.Y + pathSize),
-                    new Vector2(Position.X + pathSize, Position.Y ),
                     new Vector2(Position.X, Position.Y),
+                    new Vector2(Position.X, Position.Y + pathSize),
+                    new Vector2(Position.X + pathSize, Position.Y + pathSize),
+                    new Vector2(Position.X + pathSize, Position.Y),
                 };
             }
             else if (pathDirection == "zig-zag")
             {
                 keyPointsList = new List<Vector2>() {
-                    new Vector2(Position.X + pathSize, Position.Y + pathSize),
-                    new Vector2(Position.X + pathSize, Position.Y ),
-                    new Vector2(Position.X, Position.Y + pathSize),
                     new Vector2(Position.X, Position.Y),
+                    new Vector2(Position.X + pathSize, Position.Y + pathSize),
+                    new Vector2(Position.X + pathSize, Position.Y),
+                    new Vector2(Position.X, Position.Y + pathSize),
                 };
             }
-            return keyPointsList[keyPointsList.Count - 1];
+            return keyPointsList[0];
         }
 
-        public string MoveOrOnHold(GameTime gameTime, Vector2 Position, ref float Angle, ref Vector2 Velo, float Speed)
+        public string MoveOrOnHold(GameTime gameTime, Vector2 Position, ref float Angle, ref Vector2 Velocity, float Speed)
         {
             if (onHoldTimer > 0)
             {
@@ -86,36 +87,36 @@ namespace SpaceSaver
                 return "On_hold";
             }
 
-            Velo.X += keyPointsList[indexOfDestinationPoint].X > Position.X ? Speed : -Speed;
-            if (Velo.X > 0)
+            Velocity.X += keyPointsList[indexOfDestinationPoint].X > Position.X ? Speed : -Speed;
+            if (Velocity.X > 0)
             {
-                if (keyPointsList[indexOfDestinationPoint].X < Position.X + Velo.X)
+                if (keyPointsList[indexOfDestinationPoint].X < Position.X + Velocity.X)
                 {
                     Position.X = keyPointsList[indexOfDestinationPoint].X;
-                    Velo.X = 0;
+                    Velocity.X = 0;
                 }
             }
             else
-                if (keyPointsList[indexOfDestinationPoint].X > Position.X + Velo.X)
+                if (keyPointsList[indexOfDestinationPoint].X > Position.X + Velocity.X)
                 {
                     Position.X = keyPointsList[indexOfDestinationPoint].X;
-                    Velo.X = 0;
+                    Velocity.X = 0;
                 }
 
-            Velo.Y += keyPointsList[indexOfDestinationPoint].Y > Position.Y ? Speed : -Speed;
-            if (Velo.Y > 0)
+            Velocity.Y += keyPointsList[indexOfDestinationPoint].Y > Position.Y ? Speed : -Speed;
+            if (Velocity.Y > 0)
             {
-                if (keyPointsList[indexOfDestinationPoint].Y < Position.Y + Velo.Y)
+                if (keyPointsList[indexOfDestinationPoint].Y < Position.Y + Velocity.Y)
                 {
                     Position.Y = keyPointsList[indexOfDestinationPoint].Y;
-                    Velo.Y = 0;
+                    Velocity.Y = 0;
                 }
             }
             else
-                if (keyPointsList[indexOfDestinationPoint].Y > Position.Y + Velo.Y)
+                if (keyPointsList[indexOfDestinationPoint].Y > Position.Y + Velocity.Y)
                 {
                     Position.Y = keyPointsList[indexOfDestinationPoint].Y;
-                    Velo.Y = 0;
+                    Velocity.Y = 0;
                 }
             
             if (keyPointsList[indexOfDestinationPoint] == Position)

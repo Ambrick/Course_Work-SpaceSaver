@@ -18,30 +18,36 @@ namespace SpaceSaver
 
         private double click__timer = 0;
 
+        private double secondShot_timer = 0;
+
         public int key_count = 0;
 
         public Hood Hood = new Hood();
 
-        public bool Buffed = false;
+        public BulletParam _Bullet_param;
 
-        private double buff__timer;
+        public SwordParam _Sword_param;
 
-        public Bullet_param _Bullet_param;
+        private double RangeBuff_timer;
 
-        public Sword_param _Sword_param;
+        private double MeleeBuff_timer;
 
-        public Player(Dictionary<string, Animation> animations, Vector2 Position, string Object_type) : base (animations)
+        public bool RangeBuff { get; set; } = false;
+
+        public bool MeleeBuff { get; set; } = false;
+
+        public Player(Dictionary<string, Animation> animations) : base (animations)
         {
             Dynamic_Component_Initialization(animations);
-            this.Position = Position;
-            this.Object_type = Object_type;
+            this.Position = Vector2.Zero;
+            this.Object_type = "player";
 
-            _Bullet_param = new Bullet_param(1, 30);
-            _Sword_param = new Sword_param(1, 35, 1);
-            _Minion_Stats = new Passive_Stats_Skill(1, 70);
+            _Bullet_param = new BulletParam(SkillLvl: 1, Damage: 30);
+            _Sword_param = new SwordParam(SkillLvl: 1, Damage: 35);
+            _Minion_Stats = new PassiveMinionStats(SkillLvl: 1, InitialMinionHP: 70);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
-            level_system = new Leveling_up(50, 90, _Bullet_param.Skill_lvl + _Sword_param.Skill_lvl + _Minion_Stats.Skill_lvl);
+            level_system = new Leveling_up(exp_to_lvlup: 50, exp_for_key: 90, current_lvl: _Bullet_param.SkillLvl + _Sword_param.SkillLvl + _Minion_Stats.SkillLvl);
         }
 
         protected void SkillsTimerUpdate(GameTime gameTime)
@@ -53,15 +59,26 @@ namespace SpaceSaver
             //Click timer
             click__timer -= click__timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
             //Buff_timer
-            if (Buffed)
+            if (RangeBuff)
             {
-                buff__timer += gameTime.ElapsedGameTime.TotalSeconds;
-                if(buff__timer > 7.2)
+                RangeBuff_timer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (RangeBuff_timer > 7.2)
                 {
-                    buff__timer = 0;
-                    Buffed = false;
+                    RangeBuff_timer = 0;
+                    RangeBuff = false;
                 }
             }
+            if (MeleeBuff)
+            {
+                MeleeBuff_timer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (MeleeBuff_timer > 7.2)
+                {
+                    MeleeBuff_timer = 0;
+                    MeleeBuff = false;
+                }
+            }
+            //For upgraded shoot
+            secondShot_timer -= secondShot_timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
         }
 
         protected override void Action(GameTime gameTime)
@@ -72,21 +89,37 @@ namespace SpaceSaver
             var mouseSt = Mouse.GetState();
             Angle = (float) Math.Atan2(mouseSt.Y - Game1.ScreenHeight / 2, mouseSt.X - Game1.ScreenWidth / 2);
 
+            if (secondShot_timer < 0 && secondShot_timer > -4)
+            {
+                Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], Position, "player_bullet", Angle, _Bullet_param));
+                secondShot_timer = -5;
+            }
             if (mouseSt.LeftButton == ButtonState.Pressed && _bullet_timer <= 0)
             {
                 Game1.sounds["player_shoot"].Play();
-                Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle));
-                if (Buffed)
+                Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], Position, "player_bullet", Angle, _Bullet_param));
+                if (RangeBuff)
                 {
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 0.85f));
-                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], _Bullet_param, Position, "player_bullet", Angle / 1.15f));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], Position, "player_bullet", Angle - .12f, _Bullet_param));
+                    Game1.bullets.Add(new Bullet(Game1.textures["player_bullet"], Position, "player_bullet", Angle + .12f, _Bullet_param));
+                }
+                if (_Bullet_param.CheckIfUpgraded)
+                {
+                    secondShot_timer = .03;
                 }
                 _bullet_timer = _Bullet_param.CoolDown;
             }
             if (mouseSt.RightButton == ButtonState.Pressed && _sword_timer <= 0)
             {
                 Game1.sounds["player_sword"].Play();
-                Game1.swords.Add(new Sword(Game1.textures["player_sword"], _Sword_param, Position, "player_sword", Angle));
+                if(MeleeBuff)
+                {
+                    Game1.swords.Add(new Sword(Game1.textures["player_sword"], Position, "player_sword", Angle + 0.6f, _Sword_param));
+                    Game1.swords.Add(new Sword(Game1.textures["player_sword"], Position, "player_sword", Angle - 0.6f, _Sword_param));
+                }
+                else
+                    Game1.swords.Add(new Sword(Game1.textures["player_sword"], Position, "player_sword", Angle, _Sword_param));
+
                 _sword_timer = _Sword_param.CoolDown;
             }
            
@@ -95,9 +128,9 @@ namespace SpaceSaver
                 if (keyboardState.IsKeyDown(Keys.D1) || keyboardState.IsKeyDown(Keys.D2) || keyboardState.IsKeyDown(Keys.D3))
                 {
                     if (keyboardState.IsKeyDown(Keys.D1))
-                        _Bullet_param.SetCurrentBulletParam();
+                        _Bullet_param.SetParam();
                     else if (keyboardState.IsKeyDown(Keys.D2))
-                        _Sword_param.SetCurrentSwordParam();
+                        _Sword_param.SetParam();
                     else if (keyboardState.IsKeyDown(Keys.D3))
                         _Minion_Stats.SetCurrentMinionStats();
 
@@ -140,48 +173,49 @@ namespace SpaceSaver
                     Velocity.Y = 0;
             });
 
-            foreach (StaticComponent spr2 in Game1.static_objects)
+            foreach (StaticComponent component in Game1.static_objects)
             {
-                switch (spr2.Object_type)
+                if (component.Object_type == "wall")
                 {
-                    case "wall":
-                        if (Collision_manager.Collision_X(this, spr2))
-                            Velocity.X = 0;
-                        if (Collision_manager.Collision_Y(this, spr2))
-                            Velocity.Y = 0;
-                        break;
-                    case "heal":
-                        if (Properties.Intersects(spr2.Properties))
+                    if (Collision_manager.Collision_X(this, component))
+                        Velocity.X = 0;
+                    if (Collision_manager.Collision_Y(this, component))
+                        Velocity.Y = 0;
+                }
+                else
+                {
+                    if (Properties.Intersects(component.Properties))
+                    {
+                        switch (component.Object_type)
                         {
-                            Game1.sounds["heal"].Play();
-                            GetHeal();
-                            spr2.IsDead = true;
+                            case "heal":
+                                Game1.sounds["heal"].Play();
+                                GetHeal();
+                                component.IsDead = true;
+                                break;
+                            case "rangebuff":
+                                Game1.sounds["buff"].Play();
+                                RangeBuff = true;
+                                component.IsDead = true;
+                                break;
+                            case "meleebuff":
+                                Game1.sounds["buff"].Play();
+                                MeleeBuff = true;
+                                component.IsDead = true;
+                                break;
+                            case "key":
+                                Game1.sounds["key"].Play();
+                                level_system.IfGetKey();
+                                key_count++;
+                                if (key_count == amount_of_keys_on_a_level)
+                                {
+                                    var pos = Game1.static_objects.Find(iterator => iterator.Object_type == "portal").Position;
+                                    Game1.static_objects.Add(new StaticComponent(Game1.textures["portal2"], pos, "portal2"));
+                                }
+                                component.IsDead = true;
+                                return;
                         }
-                        break;
-                    case "buff":
-                        if (Properties.Intersects(spr2.Properties))
-                        {
-                            Game1.sounds["buff"].Play();
-                            Buffed = true;
-                            spr2.IsDead = true;
-                        }
-                        break;
-                        //Доавить еще один бафф
-                    case "key":
-                        if (Properties.Intersects(spr2.Properties))
-                        {
-                            Game1.sounds["key"].Play();
-                            level_system.IfGetKey();
-                            key_count++;
-                            if (key_count == amount_of_keys_on_a_level)
-                            {
-                                var pos = Game1.static_objects.Find(iterator => iterator.Object_type == "portal").Position;
-                                Game1.static_objects.Add(new StaticComponent(Game1.textures["portal2"], pos, "portal2"));
-                            }
-                            spr2.IsDead = true;
-                            return;
-                        }
-                        break;
+                    }
                 }
             }
         }

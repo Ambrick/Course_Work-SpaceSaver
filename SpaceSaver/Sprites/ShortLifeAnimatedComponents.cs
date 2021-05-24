@@ -6,11 +6,12 @@ namespace SpaceSaver
     {
         private double LifeTime;
 
-        public ShortLifeAnimatedComponents(Animation animation, Vector2 Position) : base (animation)
+        public ShortLifeAnimatedComponents(Animation animation, Vector2 Position, float Angle = 0) : base(animation)
         {
             AnimationManager = new AnimationManager(animation);
-            Rectangle = new Rectangle(0, 0, animation.FrameWidth, animation.FrameHeight);
             this.Position = Position;
+            this.Angle = Angle;
+            Rectangle = new Rectangle(0, 0, animation.FrameWidth, animation.FrameHeight);
             LifeTime = animation.FrameSpeed * animation.FrameCount;
 
             AnimationManager.Play(animation);

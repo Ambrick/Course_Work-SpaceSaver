@@ -37,7 +37,7 @@
 
                 _current_lvl++;
                 _skill_points++;
-                _eperience_points_to_lvlup +=  25 * _current_lvl;
+                _eperience_points_to_lvlup +=  20 * _current_lvl;
                 Reset_lvl_sys();
             }
         }

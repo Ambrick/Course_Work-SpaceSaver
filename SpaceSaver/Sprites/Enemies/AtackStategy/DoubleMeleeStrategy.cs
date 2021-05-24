@@ -2,9 +2,9 @@
 
 namespace SpaceSaver
 {
-    public class MeleeStrategy : CommonForSkills, IAtackStrategy
+    public class DoubleMeleeStrategy : CommonForSkills, IAtackStrategy
     {
-        public MeleeStrategy(SwordParam param)
+        public DoubleMeleeStrategy(SwordParam param)
         {
             Param = param;
         }
@@ -17,7 +17,8 @@ namespace SpaceSaver
             if (CheckTimer())
             {
                 Game1.sounds["enemy_sword"].Play();
-                Game1.swords.Add(new Sword(Game1.textures["enemy_sword"], Position, "enemy_sword", Angle, Param));
+                Game1.swords.Add(new Sword(Game1.textures["enemy_sword"], Position, "enemy_sword", Angle + 0.6f, Param));
+                Game1.swords.Add(new Sword(Game1.textures["enemy_sword"], Position, "enemy_sword", Angle - 0.6f, Param));
                 timer = Param.CoolDown;
             }
             return "Melee_atack";

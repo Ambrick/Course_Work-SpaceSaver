@@ -2,9 +2,9 @@
 
 namespace SpaceSaver
 {
-    public class RangeStrategy : CommonForSkills, IAtackStrategy
+    public class DoubleRangeStrategy : CommonForSkills, IAtackStrategy
     {
-        public RangeStrategy(BulletParam param)
+        public DoubleRangeStrategy(BulletParam param)
         {
             Param = param;
         }
@@ -17,7 +17,8 @@ namespace SpaceSaver
             if (CheckTimer())
             {
                 Game1.sounds["enemy_shoot"].Play();
-                Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Position, "enemy_bullet", Angle, Param));
+                Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Position, "enemy_bullet", Angle - 0.12f, Param));
+                Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Position, "enemy_bullet", Angle + 0.12f, Param));
                 timer = Param.CoolDown;
             }
             return "Range_atack";

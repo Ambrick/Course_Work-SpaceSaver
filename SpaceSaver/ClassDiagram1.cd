@@ -31,7 +31,7 @@
   <Class Name="SpaceSaver.LevelContent">
     <Position X="14.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAA=</HashCode>
+      <HashCode>AAAAAIAAAAgAAAgAAAAAAAAAAAAAAACAAAAAAAAGAAA=</HashCode>
       <FileName>Map\LevelContent.cs</FileName>
       <NewMemberFileName>Managers\ContentManager.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -46,7 +46,7 @@
   <Class Name="SpaceSaver.Level">
     <Position X="26.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAA4AABAAAAAAAAQAAAAAAIAAAAAACAEAAAAAAAA=</HashCode>
+      <HashCode>AAQAAA4AABAAAAAAAAQAAAAAAIAAAAAACAAAAAAAAAA=</HashCode>
       <FileName>Map\Level.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -79,19 +79,20 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SpaceSaver.MeleeStrategy">
+  <Class Name="SpaceSaver.DoubleMeleeStrategy">
     <Position X="28.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\AtackStategy\MeleeStrategy.cs</FileName>
+      <FileName>Sprites\Enemies\AtackStategy\DoubleMeleeStrategy.cs</FileName>
+      <NewMemberFileName>Sprites\Enemies\AtackStategy\MeleeStrategy.cs</NewMemberFileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SpaceSaver.RangeStrategy">
+  <Class Name="SpaceSaver.DoubleRangeStrategy">
     <Position X="32.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Sprites\Enemies\AtackStategy\RangeStrategy.cs</FileName>
+      <FileName>Sprites\Enemies\AtackStategy\DoubleRangeStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -204,7 +205,7 @@
   <Class Name="SpaceSaver.Game1">
     <Position X="13" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAcAAEAAANBAAwQAAAAMAJAAAABEAAgBBAEAAAAAAAQ=</HashCode>
+      <HashCode>AAcAAEAAANAQAwQAAAAMAJAAAABEAAgBBAEAAAAAAAQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>

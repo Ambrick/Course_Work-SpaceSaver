@@ -1,6 +1,6 @@
 ﻿namespace SpaceSaver
 {
-    public class Passive_Stats_Skill
+    public class PassiveMinionStats
     {
         public double MaxHealthPoints { get; set; }
 
@@ -8,20 +8,20 @@
 
         public double CurrentHealthPoints { get; set; }
 
-        public int Skill_lvl { get; private set; }
+        public int SkillLvl { get; private set; }
 
-        public Passive_Stats_Skill(int lvl, float InitialMinionHP)
+        public PassiveMinionStats(int SkillLvl, float InitialMinionHP)
         {
-            Skill_lvl = lvl;
-            MaxHealthPoints = CurrentHealthPoints = InitialMinionHP + lvl * 30;
-            MoveSpeed = 2f + 0.65f * Skill_lvl;
+            this.SkillLvl = SkillLvl;
+            MaxHealthPoints = CurrentHealthPoints = InitialMinionHP + SkillLvl * 30;
+            MoveSpeed = 2f + 0.65f * SkillLvl;
         }
 
         public void SetCurrentMinionStats()
         {
-            Skill_lvl++;
-            MaxHealthPoints = MaxHealthPoints + Skill_lvl * 30;
-            MoveSpeed = 2f + 0.65f * Skill_lvl;
+            SkillLvl++;
+            MaxHealthPoints = MaxHealthPoints + SkillLvl * 30;
+            MoveSpeed = 2f + 0.65f * SkillLvl;
         }
     }
 }

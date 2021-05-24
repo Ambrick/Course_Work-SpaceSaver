@@ -1,38 +1,23 @@
 ﻿namespace SpaceSaver
 {
-    public class Sword_param
+    public class SwordParam : AtackParamPrototype
     {
-        public double Duration => 0.3f;
-
-        public float Damage { get; set; }
-
-        public double CoolDown { get; set; }
-
-        public bool IsJedi { get; set; }
-
-        private float BaseDamage { get; set; }
-
-        private double AtackRate { get; set; }
-
-        public int Skill_lvl { get; private set; }
-
-        public double Range => 70;
-
-        public Sword_param(int skill_lvl, float InitialDamage, float atackRate)
+        public SwordParam(int SkillLvl, float Damage = 27, double AtackRate = 0.7f, double Range = 70) : base(SkillLvl, Damage)
         {
-            Damage = BaseDamage = InitialDamage;
-            Skill_lvl = skill_lvl - 1;
-            AtackRate = atackRate;
+            this.Damage = BaseDamage = Damage;
+            this.SkillLvl = SkillLvl - 1;
+            this.AtackRate = AtackRate;
+            this.Range = Range;
 
-            SetCurrentSwordParam();
+            SetParam();
         }
 
-        public void SetCurrentSwordParam()
+        public override void SetParam()
         {
-            Skill_lvl++;
-            Damage = BaseDamage * Skill_lvl * 0.45f;
-            CoolDown = (0.2f + 1.6 / Skill_lvl) * AtackRate < 0.32 ? 0.32 : (0.2f + 1.6 / Skill_lvl) * AtackRate;
-            IsJedi = Skill_lvl > 4 ? true : false;
+            SkillLvl++;
+            Damage = BaseDamage + SkillLvl * 0.45f;
+            CoolDown = (0.2f + 1.6 / SkillLvl) * AtackRate < 0.32 ? 0.32 : (0.2f + 1.6 / SkillLvl) * AtackRate;
+            Range = Range + SkillLvl * 8;
         }
     }
 }

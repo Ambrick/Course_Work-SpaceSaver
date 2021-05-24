@@ -22,15 +22,24 @@ namespace SpaceSaver
                 {"enemy_bullet", Content.Load<Texture2D>("Sprites/Enemy_bullet") },
                 {"enemy_shield", Content.Load<Texture2D>("Sprites/Shield_enemy") },
 
+                {"cockroach_move", Content.Load<Texture2D>("Sprites/cockroach_move") },
+                {"cockroach_hit", Content.Load<Texture2D>("Sprites/cockroach_hit") },
+                {"cockroach_idle", Content.Load<Texture2D>("Sprites/cockroach_idle") },
+                {"cockroach_death", Content.Load<Texture2D>("Sprites/cockroach_death") },
+
                 {"player_run", Content.Load<Texture2D>("Sprites/Robot_Run") },
                 {"player_bullet", Content.Load<Texture2D>("Sprites/Player_bullet") },
                 {"player_sword", Content.Load<Texture2D>("Sprites/Player_slice") },
                 {"blood", Content.Load<Texture2D>("Sprites/Blood") },
                 {"blood_part", Content.Load<Texture2D>("Sprites/BloodPart") },
-                {"wall", Content.Load<Texture2D>("Sprites/Wall2") },
-                {"floor", Content.Load<Texture2D>("Sprites/Floor2") },
+                {"wall", Content.Load<Texture2D>("Sprites/Wall") },
+                {"wall2", Content.Load<Texture2D>("Sprites/Wall2") },
+                {"floor0", Content.Load<Texture2D>("Sprites/Floor") },
+                {"floor1", Content.Load<Texture2D>("Sprites/Floor2") },
+                {"floor2", Content.Load<Texture2D>("Sprites/Floor3") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
                 {"buff", Content.Load<Texture2D>("Sprites/Buff") },
+                {"buff2", Content.Load<Texture2D>("Sprites/Buff2") },
                 {"key", Content.Load<Texture2D>("Sprites/Key_Big") },
                 {"hood", Content.Load<Texture2D>("Sprites/Hood") },
                 {"menu", Content.Load<Texture2D>("Sprites/Menu") },
@@ -72,7 +81,6 @@ namespace SpaceSaver
                 {"teleport", Content.Load<SoundEffect>("Sounds/Level/Teleport") },
                 {"game_over", Content.Load<SoundEffect>("Sounds/Level/GameOver") },
 
-
                 {"face_your_demons", Content.Load<SoundEffect>("Sounds/Level/Face your demons") },
                 {"i_bring_doom", Content.Load<SoundEffect>("Sounds/Level/I bring Doom") },
             };
@@ -80,7 +88,7 @@ namespace SpaceSaver
 
         private Dictionary<string, Song> LoadSongs(ContentManager Content)
         {
-            MediaPlayer.Volume = 0.04f;
+            MediaPlayer.Volume = 0.03f;
             MediaPlayer.IsRepeating = true;
             return new Dictionary<string, Song> {
                 {"menu", Content.Load<Song>("Music/Menu") },

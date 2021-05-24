@@ -21,11 +21,12 @@ namespace SpaceSaver
 
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount, float frameSpeed)
+        public Animation(Texture2D Texture, float FrameSpeed)
         {
-            Texture = texture;
-            FrameCount = frameCount;
-            FrameSpeed = frameSpeed;
+            this.Texture = Texture;
+            this.FrameSpeed = FrameSpeed;
+
+            FrameCount = Texture.Height / Texture.Width;
         }
     }
 }

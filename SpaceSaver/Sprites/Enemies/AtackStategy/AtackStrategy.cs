@@ -5,11 +5,13 @@ namespace SpaceSaver
 {
     public interface IAtackStrategy
     {
-        bool Skill(GameTime gameTime, Vector2 Position, ref float Angle);
+        string Skill(GameTime gameTime, Vector2 Position, ref float Angle);
     }
 
     public class CommonForSkills
     {
+        protected AtackParamPrototype Param;
+
         protected double timer;
 
         protected bool CheckIfInRange(Vector2 Position1, Vector2 Position2, double Range) =>
@@ -17,11 +19,11 @@ namespace SpaceSaver
 
         protected float CurrentAngle(Vector2 Position1, Vector2 Position2) => (float) Math.Atan2(Position2.Y - Position1.Y, Position2.X - Position1.X);
 
-        protected bool UpdateState(GameTime gameTime, Vector2 Position, ref float Angle, double Range)
+        protected bool UpdateState(GameTime gameTime, Vector2 Position, ref float Angle)
         {
             timer -= timer > 0 ? gameTime.ElapsedGameTime.TotalSeconds : 0;
 
-            if (CheckIfInRange(Position, Game1.player.Position, Range))
+            if (CheckIfInRange(Position, Game1.player.Position, Param.Range))
             {
                 Angle = CurrentAngle(Position, Game1.player.Position);
                 return true;

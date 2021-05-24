@@ -40,7 +40,7 @@ namespace SpaceSaver
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, Color.Orchid);
                 spriteBatch.DrawString(Game1.font, ((int)(Game1.player._bullet_timer / 0.1)).ToString(), b_icon_pos + new Vector2(21, 15), Color.White);
             }
-            else if (Game1.player.Buffed)
+            else if (Game1.player.RangeBuff)
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, new Color(30, 50, 255));
             else
                 spriteBatch.Draw(Bullet_icon, b_icon_pos, Color.White);
@@ -51,6 +51,8 @@ namespace SpaceSaver
                 spriteBatch.Draw(Sword_icon, sw_icon_pos, Color.Orchid);
                 spriteBatch.DrawString(Game1.font, ((int)(Game1.player._sword_timer / 0.1)).ToString(), sw_icon_pos + new Vector2(21, 15), Color.White);
             }
+            else if (Game1.player.MeleeBuff)
+                spriteBatch.Draw(Sword_icon, sw_icon_pos, new Color(30, 50, 255));
             else
                 spriteBatch.Draw(Sword_icon, sw_icon_pos, Color.White);
 
@@ -58,9 +60,9 @@ namespace SpaceSaver
             spriteBatch.Draw(Stats_icon, st_icon_pos, Color.White);
 
             //Вывод уровней скиллов
-            spriteBatch.DrawString(Game1.font, Game1.player._Bullet_param.Skill_lvl.ToString(), b_lvl_pos, Color.White);
-            spriteBatch.DrawString(Game1.font, Game1.player._Sword_param.Skill_lvl.ToString(), sw_lvl_pos, Color.White);
-            spriteBatch.DrawString(Game1.font, Game1.player._Minion_Stats.Skill_lvl.ToString(), st_lvl_pos, Color.White);
+            spriteBatch.DrawString(Game1.font, Game1.player._Bullet_param.SkillLvl.ToString(), b_lvl_pos, Color.White);
+            spriteBatch.DrawString(Game1.font, Game1.player._Sword_param.SkillLvl.ToString(), sw_lvl_pos, Color.White);
+            spriteBatch.DrawString(Game1.font, Game1.player._Minion_Stats.SkillLvl.ToString(), st_lvl_pos, Color.White);
 
             //Вывод здоровья
             spriteBatch.DrawString(Game1.font,

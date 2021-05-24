@@ -11,71 +11,6 @@ namespace SpaceSaver
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public int[,] Level1 = {
-           { 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1 },
-           { 1, 8, 1, 5, 1, 0, 0, 0, 0, 6, 1 },
-           { 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
-           { 1, 2, 1, 5, 1, 0, 0, 0, 0, 0, 1 },
-           { 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1 },
-           };
-        
-
-        int[,] Level3 = {
-           { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
-           { 1, 6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 1  },
-           { 1, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 1  },
-           { 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1  },
-           { 1, 4, 0, 0, 4, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 3, 0, 1  },
-           { 1, 0, 7, 0, 3, 0, 0, 1, 5, 5, 1, 0, 0, 0, 1  },
-           { 1, 0, 0, 6, 0, 0, 0, 1, 1, 1, 1, 0, 7, 0, 1  },
-           { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 1  },
-           { 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1  },
-           { 1, 8, 0, 0, 0, 4, 0, 3, 0, 0, 1, 0, 0, 0, 1  },
-           { 1, 6, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 2, 0, 1  },
-           { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
-           };
-
-        int[,] Level2 = {
-           { 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-           { 5, 5, 5, 1, 6, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 5, 5, 5, 1, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 1, 1, 1, 0, 0, 4, 0, 1 },
-           { 1, 8, 0, 1, 1, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 3, 0, 1 },
-           { 1, 0, 3, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5, 1, 0, 0, 0, 0, 4, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 3, 0, 1, 5, 5, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
-           { 1, 6, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 1, 2, 0, 0, 0, 7, 0, 0, 8, 1 },
-           { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-           };
-
-        int[,] Level22 = {
-           { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-           { 1, 5, 5, 1, 6, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 5, 5, 1, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 1, 1, 1, 0, 0, 4, 0, 1 },
-           { 1, 8, 0, 1, 1, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 3, 0, 1 },
-           { 1, 0, 3, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5, 1, 0, 0, 0, 0, 4, 0, 0, 1 },
-           { 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 3, 0, 1, 5, 5, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
-           { 1, 6, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 1, 2, 0, 0, 0, 7, 0, 0, 8, 1 },
-           { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-           };
-
         public static Player player;
         public static Level Map;
 
@@ -97,8 +32,6 @@ namespace SpaceSaver
 
         public static bool alow_next = true;
         public static int score = 0;
-        private int cell_size = 64;
-
 
         UiFacade Facade = new UiFacade(new Menu(), new Nick_input(), ScoreManager.Load(), new ComponentsManager(), new ResultBoard());
 
@@ -133,29 +66,44 @@ namespace SpaceSaver
                 alow_next = false;
                 switch (game_state)
                 {
-                    case "result":
-                        Facade.AddFinalScores();
-                        Level.UnloadLvl(true);
-                        break;
                     case "menu":
                         MediaPlayer.Play(songs["menu"]);
                         Facade.ResetScores();
                         break;
                     case "lvl1":
-                        player = new Player(new Dictionary<string, Animation>() {{ "Move", new Animation(textures["player_run"], 8, 0.15f) },  }, Vector2.Zero, "player");
-                        Map = new Level(1, cell_size);
+                        MediaPlayer.Play(songs["lvl1"]);
+                        player = new Player(new Dictionary<string, Animation>() {{ "Move", new Animation(textures["player_run"], 0.15f)}});
+                        Map = new Level(1);
+                        sounds["face_your_demons"].Play();
                         break;
                     case "lvl2":
+                        MediaPlayer.Play(songs["lvl2"]);
                         Level.UnloadLvl(true);
-                        Map = new Level(2, cell_size);
+                        Map = new Level(2);
+                        sounds["teleport"].Play();
                         break;
                     case "lvl3":
+                        MediaPlayer.Play(songs["lvl3"]);
                         Level.UnloadLvl(true);
-                        Map = new Level(1, cell_size);
+                        Map = new Level(3);
+                        sounds["teleport"].Play();
                         break;
                     case "lvl4":
+                        MediaPlayer.Play(songs["lvl4"]);
                         Level.UnloadLvl(true);
-                        Map = new Level(1, cell_size);
+                        Map = new Level(4);
+                        sounds["teleport"].Play();
+                        break;
+                    case "lvl5":
+                        MediaPlayer.Play(songs["lvl5"]);
+                        Level.UnloadLvl(true);
+                        Map = new Level(5);
+                        sounds["teleport"].Play();
+                        sounds["i_bring_doom"].Play();
+                        break;
+                    case "result":
+                        Facade.AddFinalScores();
+                        Level.UnloadLvl(true);
                         break;
                     case "end":
                         Exit();
@@ -166,8 +114,6 @@ namespace SpaceSaver
             //Прогон соответствующих апдейтов
             switch (game_state)
             {
-                case "end":
-                    break;
                 case "menu":
                     Facade.UpdateMenu(gameTime);
                     break;

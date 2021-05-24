@@ -7,15 +7,7 @@ namespace SpaceSaver
     {
         public Texture2D Texture;
 
-        public StaticComponent (Texture2D Texture, Vector2 Position, string Object_type)
-        {
-            this.Texture = Texture;
-            this.Position = Position;
-            this.Object_type = Object_type;
-            Rectangle = new Rectangle(0, 0, Texture.Width, Texture.Height);
-        }
-
-        public StaticComponent(Texture2D Texture, Vector2 Position, string Object_type, float Angle)
+        public StaticComponent(Texture2D Texture, Vector2 Position, string Object_type, float Angle = 0)
         {
             this.Texture = Texture;
             this.Position = Position;

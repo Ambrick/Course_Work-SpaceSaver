@@ -17,9 +17,9 @@ namespace SpaceSaver
 
         public bool IsDead { get; set; }
 
-        protected float angle;
+        protected float _angle;
 
-        public float Angle { get { return angle; } set => angle = value; }
+        public float Angle { get { return _angle; } set => _angle = value; }
 
         public Rectangle Rectangle { get; protected set; }
         

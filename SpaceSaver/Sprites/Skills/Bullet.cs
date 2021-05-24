@@ -1,89 +1,74 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 
 namespace SpaceSaver
 {
-    public class Bullet : StaticComponent 
+    public class Bullet : SkillPrototype
     {
-        private Vector2 Direction;
+        private Vector2 initialPosition;
 
-        public Bullet_param Param;
-
-        private Vector2 initial_pos;
-
-        public Bullet(Texture2D texture, Bullet_param param, Vector2 position, string object_type, float angle) : base(texture, position, object_type)
+        public Bullet(Texture2D Texture, Vector2 Position, string Object_type, float Angle, AtackParamPrototype Param) : base(Texture, Position, Object_type, Angle, Param)
         {
-            Texture = texture;
-            Rectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            Object_type = object_type;
-            Angle = angle;
+            this.Texture = Texture;
+            this.Position = initialPosition = Position + new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle)) * 25f;
+            this.Object_type = Object_type;
+            this.Angle = Angle;
+            this.Param = Param;
 
-            Param = param;
-            Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
-            initial_pos = Position = position + Direction * 25f;
-            Velocity = Direction * Param.MoveSpeed;
+            Rectangle = new Rectangle(0, 0, Texture.Width, Texture.Height);
+            Velocity = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle)) * Param.MoveSpeed;
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void InnerUpdate(GameTime gameTime)
         {
-            IsDead = Math.Sqrt(Math.Pow(Position.X - initial_pos.X, 2) + Math.Pow(Position.Y - initial_pos.Y, 2)) > Param.Range ? true : false;
+            IsDead = Math.Sqrt(Math.Pow(Position.X - initialPosition.X, 2) + Math.Pow(Position.Y - initialPosition.Y, 2)) > Param.Range ? true : false;
+            Position += Velocity;
+        }
 
-            //проверка на столкновение со стеной
-            foreach (StaticComponent spr2 in Game1.static_objects)
-                if (spr2.Object_type == "wall" && Collision_manager.CheckCollision(this, spr2))
+        public override void PlayerSkillUpdate()
+        {
+            Game1.enemies.ForEach(enemy => {
+                if (Collision_manager.CheckCollision(this, enemy))
                 {
-                    Game1.shortLifeAnimatedComponents.Add(new ShortLifeAnimatedComponents(new Animation(Game1.textures["explosion"], 6, 0.15f), Position));
-                    Game1.sounds["explosion"].Play();
+                    enemy.GetHitIsDead(Param.Damage, Position, true);
                     IsDead = true;
+                    if (enemy.Shield)
+                    {
+                        initialPosition = Position;
+                        Angle += (float)Math.Atan(90) * 2;
+                        Velocity = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle)) * Param.MoveSpeed;
+                        Object_type = "enemy_bullet";
+                        IsDead = false;
+                    }
                     return;
                 }
+            });
+        }
 
-            //проверка на столкновение пули игрока с врагом
-            if (Object_type == "player_bullet")
+        public override void EnemySkillUpdate()
+        {
+            if (Game1.player._Sword_param.CheckIfUpgraded)
             {
-                foreach (Enemy enemy in Game1.enemies)
+                foreach (Sword sword in Game1.swords)
                 {
-                    if (Collision_manager.CheckCollision(this, enemy))
+                    if (sword.Object_type == "player_sword" && Properties.Intersects(sword.Properties))
                     {
-                        enemy.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
-                        IsDead = true;
-                        if (enemy.Object_type == "enemy_shielded")
-                        {
-                            initial_pos = Position;
-                            Angle += (float) Math.Atan(50 + new Random().Next(0, 80)) * 2;
-                            Direction = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
-                            Velocity = Direction * Param.MoveSpeed;
-                            Object_type = "enemy_bullet";
-                            IsDead = false;
-                        }
+                        initialPosition = Position;
+                        Angle += (float)Math.Atan(90) * 2;
+                        Velocity = new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle)) * Param.MoveSpeed;
+                        Object_type = "player_bullet";
                         return;
                     }
                 }
             }
-            //проверка на столкновение вражеской пули с игроком
-            if (Object_type == "enemy_bullet")
+            if (Collision_manager.CheckCollision(this, Game1.player))
             {
-                foreach (Sword sword in Game1.swords)
-                {
-                    if (sword.Object_type == "player_sword" && Collision_manager.CheckCollision(this, sword) && sword.Param.IsJedi)
-                    {
-                        Game1.bullets.Add(new Bullet(Game1.textures["enemy_bullet"], Param, Position, "player_bullet", Game1.player.Angle));
-                        IsDead = true;
-                        return;
-                    }
-                }
-                if (Collision_manager.CheckCollision(this, Game1.player))
-                {
-                    Game1.sounds["player_get_hit"].Play();
-                    Game1.player.GetHitIsDead(Param.Damage, "bullet_damage_was_dealt", Position);
-                    IsDead = true;
-                    return;
-                }
-            };
-            //--------------------------------
-            Position += Velocity;
+                Game1.sounds["player_get_hit"].Play();
+                Game1.player.GetHitIsDead(Param.Damage,Position, true);
+                IsDead = true;
+                return;
+            }
         }
     }
 }
