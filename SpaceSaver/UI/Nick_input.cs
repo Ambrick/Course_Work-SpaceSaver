@@ -82,8 +82,7 @@ namespace SpaceSaver
             { Keys.OemQuestion, "." },
             { Keys.Space, " " }};
             
-            string value = "*";
-            alphabetEquivalents.TryGetValue(key, out value);
+            alphabetEquivalents.TryGetValue(key, out string value);
             return value;
         }
     }

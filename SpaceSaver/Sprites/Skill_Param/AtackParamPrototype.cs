@@ -20,8 +20,6 @@
 
         public virtual void SetParam() { }
 
-        public bool CheckIfUpgraded => SkillLvl >= LvlForUpgrade ? true : false;
-
-        private int LvlForUpgrade { get; set; } = 5;
+        public bool CheckIfUpgraded => SkillLvl >= GameSettings.LVL_FOR_PLAYER_SKILL_UPGRADE ? true : false;
     }
 }

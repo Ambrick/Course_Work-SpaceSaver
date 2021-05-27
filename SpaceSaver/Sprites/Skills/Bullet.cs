@@ -65,7 +65,7 @@ namespace SpaceSaver
             if (Collision_manager.CheckCollision(this, Game1.player))
             {
                 Game1.sounds["player_get_hit"].Play();
-                Game1.player.GetHitIsDead(Param.Damage,Position, true);
+                Game1.player.GetHitIsDead(Param.Damage, Position, true);
                 IsDead = true;
                 return;
             }

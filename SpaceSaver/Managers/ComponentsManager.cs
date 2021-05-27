@@ -7,7 +7,7 @@ namespace SpaceSaver
     {
         public void UpdateComponents(GameTime gameTime)
         {
-            Game1.Map.Update(gameTime);
+            if (Game1.Map != null) Game1.Map.Update(gameTime);
             Game1.static_objects.RemoveAll(static_object => static_object.IsDead == true);
             Game1.bullets.RemoveAll(bullet => bullet.IsDead == true);
             Game1.bullets.ForEach(bullet => bullet.Update(gameTime));

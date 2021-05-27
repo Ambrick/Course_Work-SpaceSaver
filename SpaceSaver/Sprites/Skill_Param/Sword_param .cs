@@ -2,11 +2,11 @@
 {
     public class SwordParam : AtackParamPrototype
     {
-        public SwordParam(int SkillLvl, float Damage = 27, double AtackRate = 0.7f, double Range = 70) : base(SkillLvl, Damage)
+        public SwordParam(int SkillLvl, float Damage = 27, double AtackRate = .7f, double Range = 70) : base(SkillLvl, Damage)
         {
             this.Damage = BaseDamage = Damage;
             this.SkillLvl = SkillLvl - 1;
-            this.AtackRate = AtackRate;
+            this.AtackRate = GameSettings.BULLET_ATACK_RATE;
             this.Range = Range;
 
             SetParam();

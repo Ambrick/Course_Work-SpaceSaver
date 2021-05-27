@@ -16,7 +16,7 @@ namespace SpaceSaver
             base(animations)
         {
             Dynamic_Component_Initialization(animations);
-            _Minion_Stats = new PassiveMinionStats(lvl, 65);
+            _Minion_Stats = new PassiveMinionStats(lvl, GameSettings.INITIAL_ENEMY_HP, GameSettings.INITIAL_ENEMY_MOVESPEED);
 
             this.Object_type = "enemy";
             this.skillList = skillList;

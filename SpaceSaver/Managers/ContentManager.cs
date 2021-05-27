@@ -34,9 +34,9 @@ namespace SpaceSaver
                 {"blood_part", Content.Load<Texture2D>("Sprites/BloodPart") },
                 {"wall", Content.Load<Texture2D>("Sprites/Wall") },
                 {"wall2", Content.Load<Texture2D>("Sprites/Wall2") },
-                {"floor0", Content.Load<Texture2D>("Sprites/Floor") },
-                {"floor1", Content.Load<Texture2D>("Sprites/Floor2") },
-                {"floor2", Content.Load<Texture2D>("Sprites/Floor3") },
+                {"floor1", Content.Load<Texture2D>("Sprites/Floor") },
+                {"floor2", Content.Load<Texture2D>("Sprites/Floor2") },
+                {"floor3", Content.Load<Texture2D>("Sprites/Floor3") },
                 {"heal", Content.Load<Texture2D>("Sprites/Heal") },
                 {"buff", Content.Load<Texture2D>("Sprites/Buff") },
                 {"buff2", Content.Load<Texture2D>("Sprites/Buff2") },
@@ -95,6 +95,8 @@ namespace SpaceSaver
                 {"lvl1", Content.Load<Song>("Music/Lvl_1") },
                 {"lvl2", Content.Load<Song>("Music/Lvl_2") },
                 {"lvl3", Content.Load<Song>("Music/Lvl_3") },
+                {"lvl4", Content.Load<Song>("Music/Lvl_4") },
+                {"lvl5", Content.Load<Song>("Music/Lvl_5") },
             };
         }
 

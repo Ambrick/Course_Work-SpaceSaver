@@ -1,30 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace SpaceSaver
 {
     public class Level
     {
-        LevelContent level_content = new LevelContent();
-
-        public int Map_lvl;
-
-        private int cell_size;
-
         private Rectangle Start_position_Rect;
 
-        private int MaxMapLevel = 5;
+        private int LevelCount;
 
-        public Level(int Map_lvl, int cell_size = 64)
+        private int MaxMapLevel;
+
+        public Level(int LevelCount, int cell_size = 64)
         {
-            this.Map_lvl = Map_lvl;
-            this.cell_size = cell_size;
-            int [,] LVL = level_content.LevelMap(this.Map_lvl);
-            List <Enemy> enemyList = level_content.GetEnemyList(this.Map_lvl, this.cell_size);
+            LevelContent level_content = new LevelContent();
+            MaxMapLevel = level_content.GetMaximumLevelCount;
+            this.LevelCount = LevelCount;
 
-            Texture2D FloorTxtr = Game1.textures[$"floor{new System.Random().Next(0, 2)}"];
-            Texture2D WallTxtr = new System.Random().Next(0, 2) == 0 ? Game1.textures["wall"] : Game1.textures["wall2"];
+            var LVL = level_content.GetLevelMatrix(this.LevelCount);
+            var enemyList = level_content.GetEnemyList(this.LevelCount, cell_size);
+
+            var FloorTxtr = Game1.textures[$"floor{new System.Random().Next(1, 3)}"];
+            var WallTxtr = new System.Random().Next(0, 2) == 0 ? Game1.textures["wall"] : Game1.textures["wall2"];
 
             for (int i = 0; i < LVL.GetLongLength(1); i++)
                 {
@@ -82,7 +78,7 @@ namespace SpaceSaver
                 Game1.player.key_count = 0;
                 Game1.player.amount_of_keys_on_a_level = 0;
                 Game1.sounds["win"].Play();
-                Game1.game_state = Map_lvl == MaxMapLevel ? "result" : $"lvl{Map_lvl + 1}";
+                Game1.game_state = LevelCount == MaxMapLevel ? "result" : $"lvl{LevelCount + 1}";
                 Game1.alow_next = true;
                 return;
             }

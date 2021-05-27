@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -48,6 +49,7 @@
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
@@ -59,9 +61,10 @@
     <Compile Include="Map\LevelContent.cs" />
     <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\Collision_manager.cs" />
-    <Compile Include="Managers\Leveling_up.cs" />
+    <Compile Include="Sprites\Skill_Param\Leveling_up.cs" />
     <Compile Include="Managers\ComponentsManager.cs" />
     <Compile Include="Map\Level.cs" />
+    <Compile Include="Models\GameSettings.cs" />
     <Compile Include="Sprites\Enemies\AtackStategy\DoubleRangeStrategy.cs" />
     <Compile Include="Sprites\Enemies\AtackStategy\DoubleMeleeStrategy.cs" />
     <Compile Include="Sprites\Enemies\AtackStategy\RangeStrategy.cs" />
@@ -76,7 +79,7 @@
     <Compile Include="Sprites\Skill_Param\BulletParam.cs" />
     <Compile Include="Models\Animation.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
-    <Compile Include="Sprites\Skill_Param\Passive_Stats_Skill.cs" />
+    <Compile Include="Sprites\Skill_Param\PassiveMinionStats.cs" />
     <Compile Include="Sprites\Minion.cs" />
     <Compile Include="Sprites\Player.cs" />
     <Compile Include="Sprites\PrimitiveComponent.cs" />

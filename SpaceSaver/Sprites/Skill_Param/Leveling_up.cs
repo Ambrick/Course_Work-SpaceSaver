@@ -25,21 +25,15 @@
         {
             _eperience_points += _eperience_for_key;
 
-            Reset_lvl_sys();
-        }
+            if (_eperience_points < _eperience_points_to_lvlup)
+                return;
 
-        void Reset_lvl_sys()
-        {
-            if (_eperience_points >= _eperience_points_to_lvlup)
-            {
-                Game1.sounds["lvlup"].Play();
-                _eperience_points = _eperience_points - _eperience_points_to_lvlup;
+            Game1.sounds["lvlup"].Play();
+            _eperience_points = _eperience_points - _eperience_points_to_lvlup;
 
-                _current_lvl++;
-                _skill_points++;
-                _eperience_points_to_lvlup +=  20 * _current_lvl;
-                Reset_lvl_sys();
-            }
+            _current_lvl++;
+            _skill_points++;
+            _eperience_points_to_lvlup += 18 * _current_lvl;
         }
     }
 }

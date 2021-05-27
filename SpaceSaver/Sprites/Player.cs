@@ -39,15 +39,15 @@ namespace SpaceSaver
         public Player(Dictionary<string, Animation> animations) : base (animations)
         {
             Dynamic_Component_Initialization(animations);
-            this.Position = Vector2.Zero;
-            this.Object_type = "player";
+            Position = Vector2.Zero;
+            Object_type = "player";
 
-            _Bullet_param = new BulletParam(SkillLvl: 1, Damage: 30);
-            _Sword_param = new SwordParam(SkillLvl: 1, Damage: 35);
-            _Minion_Stats = new PassiveMinionStats(SkillLvl: 1, InitialMinionHP: 70);
+            _Bullet_param = new BulletParam(GameSettings.INITIAL_PLAYER_BULLET_LVL, GameSettings.INITIAL_PLAYER_BULLET_DAMAGE, GameSettings.BULLET_ATACK_RATE);
+            _Sword_param = new SwordParam(GameSettings.INITIAL_PLAYER_SWORD_LVL, GameSettings.INITIAL_PLAYER_SWORD_DAMAGE);
+            _Minion_Stats = new PassiveMinionStats(GameSettings.INITIAL_PLAYER_STATS_LVL, GameSettings.INITIAL_PLAYER_HP, GameSettings.INITIAL_PLAYER_MOVESPEED);
 
             //Объявляем сис. уровней (нач. эксп. до лвлапа, эксп. за ключ, уровень игрока)
-            level_system = new Leveling_up(exp_to_lvlup: 50, exp_for_key: 90, current_lvl: _Bullet_param.SkillLvl + _Sword_param.SkillLvl + _Minion_Stats.SkillLvl);
+            level_system = new Leveling_up(GameSettings.INITIAL_EXPERIENCE_TO_LVLUP, GameSettings.INITIAL_EXPERIENCE_FOR_KEY, GameSettings.INITIAL_PLAYER_LVL);
         }
 
         protected void SkillsTimerUpdate(GameTime gameTime)
