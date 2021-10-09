@@ -4,7 +4,7 @@ namespace SpaceSaver
 {
     public class LevelContent
     {
-        private Dictionary<string, Animation> MonsterAnimations => new Dictionary<string, Animation>()
+        private readonly Dictionary<string, Animation> MonsterAnimations = new Dictionary<string, Animation>()
         {
             { "Move",           new Animation(Game1.textures["enemy_run"],      .2f) },
             { "Melee_atack",    new Animation(Game1.textures["enemy_slice"],    .1f) },
@@ -12,7 +12,7 @@ namespace SpaceSaver
             { "On_hold",        new Animation(Game1.textures["enemy_idle"],     .5f) }
         };
 
-        private Dictionary<string, Animation> CockroachAnimations => new Dictionary<string, Animation>()
+        private readonly Dictionary<string, Animation> CockroachAnimations = new Dictionary<string, Animation>()
         {
             { "Move",           new Animation(Game1.textures["cockroach_move"],     .2f) },
             { "Melee_atack",    new Animation(Game1.textures["cockroach_hit"],      .04f) },
@@ -53,7 +53,7 @@ namespace SpaceSaver
             new DoubleMeleeStrategy(new SwordParam(level_number))
         };
 
-        private Dictionary<int, int[,]> levelMatrixes = new Dictionary<int, int[,]>() {
+        private readonly Dictionary<int, int[,]> levelMatrixes = new Dictionary<int, int[,]>() {
             {1, new int[,]
                 {  { 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1 },
                    { 1, 8, 1, 5, 1, 0, 0, 0, 0, 6, 1 },

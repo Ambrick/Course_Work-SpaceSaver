@@ -16,12 +16,10 @@ namespace SpaceSaver
 
         public void UpdateResultBoard(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Game1.sounds["gong"].Play();
-                Game1.game_state = "menu";
-                Game1.alow_next = true;
-            }
+            if (!Keyboard.GetState().IsKeyDown(Keys.Escape)) return;
+            Game1.sounds["gong"].Play();
+            Game1.game_state = "menu";
+            Game1.alow_next = true;
         }
     }
 }

@@ -22,6 +22,8 @@
         public static float INITIAL_ENEMY_MOVESPEED     { get; } = 2f;
 
         public static double BULLET_ATACK_RATE          { get; } = 1.4;
+        //Add other bullet parametres here
         public static double SWORD_ATACK_RATE           { get; } = .7f;
+        //Add other sword parametres here
     }
 }
